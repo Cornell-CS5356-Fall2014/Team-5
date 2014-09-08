@@ -14,7 +14,6 @@ group.add_argument('--dev', action='store_true')
 group.add_argument('--test', action='store_true')
 parser.add_argument('--version', action='version', version='%(prog)s %(VERSION)d')
 args = parser.parse_args()
-print args
 
 app = Flask(__name__)
 
@@ -31,4 +30,9 @@ def hello_world():
     return 'Hello World!'
 
 if __name__ == '__main__':
-    app.run()
+    if args.dev or args.test:
+        print "Local"
+        app.run()
+    else:
+        print "Prod"
+        app.run(host='0.0.0.0')
