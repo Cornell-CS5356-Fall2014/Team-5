@@ -7,4 +7,8 @@ module.exports = function(System, app, auth, database) {
   app.route('/')
     .get(index.render);
 
+  app.get('/jazz', function(req, res) {
+    res.send('Hello world!');
+  });
+
 };
