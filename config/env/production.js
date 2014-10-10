@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  db: 'mongodb://localhost/mean-prod',
+  db: 'mongodb://cookapp:sIew2QHmu5UQzFejlMIRMLOD7pm3R2@linus.mongohq.com:10082/cookapp',
   /**
    * Database options that will be passed directly to mongoose.connect
    * Below are some examples.
