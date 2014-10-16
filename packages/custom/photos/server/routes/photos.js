@@ -33,7 +33,7 @@ module.exports = function(Photos, app, auth, database) {
     res.send('Only users with Admin role can access this');
   });
 
-  app.get('/photos/example/render', auth.requiresLogin, function(req, res, next) {
+  app.get('/photos/example/upload', auth.requiresLogin, function(req, res, next) {
     Photos.render('index', {
       package: 'photos'
     }, function(err, html) {
