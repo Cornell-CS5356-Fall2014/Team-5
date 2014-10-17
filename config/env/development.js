@@ -1,7 +1,11 @@
 'use strict';
 
-var connectionString = 'mongodb://' + process.env['DB_USER'] + ':' + process.env['DB_PASSWORD'] + '@linus.mongohq.com:10045/cookapp';
-
+var connectionString;
+if (process.env['DB_USER']) { 
+    connectionString = 'mongodb://' + process.env['DB_USER'] + ':' + process.env['DB_PASSWORD'] + '@linus.mongohq.com:10045/cookapp'; 
+} else {
+    connectionString = 'mongodb://localhost/mean-dev';
+}
 module.exports = {
     db: connectionString,
 	debug: 'true',
