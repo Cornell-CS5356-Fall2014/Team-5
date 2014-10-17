@@ -32,7 +32,7 @@
   <ul class="photos">
     <li ng-repeat="photo in photos | orderBy:orderProp" class="thumbnail">
     <a href="/photos/{{photo._id}}" class="thumb"><img ng-src="/photos/{{photo._id}}"></a>
-    <a href="/photo/{{photo._id}}">{{phone.caption}}</a>
+    <a href="/photo/{{photo._id}}">{{photo.caption}}</a>
   </ul>
   <!--<h3><img src="/photos/assets/img/logo.png" /></h3>
   <p class="alert alert-info">You can find your package in /packages/photos</p>

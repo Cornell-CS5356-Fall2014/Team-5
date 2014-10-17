@@ -5,12 +5,12 @@
  */
 var mongoose = require('mongoose'),
   Photo = mongoose.model('Photo'),
-  multiparty = require('multiparty'),
-  util = require('util');
+  multiparty = require('multiparty');
+  //util = require('util');
 
-var getPhotoBody = function(photo) {
-  return photo.image.original
-};
+//var getPhotoBody = function(photo) {
+  //return photo.image.original;
+//};
 
 var getPhotoMeta = function(photo) {
   return {
@@ -20,7 +20,7 @@ var getPhotoMeta = function(photo) {
     filename: photo.fileName,
     caption: photo.caption,
     user: photo.user
-  }
+  };
 };
 
 // Find photo by id
