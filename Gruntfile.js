@@ -101,7 +101,10 @@ module.exports = function(grunt) {
     env: {
       test: {
         NODE_ENV: 'test'
-      }
+      },
+      development: {
+        NODE_ENV: 'development'
+        }
     },
     karma: {
       unit: {
@@ -126,5 +129,5 @@ module.exports = function(grunt) {
   // For Heroku users only.
   // Docs: https://github.com/linnovate/mean/wiki/Deploying-on-Heroku
   grunt.registerTask('heroku:production', ['clean', 'cssmin', 'uglify']); 
-  grunt.registerTask('heroku:development', ['clean', 'cssmin']);
+  grunt.registerTask('heroku:development', ['env:development', 'clean', 'cssmin', 'csslint']);
 };
