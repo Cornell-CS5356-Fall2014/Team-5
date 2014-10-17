@@ -2,7 +2,7 @@
 
 var connectionString;
 if (process.env['DB_USER']) { 
-    connectionString = 'mongodb://' + process.env['DB_USER'] + ':' + process.env['DB_PASSWORD'] + '@linus.mongohq.com:10045/cookapp'; 
+    connectionString = 'mongodb://' + process.env['DB_USER'] + ':' + process.env['DB_PASS'] + '@linus.mongohq.com:10045/cookapp'; 
 } else {
     connectionString = 'mongodb://localhost/mean-dev1';
 }
