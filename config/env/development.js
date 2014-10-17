@@ -1,7 +1,9 @@
 'use strict';
 
+var connectionString = 'mongodb://' + process.env['DB_USER'] + ':' + process.env['DB_PASSWORD'] + '@linus.mongohq.com:10045/cookapp';
+
 module.exports = {
-  db: 'mongodb://localhost/mean-dev1',
+    db: connectionString,
 	debug: 'true',
   mongoose: {
     debug: false

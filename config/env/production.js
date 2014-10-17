@@ -1,7 +1,10 @@
 'use strict';
 
+var connectionString = 'mongodb://' + process.env['DB_USER'] + ':' + process.env['DB_PASS'] + '@linus.mongohq.com:10082/cookapp';
+
 module.exports = {
-  db: 'mongodb://cookapp:sIew2QHmu5UQzFejlMIRMLOD7pm3R2@linus.mongohq.com:10082/cookapp',
+    db: connectionString,
+  //db: 'mongodb://cookapp:sIew2QHmu5UQzFejlMIRMLOD7pm3R2@linus.mongohq.com:10082/cookapp',
   /**
    * Database options that will be passed directly to mongoose.connect
    * Below are some examples.
