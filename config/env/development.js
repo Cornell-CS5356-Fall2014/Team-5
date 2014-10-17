@@ -4,8 +4,10 @@ var connectionString;
 if (process.env['DB_USER']) { 
     connectionString = 'mongodb://' + process.env['DB_USER'] + ':' + process.env['DB_PASSWORD'] + '@linus.mongohq.com:10045/cookapp'; 
 } else {
-    connectionString = 'mongodb://localhost/mean-dev';
+    connectionString = 'mongodb://localhost/mean-dev1';
 }
+console.log('Connection string: ' + connectionString);
+
 module.exports = {
     db: connectionString,
 	debug: 'true',
