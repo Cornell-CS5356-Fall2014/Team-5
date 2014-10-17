@@ -21,17 +21,17 @@ module.exports = function(Photos, app, auth, database) {
     .delete(auth.requiresLogin, hasAuthorization, photos.destroy);
 
 
-  app.get('/photos/example/anyone', function(req, res, next) {
-    res.send('Anyone can access this');
-  });
+  //app.get('/photos/example/anyone', function(req, res, next) {
+    //res.send('Anyone can access this');
+  //});
 
-  app.get('/photos/example/auth', auth.requiresLogin, function(req, res, next) {
-    res.send('Only authenticated users can access this');
-  });
+  //app.get('/photos/example/auth', auth.requiresLogin, function(req, res, next) {
+    //res.send('Only authenticated users can access this');
+  //});
 
-  app.get('/photos/example/admin', auth.requiresAdmin, function(req, res, next) {
-    res.send('Only users with Admin role can access this');
-  });
+  //app.get('/photos/example/admin', auth.requiresAdmin, function(req, res, next) {
+    //res.send('Only users with Admin role can access this');
+  //});
 
   app.get('/photos/example/upload', auth.requiresLogin, function(req, res, next) {
     Photos.render('index', {

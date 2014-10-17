@@ -1,6 +1,9 @@
 <div class="" data-ng-controller="PhotosController">
   <h1>Placeholder for package {{package.name}}</h1>
-  <ol>
+  </br>
+  <p class="alert alert-info">You can find this package in custom/packages/photos</p>
+  </br>
+  <ul>
     <!--<li>
       <a href="photos/example/anyone">Server route that anyone can access</a>
     </li>
@@ -13,9 +16,24 @@
     <li>
       <a href="/photos/example/upload">Photo upload demo (server-side view)</a>
     </li>
-  </ol>
-  </br>
-  <p class="alert alert-info">You can find your package in custom/packages/photos</p>
+    <li>
+      <a href="/photos/">List of all photos uploaded (JSON)</a>
+    </li>
+    <!--<li>
+      View one photo by ID:
+      <form action="/photos/" enctype="text/plain" method="get">
+        <input type="search" name="id">
+        <input type="submit" value="View">
+      </form>
+    </li>-->
+  </ul>
+  </br></br>
+
+  <ul class="photos">
+    <li ng-repeat="photo in photos | orderBy:orderProp" class="thumbnail">
+    <a href="/photos/{{photo._id}}" class="thumb"><img ng-src="/photos/{{photo._id}}"></a>
+    <a href="/photo/{{photo._id}}">{{phone.caption}}</a>
+  </ul>
   <!--<h3><img src="/photos/assets/img/logo.png" /></h3>
   <p class="alert alert-info">You can find your package in /packages/photos</p>
   </br>
