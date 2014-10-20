@@ -149,3 +149,20 @@ exports.all = function(req, res) {
     res.status(200).send(photoMeta);
   });
 };
+
+// List the photos
+exports.currentUserPhotos = function(req, res) {
+  var photoMeta = [];
+  //var currentUser = req.user;
+  Photo.find({'user._id' : req.user._id}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
+    if (err) {
+      return res.json(500, {
+        error: 'Cannot list the photos'
+      });
+    }
+    photos.forEach(function(photo){
+      photoMeta.push(getPhotoMeta(photo));
+    });
+    res.status(200).send(photoMeta);
+  });
+};
