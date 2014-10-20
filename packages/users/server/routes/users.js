@@ -4,6 +4,13 @@
 var users = require('../controllers/users'),
     config = require('meanio').loadConfig();
 
+var logFB = function(req, res, next) {
+  console.log(process.env.FB_CLIENT_ID);
+  console.log(process.env.FB_CLIENT_SECRET);
+  console.log(process.env.BASE_URL + '/auth/facebook/callback');
+  next();
+};
+
 module.exports = function(MeanUser, app, auth, database, passport) {
 
   app.route('/logout')
@@ -49,7 +56,7 @@ module.exports = function(MeanUser, app, auth, database, passport) {
 
   // Setting the facebook oauth routes
   app.route('/auth/facebook')
-    .get(passport.authenticate('facebook', {
+    .get(logFB, passport.authenticate('facebook', {
       scope: ['email', 'user_about_me'],
       failureRedirect: '#!/login'
     }), users.signin);

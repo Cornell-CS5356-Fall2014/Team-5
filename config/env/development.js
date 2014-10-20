@@ -20,7 +20,7 @@ module.exports = {
   facebook: {
     clientID: process.env['FB_CLIENT_ID'],
     clientSecret: process.env['FB_CLIENT_SECRET'],
-    callbackURL: 'http://dry-beach-2224-staging.herokuapp.com/auth/facebook/callback'
+    callbackURL: process.env['BASE_URL'] + '/auth/facebook/callback'
   },
   twitter: {
     clientID: 'DEFAULT_CONSUMER_KEY',
