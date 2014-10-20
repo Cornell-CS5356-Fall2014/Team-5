@@ -154,7 +154,7 @@ exports.all = function(req, res) {
 exports.currentUserPhotos = function(req, res) {
   var photoMeta = [];
   //var currentUser = req.user;
-  Photo.find({'user._id' : req.user._id}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
+  Photo.find({'user' : req.user}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
     if (err) {
       return res.json(500, {
         error: 'Cannot list the photos'
