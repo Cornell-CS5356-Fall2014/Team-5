@@ -153,7 +153,7 @@ exports.all = function(req, res) {
 // List the photos
 exports.currentUserPhotos = function(req, res) {
   var photoMeta = [];
-  //var currentUser = req.user;
+  //only find photos where user matches req.user
   Photo.find({'user' : req.user}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
     if (err) {
       return res.json(500, {
