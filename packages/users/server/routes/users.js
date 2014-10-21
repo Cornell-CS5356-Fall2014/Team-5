@@ -71,7 +71,8 @@ module.exports = function(MeanUser, app, auth, database, passport) {
     passport.authenticate('facebook-token'),
     function (req, res) {
       // do something with req.user
-      res.send(req.user? 200 : 401);
+      //res.send(req.user? 200 : 401);
+      res.status(200).send({});
     }
   );
   // Setting the github oauth routes
