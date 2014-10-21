@@ -14,7 +14,7 @@ var hasAuthorization = function(req, res, next) {
 module.exports = function(Photos, app, auth, database) {
 
   app.route('/photos')
-    .get(photos.all)
+    .get(auth.requiresLogin, photos.currentUserPhotos)
     .post(auth.requiresLogin, photos.create);
   app.route('/photos/:photoId')
     .get(photos.show)

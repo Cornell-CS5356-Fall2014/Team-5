@@ -4,6 +4,7 @@ var mongoose = require('mongoose'),
   LocalStrategy = require('passport-local').Strategy,
   TwitterStrategy = require('passport-twitter').Strategy,
   FacebookStrategy = require('passport-facebook').Strategy,
+  FacebookTokenStrategy = require('passport-facebook-token').Strategy,
   GitHubStrategy = require('passport-github').Strategy,
   GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
   LinkedinStrategy = require('passport-linkedin').Strategy,
@@ -94,6 +95,40 @@ module.exports = function(passport) {
       clientID: config.facebook.clientID,
       clientSecret: config.facebook.clientSecret,
       callbackURL: config.facebook.callbackURL
+    },
+    function(accessToken, refreshToken, profile, done) {
+      User.findOne({
+        'facebook.id': profile.id
+      }, function(err, user) {
+        if (err) {
+          return done(err);
+        }
+        if (user) {
+          return done(err, user);
+        }
+        user = new User({
+          name: profile.displayName,
+          email: profile.emails[0].value,
+          username: profile.username || profile.emails[0].value.split('@')[0],
+          provider: 'facebook',
+          facebook: profile._json,
+          roles: ['authenticated']
+        });
+        user.save(function(err) {
+          if (err) {
+            console.log(err);
+            return done(null, false, {message: 'Facebook login failed, email already used by other login strategy'});
+          } else {
+            return done(err, user);
+          }
+        });
+      });
+    }
+  ));
+
+  passport.use(new FacebookTokenStrategy({
+      clientID: config.facebook.clientID,
+      clientSecret: config.facebook.clientSecret
     },
     function(accessToken, refreshToken, profile, done) {
       User.findOne({
