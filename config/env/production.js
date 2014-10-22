@@ -30,7 +30,7 @@ module.exports = {
     */
   },
   app: {
-    name: 'MEAN - A Modern Stack - Production'
+    name: 'Cookem Cookalicious'
   },
   facebook: {
     clientID: process.env['FB_CLIENT_ID'],

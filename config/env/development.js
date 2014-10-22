@@ -15,7 +15,7 @@ module.exports = {
     debug: false
   },
   app: {
-    name: 'MEAN - FullStack JS - Development'
+    name: 'Cookem Cookalicious - Development'
   },
   facebook: {
     clientID: process.env['FB_CLIENT_ID'],
