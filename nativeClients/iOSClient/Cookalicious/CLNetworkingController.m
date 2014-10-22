@@ -90,8 +90,7 @@ static NSUInteger defaultRetryCount = 3;
 
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    
-    NSLog(@"Cookies: %@", [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:self.operationManager.baseURL]);
+    //NSLog(@"Cookies: %@", [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:self.operationManager.baseURL]);
     [self.operationManager GET:@"/photos" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"%@", responseObject);
