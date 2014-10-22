@@ -1,0 +1,575 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		40BA98742D564CB188DC718C /* libPods-Cookalicious.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B4D2E68710A4A60AD754915 /* libPods-Cookalicious.a */; };
+		48092D7319F32005009EBC3F /* CLPhotoCaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48092D7219F32005009EBC3F /* CLPhotoCaptureViewController.m */; };
+		48092D7519F32419009EBC3F /* CLPhotoCaptureOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48092D7419F32419009EBC3F /* CLPhotoCaptureOverlayView.xib */; };
+		4826E14D19F6B67D00E79107 /* CLNetworkingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826E14C19F6B67D00E79107 /* CLNetworkingController.m */; };
+		4826E15119F7383C00E79107 /* CLFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826E15019F7383C00E79107 /* CLFeedViewController.m */; };
+		4826E15419F73A1A00E79107 /* CLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826E15319F73A1A00E79107 /* CLNavigationController.m */; };
+		4866475919F6108F00DC63A1 /* CLLoadingScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4866475819F6108F00DC63A1 /* CLLoadingScreenViewController.m */; };
+		4866475C19F6113F00DC63A1 /* CLLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4866475B19F6113F00DC63A1 /* CLLogInViewController.m */; };
+		488D974F19F1E1C20002B4E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 488D974E19F1E1C20002B4E8 /* main.m */; };
+		488D975219F1E1C20002B4E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 488D975119F1E1C20002B4E8 /* AppDelegate.m */; };
+		488D975819F1E1C20002B4E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 488D975619F1E1C20002B4E8 /* Main.storyboard */; };
+		488D975A19F1E1C20002B4E8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 488D975919F1E1C20002B4E8 /* Images.xcassets */; };
+		488D975D19F1E1C20002B4E8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488D975B19F1E1C20002B4E8 /* LaunchScreen.xib */; };
+		488D976919F1E1C20002B4E8 /* CookaliciousTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 488D976819F1E1C20002B4E8 /* CookaliciousTests.m */; };
+		B04AA200C4C74FB5893190D3 /* libPods-CookaliciousTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33320F88E40640A683F529F8 /* libPods-CookaliciousTests.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		488D976319F1E1C20002B4E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 488D974119F1E1C10002B4E8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 488D974819F1E1C20002B4E8;
+			remoteInfo = Cookalicious;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		33320F88E40640A683F529F8 /* libPods-CookaliciousTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CookaliciousTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B4D2E68710A4A60AD754915 /* libPods-Cookalicious.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cookalicious.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		48092D7119F32005009EBC3F /* CLPhotoCaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhotoCaptureViewController.h; sourceTree = "<group>"; };
+		48092D7219F32005009EBC3F /* CLPhotoCaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPhotoCaptureViewController.m; sourceTree = "<group>"; };
+		48092D7419F32419009EBC3F /* CLPhotoCaptureOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLPhotoCaptureOverlayView.xib; sourceTree = "<group>"; };
+		4826E14B19F6B67D00E79107 /* CLNetworkingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNetworkingController.h; sourceTree = "<group>"; };
+		4826E14C19F6B67D00E79107 /* CLNetworkingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNetworkingController.m; sourceTree = "<group>"; };
+		4826E14F19F7383C00E79107 /* CLFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLFeedViewController.h; sourceTree = "<group>"; };
+		4826E15019F7383C00E79107 /* CLFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLFeedViewController.m; sourceTree = "<group>"; };
+		4826E15219F73A1A00E79107 /* CLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNavigationController.h; sourceTree = "<group>"; };
+		4826E15319F73A1A00E79107 /* CLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNavigationController.m; sourceTree = "<group>"; };
+		4866475719F6108F00DC63A1 /* CLLoadingScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLoadingScreenViewController.h; sourceTree = "<group>"; };
+		4866475819F6108F00DC63A1 /* CLLoadingScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLoadingScreenViewController.m; sourceTree = "<group>"; };
+		4866475A19F6113F00DC63A1 /* CLLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLogInViewController.h; sourceTree = "<group>"; };
+		4866475B19F6113F00DC63A1 /* CLLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLogInViewController.m; sourceTree = "<group>"; };
+		488D974919F1E1C20002B4E8 /* Cookalicious.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookalicious.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		488D974D19F1E1C20002B4E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		488D974E19F1E1C20002B4E8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		488D975019F1E1C20002B4E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		488D975119F1E1C20002B4E8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		488D975719F1E1C20002B4E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		488D975919F1E1C20002B4E8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		488D975C19F1E1C20002B4E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		488D976219F1E1C20002B4E8 /* CookaliciousTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookaliciousTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		488D976719F1E1C20002B4E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		488D976819F1E1C20002B4E8 /* CookaliciousTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CookaliciousTests.m; sourceTree = "<group>"; };
+		5AD7E86585264E178A3AA36B /* Pods-CookaliciousTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookaliciousTests.xcconfig"; path = "Pods/Pods-CookaliciousTests.xcconfig"; sourceTree = "<group>"; };
+		F3C2B2A345354D07AEDEC9BA /* Pods-Cookalicious.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cookalicious.xcconfig"; path = "Pods/Pods-Cookalicious.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		488D974619F1E1C20002B4E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40BA98742D564CB188DC718C /* libPods-Cookalicious.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		488D975F19F1E1C20002B4E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B04AA200C4C74FB5893190D3 /* libPods-CookaliciousTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4826E14E19F6B68800E79107 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4826E14B19F6B67D00E79107 /* CLNetworkingController.h */,
+				4826E14C19F6B67D00E79107 /* CLNetworkingController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		4866475D19F6114900DC63A1 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				4866475719F6108F00DC63A1 /* CLLoadingScreenViewController.h */,
+				4866475819F6108F00DC63A1 /* CLLoadingScreenViewController.m */,
+				4866475A19F6113F00DC63A1 /* CLLogInViewController.h */,
+				4866475B19F6113F00DC63A1 /* CLLogInViewController.m */,
+			);
+			name = Launch;
+			sourceTree = "<group>";
+		};
+		488D974019F1E1C10002B4E8 = {
+			isa = PBXGroup;
+			children = (
+				488D974B19F1E1C20002B4E8 /* Cookalicious */,
+				488D976519F1E1C20002B4E8 /* CookaliciousTests */,
+				488D974A19F1E1C20002B4E8 /* Products */,
+				F3C2B2A345354D07AEDEC9BA /* Pods-Cookalicious.xcconfig */,
+				8EFC9A56ED404197ACAD237C /* Frameworks */,
+				5AD7E86585264E178A3AA36B /* Pods-CookaliciousTests.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		488D974A19F1E1C20002B4E8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				488D974919F1E1C20002B4E8 /* Cookalicious.app */,
+				488D976219F1E1C20002B4E8 /* CookaliciousTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		488D974B19F1E1C20002B4E8 /* Cookalicious */ = {
+			isa = PBXGroup;
+			children = (
+				488D975019F1E1C20002B4E8 /* AppDelegate.h */,
+				488D975119F1E1C20002B4E8 /* AppDelegate.m */,
+				4866475D19F6114900DC63A1 /* Launch */,
+				4826E14E19F6B68800E79107 /* Controllers */,
+				4826E14F19F7383C00E79107 /* CLFeedViewController.h */,
+				4826E15019F7383C00E79107 /* CLFeedViewController.m */,
+				4826E15219F73A1A00E79107 /* CLNavigationController.h */,
+				4826E15319F73A1A00E79107 /* CLNavigationController.m */,
+				48092D7119F32005009EBC3F /* CLPhotoCaptureViewController.h */,
+				48092D7219F32005009EBC3F /* CLPhotoCaptureViewController.m */,
+				488D975619F1E1C20002B4E8 /* Main.storyboard */,
+				48092D7419F32419009EBC3F /* CLPhotoCaptureOverlayView.xib */,
+				488D975919F1E1C20002B4E8 /* Images.xcassets */,
+				488D975B19F1E1C20002B4E8 /* LaunchScreen.xib */,
+				488D974C19F1E1C20002B4E8 /* Supporting Files */,
+			);
+			path = Cookalicious;
+			sourceTree = "<group>";
+		};
+		488D974C19F1E1C20002B4E8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				488D974D19F1E1C20002B4E8 /* Info.plist */,
+				488D974E19F1E1C20002B4E8 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		488D976519F1E1C20002B4E8 /* CookaliciousTests */ = {
+			isa = PBXGroup;
+			children = (
+				488D976819F1E1C20002B4E8 /* CookaliciousTests.m */,
+				488D976619F1E1C20002B4E8 /* Supporting Files */,
+			);
+			path = CookaliciousTests;
+			sourceTree = "<group>";
+		};
+		488D976619F1E1C20002B4E8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				488D976719F1E1C20002B4E8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8EFC9A56ED404197ACAD237C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3B4D2E68710A4A60AD754915 /* libPods-Cookalicious.a */,
+				33320F88E40640A683F529F8 /* libPods-CookaliciousTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		488D974819F1E1C20002B4E8 /* Cookalicious */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 488D976C19F1E1C20002B4E8 /* Build configuration list for PBXNativeTarget "Cookalicious" */;
+			buildPhases = (
+				5B23ACABA40E4D839B01E98D /* Check Pods Manifest.lock */,
+				488D974519F1E1C20002B4E8 /* Sources */,
+				488D974619F1E1C20002B4E8 /* Frameworks */,
+				488D974719F1E1C20002B4E8 /* Resources */,
+				6D3C7817E6F6422EAADA60E7 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cookalicious;
+			productName = Cookalicious;
+			productReference = 488D974919F1E1C20002B4E8 /* Cookalicious.app */;
+			productType = "com.apple.product-type.application";
+		};
+		488D976119F1E1C20002B4E8 /* CookaliciousTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 488D976F19F1E1C20002B4E8 /* Build configuration list for PBXNativeTarget "CookaliciousTests" */;
+			buildPhases = (
+				67D66F7F8D574E3DA46AE3AC /* Check Pods Manifest.lock */,
+				488D975E19F1E1C20002B4E8 /* Sources */,
+				488D975F19F1E1C20002B4E8 /* Frameworks */,
+				488D976019F1E1C20002B4E8 /* Resources */,
+				1FBB652F4CF740EFB1F5BA83 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				488D976419F1E1C20002B4E8 /* PBXTargetDependency */,
+			);
+			name = CookaliciousTests;
+			productName = CookaliciousTests;
+			productReference = 488D976219F1E1C20002B4E8 /* CookaliciousTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		488D974119F1E1C10002B4E8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "SHJK-BuildingStartupSystems";
+				TargetAttributes = {
+					488D974819F1E1C20002B4E8 = {
+						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = AA753846B2;
+					};
+					488D976119F1E1C20002B4E8 = {
+						CreatedOnToolsVersion = 6.0.1;
+						TestTargetID = 488D974819F1E1C20002B4E8;
+					};
+				};
+			};
+			buildConfigurationList = 488D974419F1E1C20002B4E8 /* Build configuration list for PBXProject "Cookalicious" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 488D974019F1E1C10002B4E8;
+			productRefGroup = 488D974A19F1E1C20002B4E8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				488D974819F1E1C20002B4E8 /* Cookalicious */,
+				488D976119F1E1C20002B4E8 /* CookaliciousTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		488D974719F1E1C20002B4E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48092D7519F32419009EBC3F /* CLPhotoCaptureOverlayView.xib in Resources */,
+				488D975819F1E1C20002B4E8 /* Main.storyboard in Resources */,
+				488D975D19F1E1C20002B4E8 /* LaunchScreen.xib in Resources */,
+				488D975A19F1E1C20002B4E8 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		488D976019F1E1C20002B4E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1FBB652F4CF740EFB1F5BA83 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-CookaliciousTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B23ACABA40E4D839B01E98D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		67D66F7F8D574E3DA46AE3AC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6D3C7817E6F6422EAADA60E7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-Cookalicious-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		488D974519F1E1C20002B4E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4826E15119F7383C00E79107 /* CLFeedViewController.m in Sources */,
+				4826E14D19F6B67D00E79107 /* CLNetworkingController.m in Sources */,
+				48092D7319F32005009EBC3F /* CLPhotoCaptureViewController.m in Sources */,
+				488D975219F1E1C20002B4E8 /* AppDelegate.m in Sources */,
+				4866475919F6108F00DC63A1 /* CLLoadingScreenViewController.m in Sources */,
+				488D974F19F1E1C20002B4E8 /* main.m in Sources */,
+				4826E15419F73A1A00E79107 /* CLNavigationController.m in Sources */,
+				4866475C19F6113F00DC63A1 /* CLLogInViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		488D975E19F1E1C20002B4E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				488D976919F1E1C20002B4E8 /* CookaliciousTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		488D976419F1E1C20002B4E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 488D974819F1E1C20002B4E8 /* Cookalicious */;
+			targetProxy = 488D976319F1E1C20002B4E8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		488D975619F1E1C20002B4E8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				488D975719F1E1C20002B4E8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		488D975B19F1E1C20002B4E8 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				488D975C19F1E1C20002B4E8 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		488D976A19F1E1C20002B4E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		488D976B19F1E1C20002B4E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		488D976D19F1E1C20002B4E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3C2B2A345354D07AEDEC9BA /* Pods-Cookalicious.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Cookalicious/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		488D976E19F1E1C20002B4E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3C2B2A345354D07AEDEC9BA /* Pods-Cookalicious.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Cookalicious/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		488D977019F1E1C20002B4E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5AD7E86585264E178A3AA36B /* Pods-CookaliciousTests.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CookaliciousTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cookalicious.app/Cookalicious";
+			};
+			name = Debug;
+		};
+		488D977119F1E1C20002B4E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5AD7E86585264E178A3AA36B /* Pods-CookaliciousTests.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CookaliciousTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cookalicious.app/Cookalicious";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		488D974419F1E1C20002B4E8 /* Build configuration list for PBXProject "Cookalicious" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				488D976A19F1E1C20002B4E8 /* Debug */,
+				488D976B19F1E1C20002B4E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		488D976C19F1E1C20002B4E8 /* Build configuration list for PBXNativeTarget "Cookalicious" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				488D976D19F1E1C20002B4E8 /* Debug */,
+				488D976E19F1E1C20002B4E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		488D976F19F1E1C20002B4E8 /* Build configuration list for PBXNativeTarget "CookaliciousTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				488D977019F1E1C20002B4E8 /* Debug */,
+				488D977119F1E1C20002B4E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 488D974119F1E1C10002B4E8 /* Project object */;
+}
