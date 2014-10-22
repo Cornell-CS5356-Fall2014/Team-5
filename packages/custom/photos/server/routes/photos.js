@@ -14,11 +14,14 @@ var hasAuthorization = function(req, res, next) {
 module.exports = function(Photos, app, auth, database) {
 
   app.route('/photos')
-    .get(auth.requiresLogin, photos.currentUserPhotos)
+    .get(auth.requiresLogin, photos.userPhotos)
     .post(auth.requiresLogin, photos.create);
   app.route('/photos/:photoId')
     .get(photos.show)
+    .put(auth.requiresLogin, hasAuthorization, photos.update)
     .delete(auth.requiresLogin, hasAuthorization, photos.destroy);
+  app.route('/photos/image/:photoId')
+    .get(auth.requiresLogin, photos.showImage);
 
 
   //app.get('/photos/example/anyone', function(req, res, next) {

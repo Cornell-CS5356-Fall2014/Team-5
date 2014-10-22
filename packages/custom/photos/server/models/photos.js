@@ -23,6 +23,9 @@ var PhotoSchema = new Schema({
     original: {
       type: Buffer,
       required: true
+    },
+    thumbnail: {
+      type: Buffer
     }
   }
 });

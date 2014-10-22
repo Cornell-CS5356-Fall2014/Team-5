@@ -5,15 +5,32 @@
  */
 var mongoose = require('mongoose'),
   Photo = mongoose.model('Photo'),
-  multiparty = require('multiparty');
-  //util = require('util');
+  multiparty = require('multiparty'),
+  util = require('util');
 
-//var getPhotoBody = function(photo) {
-  //return photo.image.original;
-//};
+var getImageOriginal = function(photo) {
+  return photo.image.original;
+};
+
+var getImageThumbnail = function(photo) {
+  return photo.image.thumbnail;
+};
+
+var getImageURL = function(photo, version) {
+  switch (version) {
+    case 'original':
+      break;
+    case 'thumbnail':
+      break;
+    default:
+      version = 'original';
+      break;
+  }
+  return ('/photos/image/' + photo._id + '?version=' + version);
+};
 
 var getPhotoMeta = function(photo) {
-  return {
+  var meta = {
     _id: photo._id,
     created: photo.created,
     contentType: photo.contentType,
@@ -21,6 +38,13 @@ var getPhotoMeta = function(photo) {
     caption: photo.caption,
     user: photo.user
   };
+  meta.image = {}; meta.image.original = {};
+  meta.image.original.url = getImageURL(photo, 'original');
+  if (meta.image && meta.image.thumbnail) {
+    console.log('Image has a thumbnail');
+    meta.image.original.url = getImageURL(photo, 'thumbnail');
+  }
+  return meta;
 };
 
 // Find photo by id
@@ -37,54 +61,54 @@ exports.photo = function(req, res, next, id) {
 exports.create = function(req, res) {
   var form = new multiparty.Form();
   var photo = new Photo();
-  var photoData = [];
+  var photoBuffer = [];
 
   form.on('part', function(part) {
-      part.on('error', function(err) {
-        return res.json(500, {
-          error: 'Cannot upload photo ' + err
-        });
+    part.on('error', function(err) {
+      return res.json(500, {
+        error: 'Cannot upload photo ' + err
+      });
+    });
+
+    if (part.name === 'photo') {
+
+      //console.log('Part is the photo');
+      photo.fileName = part.filename;
+      photo.contentType = part.headers ? part.headers['content-type'] : null;
+      //console.log('Set fileName to ' + fileName + ' and contentType to ' + contentType);
+      
+      photo.user = req.user;
+
+      part.on('data', function(chunk){
+        //console.log('Processing photo chunk');
+        photoBuffer.push(chunk);
       });
 
-      if (part.name === 'photo') {
+      part.on('end', function() {
+        //console.log('Done processing photo stream. photoBuffer[] is length ' + photoBuffer.length);
+        photo.image.original = Buffer.concat(photoBuffer);
+      });
 
-        //console.log('Part is the photo');
-        photo.fileName = part.filename;
-        photo.contentType = part.headers ? part.headers['content-type'] : null;
-        //console.log('Set fileName to ' + fileName + ' and contentType to ' + contentType);
-        
-        photo.user = req.user;
+    } else if (part.name === 'caption') {
 
-        part.on('data', function(chunk){
-          //console.log('Processing photo chunk');
-          photoData.push(chunk);
-        });
+      var caption = '';
+      //console.log('Part is the caption');
+      part.setEncoding('utf8');
 
-        part.on('end', function() {
-          //console.log('Done processing photo stream. PhotoData[] is length ' + photoData.length);
-          photo.image.original = Buffer.concat(photoData);
-        });
+      part.on('data', function(chunk){
+        caption = caption.concat(chunk);
+      });
+      part.on('end', function(){
+        photo.caption = caption;
+      });
 
-      } else if (part.name === 'caption') {
+    } else {
+      throw new Error('Unexpected form name: ' + part.name);
+    }
 
-        var caption = '';
-        //console.log('Part is the caption');
-        part.setEncoding('utf8');
-
-        part.on('data', function(chunk){
-          caption = caption.concat(chunk);
-        });
-        part.on('end', function(){
-          photo.caption = caption;
-        });
-
-      } else {
-        throw new Error('Unexpected form name: ' + part.name);
-      }
-
-      //console.log(util.inspect(part) + '\n\n');
-      part.resume();
-    });
+    //console.log(util.inspect(part) + '\n\n');
+    part.resume();
+  });
 
   form.on('error', function(err) {
       return res.json(500, {
@@ -107,6 +131,56 @@ exports.create = function(req, res) {
   form.parse(req);
 };
 
+exports.addThumbnail = function(req, res) {
+  var photo = req.photo;
+  var form = new multiparty.Form();
+  var photoBuffer = [];
+
+  form.on('part', function(part) {
+
+    part.on('error', function(err) {
+      return res.json(500, {
+        error: 'Cannot upload photo ' + err
+      });
+    });
+
+    if (part.name === 'photo') {
+      part.on('data', function(chunk){
+          //console.log('Processing photo chunk');
+          photoBuffer.push(chunk);
+      });
+
+      part.on('end', function() {
+        //console.log('Done processing photo stream. photoBuffer[] is length ' + photoBuffer.length);
+        photo.image.thumbnail = Buffer.concat(photoBuffer);
+      });
+    }
+  });
+
+  form.parse(req);
+};
+
+// Update photo metadata
+exports.update = function(req, res) {
+  var photo = req.photo;
+  if (req.body && req.body.caption) {
+    photo.caption = req.body.caption;
+  }
+  if (req.body && req.body.filename) {
+    photo.fileName = req.body.filename;
+  }
+  //console.log('Body of the update request: ' + util.inspect(req.body));
+  photo.save( function(err) {
+    
+    if (err) {
+      return res.json(500, {
+        error: 'Cannot update the photo'
+      });
+    }
+    res.json(getPhotoMeta(photo));
+  });
+};
+
 // Delete a photo
 exports.destroy = function(req, res) {
   var photo = req.photo;
@@ -117,14 +191,54 @@ exports.destroy = function(req, res) {
         error: 'Cannot delete the photo'
       });
     }
-    res.send('TODO: Destroy response');
+    res.send(getPhotoMeta(photo));
   });
 };
 
 exports.show = function(req, res) {
+  console.log('Params are: \n' + util.inspect(req.params));
+  console.log('Query is: \n' + util.inspect(req.query));
+  res.json(getPhotoMeta(req.photo));
+};
+
+exports.showImage = function(req, res) {
+  var photo = req.photo;
+
+  console.log(getPhotoMeta(photo));
+  if (req.query && req.query.version) {
+    switch (req.query.version) {
+      case 'original':
+        res.set('Content-Type', photo.contentType);
+        res.send(getImageOriginal(photo));
+        break;
+      case 'thumbnail':
+        if (photo && photo.image && photo.image.thumbnail) {
+          res.set('Content-Type', photo.contentType);
+          res.status(200).send(getImageThumbnail(photo));
+        } else {
+          res.json(404, {
+            error: 'Image version does not exist.'
+          });
+        }
+        break;
+      default:
+        res.json(404, {
+          error: 'Image version does not exist.'
+        });
+        break;
+    }
+  }
+  if (photo && photo._id) {
+    res.redirect(photo._id + '?version=original');
+  } else {
+    res.json(404, {
+      error: 'Image version does not exist.'
+    });
+  }
+};
+
+/*exports.showOriginal = function(req, res) {
   if (req.photo) {
-    //console.log('Got the photo');
-    //console.log(util.inspect(req.photo));
     res.set('Content-Type', req.photo.contentType);
     res.status(200).send(req.photo.image.original);
   } else {
@@ -132,7 +246,7 @@ exports.show = function(req, res) {
       error: 'Cannot show the photo'
     });
   }
-};
+};*/
 
 // List the photos
 exports.all = function(req, res) {
@@ -151,7 +265,7 @@ exports.all = function(req, res) {
 };
 
 // List the photos
-exports.currentUserPhotos = function(req, res) {
+exports.userPhotos = function(req, res) {
   var photoMeta = [];
   //only find photos where user matches req.user
   Photo.find({'user' : req.user}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
