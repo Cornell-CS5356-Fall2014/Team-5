@@ -208,6 +208,7 @@ exports.showImage = function(req, res) {
   if (req.query && req.query.version) {
     switch (req.query.version) {
       case 'original':
+        console.log('Sending Original');
         res.set('Content-Type', photo.contentType);
         res.send(getImageOriginal(photo));
         break;
@@ -229,6 +230,7 @@ exports.showImage = function(req, res) {
     }
   }
   if (photo && photo._id) {
+    console.log('In redirect');
     res.redirect(photo._id + '?version=original');
   } else {
     res.json(404, {

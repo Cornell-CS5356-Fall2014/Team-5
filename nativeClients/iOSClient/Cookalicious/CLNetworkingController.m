@@ -8,6 +8,7 @@
 
 #import "CLNetworkingController.h"
 #import <AFNetworking.h>
+#import "CLPhotoModel.h"
 
 static NSString *baseURLStringKey = @"BaseURL";
 static NSUInteger defaultRetryCount = 3;
@@ -15,6 +16,7 @@ static NSUInteger defaultRetryCount = 3;
 @interface CLNetworkingController()
 
 @property (strong, nonatomic) AFHTTPRequestOperationManager *operationManager;
+@property (strong, nonatomic) AFHTTPRequestOperationManager *imageOperationManger;
 
 
 @end
@@ -38,6 +40,10 @@ static NSUInteger defaultRetryCount = 3;
         
         self.operationManager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:baseURLString]];
         self.operationManager.responseSerializer = [AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:@[[AFJSONResponseSerializer serializer]]];
+        self.operationManager.requestSerializer.HTTPShouldHandleCookies = YES;
+        
+        self.imageOperationManger = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:baseURLString]];
+        self.imageOperationManger.responseSerializer = [AFImageResponseSerializer serializer];
         self.operationManager.requestSerializer.HTTPShouldHandleCookies = YES;
         
         self.retryCount = defaultRetryCount;
@@ -138,6 +144,45 @@ static NSUInteger defaultRetryCount = 3;
             *stop = YES;
         }
     }];
+}
+
+
+-(void)downloadImageAtURL:(NSString *)urlString
+                   success:(void (^)(NSURLResponse *response, UIImage *downloadedImage))success
+                   failure:(void (^)(NSURLResponse *response, NSError *error))failure
+{
+
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.operationManager.baseURL, urlString]  ];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request
+                                                                     progress:nil
+                                                                  destination:nil
+                                                            completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+                                                                // this handler is not executing on the main queue, so we can't do UI directly here
+                                                                if (!error)
+                                                                {
+                                                                    UIImage *image = nil;
+                                                                    if ([request.URL isEqual:URL]) {
+                                                                        // UIImage is an exception to the "can't do UI here"
+                                                                        image = [UIImage imageWithData:[NSData dataWithContentsOfURL:filePath]];
+                                                                        // but calling "self.image =" is definitely not an exception to that!
+                                                                        // so we must dispatch this back to the main queue
+                                                                    }
+                                                                    
+                                                                    if(success)
+                                                                        success(response, image);
+                                                                    
+                                                                }
+                                                                else
+                                                                    if(failure)
+                                                                        failure(response, error);
+    }];
+    
+    [downloadTask resume];
 }
 
 @end

@@ -13,6 +13,9 @@
 		4826E14D19F6B67D00E79107 /* CLNetworkingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826E14C19F6B67D00E79107 /* CLNetworkingController.m */; };
 		4826E15119F7383C00E79107 /* CLFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826E15019F7383C00E79107 /* CLFeedViewController.m */; };
 		4826E15419F73A1A00E79107 /* CLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826E15319F73A1A00E79107 /* CLNavigationController.m */; };
+		4857D41C19F8748A0004C5A0 /* CLFeedCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4857D41B19F8748A0004C5A0 /* CLFeedCollectionViewController.m */; };
+		4857D42019F87F590004C5A0 /* CLPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4857D41F19F87F590004C5A0 /* CLPhotoModel.m */; };
+		4857D42619F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4857D42519F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m */; };
 		4866475919F6108F00DC63A1 /* CLLoadingScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4866475819F6108F00DC63A1 /* CLLoadingScreenViewController.m */; };
 		4866475C19F6113F00DC63A1 /* CLLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4866475B19F6113F00DC63A1 /* CLLogInViewController.m */; };
 		488D974F19F1E1C20002B4E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 488D974E19F1E1C20002B4E8 /* main.m */; };
@@ -46,6 +49,12 @@
 		4826E15019F7383C00E79107 /* CLFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLFeedViewController.m; sourceTree = "<group>"; };
 		4826E15219F73A1A00E79107 /* CLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNavigationController.h; sourceTree = "<group>"; };
 		4826E15319F73A1A00E79107 /* CLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNavigationController.m; sourceTree = "<group>"; };
+		4857D41A19F8748A0004C5A0 /* CLFeedCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLFeedCollectionViewController.h; sourceTree = "<group>"; };
+		4857D41B19F8748A0004C5A0 /* CLFeedCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLFeedCollectionViewController.m; sourceTree = "<group>"; };
+		4857D41E19F87F590004C5A0 /* CLPhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhotoModel.h; sourceTree = "<group>"; };
+		4857D41F19F87F590004C5A0 /* CLPhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPhotoModel.m; sourceTree = "<group>"; };
+		4857D42419F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HigherOrderFunctionExtensions.h"; sourceTree = "<group>"; };
+		4857D42519F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+HigherOrderFunctionExtensions.m"; sourceTree = "<group>"; };
 		4866475719F6108F00DC63A1 /* CLLoadingScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLoadingScreenViewController.h; sourceTree = "<group>"; };
 		4866475819F6108F00DC63A1 /* CLLoadingScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLoadingScreenViewController.m; sourceTree = "<group>"; };
 		4866475A19F6113F00DC63A1 /* CLLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLogInViewController.h; sourceTree = "<group>"; };
@@ -94,6 +103,15 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		4857D41D19F87F410004C5A0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4857D41E19F87F590004C5A0 /* CLPhotoModel.h */,
+				4857D41F19F87F590004C5A0 /* CLPhotoModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		4866475D19F6114900DC63A1 /* Launch */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,11 +152,16 @@
 				4866475D19F6114900DC63A1 /* Launch */,
 				4826E14E19F6B68800E79107 /* Controllers */,
 				4826E14F19F7383C00E79107 /* CLFeedViewController.h */,
+				4857D41D19F87F410004C5A0 /* Models */,
 				4826E15019F7383C00E79107 /* CLFeedViewController.m */,
+				4857D41A19F8748A0004C5A0 /* CLFeedCollectionViewController.h */,
+				4857D41B19F8748A0004C5A0 /* CLFeedCollectionViewController.m */,
 				4826E15219F73A1A00E79107 /* CLNavigationController.h */,
 				4826E15319F73A1A00E79107 /* CLNavigationController.m */,
 				48092D7119F32005009EBC3F /* CLPhotoCaptureViewController.h */,
 				48092D7219F32005009EBC3F /* CLPhotoCaptureViewController.m */,
+				4857D42419F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.h */,
+				4857D42519F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m */,
 				488D975619F1E1C20002B4E8 /* Main.storyboard */,
 				48092D7419F32419009EBC3F /* CLPhotoCaptureOverlayView.xib */,
 				488D975919F1E1C20002B4E8 /* Images.xcassets */,
@@ -357,9 +380,12 @@
 				48092D7319F32005009EBC3F /* CLPhotoCaptureViewController.m in Sources */,
 				488D975219F1E1C20002B4E8 /* AppDelegate.m in Sources */,
 				4866475919F6108F00DC63A1 /* CLLoadingScreenViewController.m in Sources */,
+				4857D42019F87F590004C5A0 /* CLPhotoModel.m in Sources */,
 				488D974F19F1E1C20002B4E8 /* main.m in Sources */,
+				4857D42619F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m in Sources */,
 				4826E15419F73A1A00E79107 /* CLNavigationController.m in Sources */,
 				4866475C19F6113F00DC63A1 /* CLLogInViewController.m in Sources */,
+				4857D41C19F8748A0004C5A0 /* CLFeedCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

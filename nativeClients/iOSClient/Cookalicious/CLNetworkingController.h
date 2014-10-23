@@ -28,4 +28,8 @@
 
 -(void)clearSession;
 
+-(void)downloadImageAtURL:(NSString *)urlString
+                  success:(void (^)(NSURLResponse *response, UIImage *downloadedImage))success
+                  failure:(void (^)(NSURLResponse *response, NSError *error))failure;
+
 @end
