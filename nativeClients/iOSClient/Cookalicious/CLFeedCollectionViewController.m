@@ -129,6 +129,8 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
+    [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
     // Configure the cell
     //UIImageView *imageView = [[UIImageView alloc] initWithImage:[self.arrayOfImages objectAtIndex:indexPath.row]];
     UIImageView *imageView = [self.imageViewArray objectAtIndex:indexPath.row];
