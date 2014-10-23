@@ -207,8 +207,8 @@ exports.showImage = function(req, res) {
   var photo = req.photo;
 
   console.log(getPhotoMeta(photo));
-  console.log(req.params)
-  console.log(req.query)
+  console.log(req.params);
+  console.log(req.query);
   if (req.query && req.query.version) {
     switch (req.query.version) {
       case 'original':
