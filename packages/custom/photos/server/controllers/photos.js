@@ -205,13 +205,14 @@ exports.showImage = function(req, res) {
   var photo = req.photo;
 
   console.log(getPhotoMeta(photo));
-  console.log(req)
+  console.log(req.params)
+  console.log(req.query)
   if (req.query && req.query.version) {
     switch (req.query.version) {
       case 'original':
         console.log('Sending Original');
         res.set('Content-Type', photo.contentType);
-        res.send(getImageOriginal(photo));
+        res.status(200).send(getImageOriginal(photo));
         break;
       case 'thumbnail':
         if (photo && photo.image && photo.image.thumbnail) {
@@ -230,14 +231,16 @@ exports.showImage = function(req, res) {
         break;
     }
   }
-  // if (photo && photo._id) {
-  //   console.log('In redirect');
-  //   res.redirect(photo._id + '?version=original');
-  // } else {
-  //   res.json(404, {
-  //     error: 'Image version does not exist.'
-  //   });
-  // }
+  else if (photo && photo._id) {
+    console.log('In redirect');
+    //res.redirect(photo._id + '?version=original');
+    res.set('Content-Type', photo.contentType);
+    res.status(200).send(getImageOriginal(photo));
+  } else {
+    res.json(404, {
+      error: 'Image version does not exist.'
+    });
+  }
 };
 
 /*exports.showOriginal = function(req, res) {
