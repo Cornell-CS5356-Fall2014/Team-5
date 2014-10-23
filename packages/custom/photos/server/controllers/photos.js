@@ -229,14 +229,14 @@ exports.showImage = function(req, res) {
         break;
     }
   }
-  if (photo && photo._id) {
-    console.log('In redirect');
-    res.redirect(photo._id + '?version=original');
-  } else {
-    res.json(404, {
-      error: 'Image version does not exist.'
-    });
-  }
+  // if (photo && photo._id) {
+  //   console.log('In redirect');
+  //   res.redirect(photo._id + '?version=original');
+  // } else {
+  //   res.json(404, {
+  //     error: 'Image version does not exist.'
+  //   });
+  // }
 };
 
 /*exports.showOriginal = function(req, res) {
