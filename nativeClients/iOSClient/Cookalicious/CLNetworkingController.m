@@ -9,6 +9,7 @@
 #import "CLNetworkingController.h"
 #import <AFNetworking.h>
 #import "CLPhotoModel.h"
+#import <UIKit+AFNetworking.h>
 
 static NSString *baseURLStringKey = @"BaseURL";
 static NSUInteger defaultRetryCount = 3;
@@ -158,31 +159,60 @@ static NSUInteger defaultRetryCount = 3;
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.operationManager.baseURL, urlString]  ];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
-    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request
-                                                                     progress:nil
-                                                                  destination:nil
-                                                            completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-                                                                // this handler is not executing on the main queue, so we can't do UI directly here
-                                                                if (!error)
-                                                                {
-                                                                    UIImage *image = nil;
-                                                                    if ([request.URL isEqual:URL]) {
-                                                                        // UIImage is an exception to the "can't do UI here"
-                                                                        image = [UIImage imageWithData:[NSData dataWithContentsOfURL:filePath]];
-                                                                        // but calling "self.image =" is definitely not an exception to that!
-                                                                        // so we must dispatch this back to the main queue
-                                                                    }
-                                                                    
-                                                                    if(success)
-                                                                        success(response, image);
-                                                                    
-                                                                }
-                                                                else
-                                                                    if(failure)
-                                                                        failure(response, error);
-    }];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager.session downloadTaskWithRequest:request
+                                                    completionHandler:^(NSURL *localfile, NSURLResponse *response, NSError *error) {
+                                                        // this handler is not executing on the main queue, so we can't do UI directly here
+                                                        if (!error)
+                                                        {
+                                                            UIImage *image = nil;
+                                                            if ([request.URL isEqual:URL]) {
+                                                                // UIImage is an exception to the "can't do UI here"
+                                                                image = [UIImage imageWithData:[NSData dataWithContentsOfURL:localfile]];
+                                                                // but calling "self.image =" is definitely not an exception to that!
+                                                                // so we must dispatch this back to the main queue
+                                                            }
+                                                            
+                                                            if(success)
+                                                                success(response, image);
+                                                            
+                                                        }
+                                                        else
+                                                            if(failure)
+                                                                failure(response, error);
+                                                    }];
+    
+//    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request
+//                                                                     progress:nil
+//                                                                  destination:nil
+//                                                            completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+//                                                                // this handler is not executing on the main queue, so we can't do UI directly here
+//                                                                if (!error)
+//                                                                {
+//                                                                    UIImage *image = nil;
+//                                                                    if ([request.URL isEqual:URL]) {
+//                                                                        // UIImage is an exception to the "can't do UI here"
+//                                                                        image = [UIImage imageWithData:[NSData dataWithContentsOfURL:filePath]];
+//                                                                        // but calling "self.image =" is definitely not an exception to that!
+//                                                                        // so we must dispatch this back to the main queue
+//                                                                    }
+//                                                                    
+//                                                                    if(success)
+//                                                                        success(response, image);
+//                                                                    
+//                                                                }
+//                                                                else
+//                                                                    if(failure)
+//                                                                        failure(response, error);
+//    }];
     
     [downloadTask resume];
 }
 
+
+-(void)setImageOfImageView:(UIImageView *)imageView
+             withURLString:(NSString *)urlString
+{
+    [imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.operationManager.baseURL, urlString]]];
+}
 @end

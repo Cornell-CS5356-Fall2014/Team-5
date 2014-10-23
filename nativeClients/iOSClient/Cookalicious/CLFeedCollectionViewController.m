@@ -12,6 +12,8 @@
 #import "CLNetworkingController.h"
 #import "CLPhotoModel.h"
 #import "NSArray+HigherOrderFunctionExtensions.h"
+#import <UIImageView+AFNetworking.h>
+
 
 @interface CLFeedCollectionViewController () <CHTCollectionViewDelegateWaterfallLayout>
 
@@ -50,11 +52,12 @@ static NSString * const reuseIdentifier = @"Cell";
         
         if([responseObject isKindOfClass:[NSArray class]])
         {
-            
-            //self.arrayOfPhotoObjects = [(NSArray *)responseObject map:@selector(photoModelFromDictionary)];
-            
+            UIImage *placeHolderImage = [UIImage imageNamed:@"TestImage"];
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
             [(NSArray *)responseObject enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                
+                [self.arrayOfImages addObject:placeHolderImage];
+                [self.imageViewArray addObject:[[UIImageView alloc] initWithImage:placeHolderImage]];
                 
                 [tempArray addObject:[[CLPhotoModel alloc] initWithDictionary:(NSDictionary *)obj]];
                 
@@ -63,37 +66,9 @@ static NSString * const reuseIdentifier = @"Cell";
             
             [self.arrayOfPhotoObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 
-                
-                UIImage *placeHolderImage = [UIImage imageNamed:@"TestImage"];
-                [self.arrayOfImages addObject:placeHolderImage];
-                [self.imageViewArray addObject:[[UIImageView alloc] initWithImage:placeHolderImage]];
-                 
-                
                 CLPhotoModel *photo = (CLPhotoModel *)obj;
+                [[CLNetworkingController sharedController] setImageOfImageView:[self.imageViewArray objectAtIndex:idx] withURLString: [photo.imageURLStrings objectForKey:kOriginalPhotoURL]];
                 
-                NSLog(@"%@", photo);
-                
-                [[CLNetworkingController sharedController] downloadImageAtURL:[photo.imageURLStrings objectForKey:kOriginalPhotoURL]success:^(NSURLResponse *response, UIImage *downloadedImage) {
-                    
-                    if(downloadedImage)
-                    {
-                        __block UIImageView *imageView = [self.imageViewArray objectAtIndex:idx];
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            
-                            [UIView transitionWithView:imageView
-                                              duration:0.2f
-                                               options:UIViewAnimationOptionTransitionCrossDissolve
-                                            animations:^{
-                                                imageView.image = downloadedImage;
-                                            } completion:NULL];
-                        
-                        });
-                    }
-                    
-                } failure:^(NSURLResponse *response, NSError *error) {
-                    
-                    
-                }];
             }];
             
             [self.collectionView reloadData];
@@ -115,6 +90,12 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     if(!_arrayOfImages) _arrayOfImages = [[NSMutableArray alloc]init];
     return _arrayOfImages;
+}
+
+-(NSMutableArray *)imageViewArray
+{
+    if(!_imageViewArray) _imageViewArray = [[NSMutableArray alloc]init];
+    return _imageViewArray;
 }
 
 
@@ -151,8 +132,9 @@ static NSString * const reuseIdentifier = @"Cell";
     // Configure the cell
     //UIImageView *imageView = [[UIImageView alloc] initWithImage:[self.arrayOfImages objectAtIndex:indexPath.row]];
     UIImageView *imageView = [self.imageViewArray objectAtIndex:indexPath.row];
+    [imageView removeFromSuperview];
     // Scale with fill for contents when we resize.
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     // Scale the imageview to fit inside the contentView with the image centered:
     CGRect imageViewFrame = CGRectMake(0.f, 0.f, CGRectGetMaxX(cell.contentView.bounds), CGRectGetMaxY(cell.contentView.bounds));
