@@ -19,7 +19,7 @@ Photos.register(function(app, auth, database) {
   //We are adding a link to the main menu for all authenticated users
   Photos.menus.add({
     title: 'Photo Gallery',
-    link: 'photos example page',
+    link: 'photos gallery page',
     roles: ['authenticated'],
     menu: 'main'
   });
