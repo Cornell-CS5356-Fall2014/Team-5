@@ -47,6 +47,8 @@ var getPhotoMeta = function(photo) {
   return meta;
 };
 
+exports.getPhotoMeta = getPhotoMeta;
+
 // Find photo by id
 exports.photo = function(req, res, next, id) {
   Photo.load(id, function (err, photo) {
