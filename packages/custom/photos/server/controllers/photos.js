@@ -65,9 +65,7 @@ exports.create = function(req, res) {
 
   form.on('part', function(part) {
     part.on('error', function(err) {
-      return res.json(500, {
-        error: 'Cannot upload photo ' + err
-      });
+      return res.status(500).json({ error: 'Cannot upload photo ' + err});
     });
 
     if (part.name === 'photo') {
@@ -111,17 +109,13 @@ exports.create = function(req, res) {
   });
 
   form.on('error', function(err) {
-      return res.json(500, {
-        error: 'Cannot upload photo ' + err
-      });
+      return res.status(500).json({ error: 'Cannot upload photo ' + err});
     });
 
   form.on('close', function() {
     photo.save(function(err) {
       if (err) {
-        return res.json(500, {
-          error: 'Cannot upload the photo ' + err
-        });
+        return res.status(500).json({ error: 'Cannot upload photo ' + err});
       }
       //console.log('All Done');
       res.send(getPhotoMeta(photo));
@@ -139,9 +133,7 @@ exports.addThumbnail = function(req, res) {
   form.on('part', function(part) {
 
     part.on('error', function(err) {
-      return res.json(500, {
-        error: 'Cannot upload photo ' + err
-      });
+      return res.status(500).json({ error: 'Cannot upload photo ' + err});
     });
 
     if (part.name === 'photo') {
@@ -173,9 +165,7 @@ exports.update = function(req, res) {
   photo.save( function(err) {
     
     if (err) {
-      return res.json(500, {
-        error: 'Cannot update the photo'
-      });
+      return res.status(500).json({ error: 'Cannot update the photo '});
     }
     res.json(getPhotoMeta(photo));
   });
@@ -187,9 +177,7 @@ exports.destroy = function(req, res) {
 
   photo.remove(function(err) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot delete the photo'
-      });
+      return res.status(500).json({ error: 'Cannot delete the photo '});
     }
     res.send(getPhotoMeta(photo));
   });
@@ -219,15 +207,11 @@ exports.showImage = function(req, res) {
           res.set('Content-Type', photo.contentType);
           res.status(200).send(getImageThumbnail(photo));
         } else {
-          res.json(404, {
-            error: 'Image version does not exist.'
-          });
+          res.status(404).json({ error: 'Image version does not exist.'});
         }
         break;
       default:
-        res.json(404, {
-          error: 'Image version does not exist.'
-        });
+        res.status(404).json({ error: 'Image version does not exist.'});
         break;
     }
   }
@@ -237,9 +221,7 @@ exports.showImage = function(req, res) {
     res.set('Content-Type', photo.contentType);
     res.status(200).send(getImageOriginal(photo));
   } else {
-    res.json(404, {
-      error: 'Image version does not exist.'
-    });
+    res.status(404).json({ error: 'Image version does not exist.'});
   }
 };
 
@@ -259,9 +241,7 @@ exports.all = function(req, res) {
   var photoMeta = [];
   Photo.find().sort('-created').populate('user', 'name username').exec(function(err, photos) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot list the photos'
-      });
+      res.status(500).json({ error: 'Cannot list the photos'});
     }
     photos.forEach(function(photo){
       photoMeta.push(getPhotoMeta(photo));
@@ -274,11 +254,9 @@ exports.all = function(req, res) {
 exports.userPhotos = function(req, res) {
   var photoMeta = [];
   //only find photos where user matches req.user
-  Photo.find({'user' : req.user}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
+  Photo.find({'user' : req.user}, {image: 0}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot list the photos'
-      });
+      res.status(500).json({ error: 'Cannot list the photos'});
     }
     photos.forEach(function(photo){
       photoMeta.push(getPhotoMeta(photo));
