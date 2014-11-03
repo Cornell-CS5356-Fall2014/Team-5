@@ -113,6 +113,26 @@ static NSUInteger defaultRetryCount = 3;
     }];
 }
 
+-(void)postUserPhoto:(NSString*)name
+               fName:(NSString *)fName
+               image:(UIImage *)image
+           OnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    //AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *parameters = @{@"name": name, @"filename": fName};
+    NSData *imageData = UIImagePNGRepresentation(image);
+    //NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
+    [self.operationManager POST:@"/photos" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFormData:imageData name:@"photo"];
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+}
+
 -(void)isloggedInOnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
 
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
