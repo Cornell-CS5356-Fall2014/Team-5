@@ -259,7 +259,8 @@ exports.userPhotos = function(req, res) {
       res.status(500).json({ error: 'Cannot list the photos'});
     }
 
-    console.log('%s', photos);
+    console.log(util.inspect(photos) + '\n\n');
+    //console.log('%s', photos);
     // photos.forEach(function(photo){
     //   photoMeta.push(getPhotoMeta(photo));
     // });
