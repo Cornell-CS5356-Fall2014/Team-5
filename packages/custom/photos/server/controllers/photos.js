@@ -256,7 +256,7 @@ exports.userPhotos = function(req, res) {
   //only find photos where user matches req.user
   Photo.find({'user' : req.user}, {image: 0}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
     if (err) {
-      res.status(500).json({ error: 'Cannot list the photos'});
+      res.status(500).json({ error: 'Cannot list the photos: ' + err});
     }
 
     else 
