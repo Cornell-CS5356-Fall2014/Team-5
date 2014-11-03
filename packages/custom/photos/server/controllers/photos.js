@@ -259,7 +259,7 @@ exports.showImage = function(req, res) {
 // List the photos
 exports.all = function(req, res) {
   var photoMeta = [];
-  Photo.find().sort('-created').populate('user', 'name username').exec(function(err, photos) {
+  Photo.find({}, {image: 0}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
     if (err) {
       return res.json(500, {
         error: 'Cannot list the photos'
@@ -276,7 +276,7 @@ exports.all = function(req, res) {
 exports.userPhotos = function(req, res) {
   var photoMeta = [];
   //only find photos where user matches req.user
-  Photo.find({'user' : req.user}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
+  Photo.find({'user' : req.user}, {image: 0}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
     if (err) {
       return res.json(500, {
         error: 'Cannot list the photos'
