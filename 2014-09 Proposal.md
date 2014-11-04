@@ -16,68 +16,75 @@ Beyond this journaling/creation experience, we also hope the app and website wil
 The web experience will be focused primarily on the passive or read-only aspects of the CC product, while the app will provide the necessary features for content creation.
 ###Minimum Entry Requirements
 ####User Accounts/Management
-Rather than requiring that users create unique credentials for our product, we intend to leverage *Facebook Login* technology. We will naturally still need to store some user account data (e.g., users that have signed up, Facebook OpenID tokens, etc.), but user verification will be managed with existing Facebook credentials [1].
+CC uses a combination of native, server-side authentication, and Facebook authentication. In other words, users may sign up and login to CC using either a login/password combination or by authenticating through Facebook [1]. 
+
+To facilitate this approach, we are using the Passport module for Node (passportjs.org). Whether the user registers through our website directly, or indirectly via Facebook, we store these credentials in our Mongo database. The Passport module comes built in with Session support, meaning that once users are authenticated, a persistent cookie issued by our server is used to verify that session during subsequent requests. This Session functionality is used to protect API endpoints (i.e., POST requests to /photos), and to display user-specific content on the web and in the mobile app.
+
 ####Native App on iOS or Android
-Our native application will be developed for iOS, and will focus on the content creation portions of the product. This will require extensive integration with the camera and gallery features. Entries created on mobile devices will, however, be viewable either in the app or on the web.
+Our native application is developed in iOS. We intend to continue focusing the app on the content creation side of the product. At present, the application supports user authentication through Facebook. After login, the app also leverages our user-aware API endpoints to populate the mobile app with photos and articles contributed by the authenticated user. This includes the ability to upload photos captured on the device to the CC web server.
+
 ####Meal description/metadata logging
-Logging of meals will focus heavily on the photographs users take during the cooking process. We do hope to allow users to tie photographs together with posts and photo grouping, but the experience will be photo-centric. Each distinct journal entry will actually consist of 1 or more sub-entries. Each sub-entry represents a stage in a meal’s preparation, and may include 1 or more photos, and a writeup.
-Top-level journal entries may also include full recipes (list of ingredients, quantities, preparation instructions). These recipe/ingredient sections will be visually distinct from other sub-entries. Furthermore, each top-level entry will include a _Title_ and a _Banner/Headline_ image. It will be these elements (title, banner image) that are shown to users browsing other journal entries in their app.
+CC's meal description and metadata logging functionality is currently limited to a simple blog-like platform. Users can currently add  text-only articles to the server. Articles posted by authenticated users are visible to every other user logged into the site. These articles are very simple at present, including only a plain-text title and body (plus related metadata, like timestamps and user data). 
+
+We hope to build upon this article foundation to specialize the product for kitchen journaling. Specifically, we will allow users to (optionally) add a "recipe" to journal entries. These recipes will either be added manually by the user, or will be derived from existing recipes sourced to the Yummly API (detailed later) [8].
+
+Though it's not yet supported, we intend to allow photos to be connected to journal entries in some way. At the very least, users will be able to connect one or more images to a journal entry/article, with these images appearing in a simple gallery within or alongside the recipe and journal text. One alternative to this journal entry gallery would be to allow users to indicate where images belong within the body of each new article, though this would require some more complicated content creation functionality.
+
 ####Photo capture/storage
-We intend to use the iOS camera or a bare-bones photograph utility to allow users to capture images during meal preparation. Any images taken within the app will be stored in a dedicated folder on the device. Photos added to journal entries published using the CC app will be stored in our content database, along with the rest of the entry metadata.
+Our iOS application allows users to capture photos on the device, and upload these photos to our web server. These photos are stored in our MongoDB database hosted by Compose.IO, and associated with that user. At present, we expose these photos in simple photo galleries available to authenticated users in our iOS and web apps.
+
 ####Thumbnailing
-Banner images included with each top-level journal entry will be appropriately re-sized to make the images browsable in a blog or [Facebook] News Feed style chronological timeline.
+We have not yet implemented a thumbnailing service, but have started work on both server-side and client-side iOS thumbnailing functionality.
 
-When a photo is captured and uploaded to the server, the server will also scale the image down to thumbnail size and store this copy as well. Both regular and thumbnail URLs will be provided in the JSON metadata returned to the client.
 ####Service-Oriented Architecture (SOA)
-In order to allow for development on 2 platforms simultaneously (iOS, web), we intend to develop a universal set of API endpoints. Using these endpoints, requests from either mobile or the web will hit the same pieces of back-end query and update logic.
-To facilitate this design pattern, we will be running a MEAN stack on Heroku. 
+Our iOS application and website both currently touch all the same API endpoints, and utilize the same server-side tools for articles, photo upload, display, and user authentication.
 
-We will need to include an image processing service to support thumbnailing.
 ####Web presence
 The web portion of our product will focus on content discovery. As mentioned abovem, we will be utilizing a MEAN stack. Thus, our front end will be implemented in Javascript, utilizing the AngularJS framework. 
 
 The Web app will support recipe and photo viewing, in addition to being the single interface for data export. 
 
 ####API for Data Export
-The data export API will also be served by Node. We expect that a certain endpoint will simply provide a full zipped-archive a CSV data representing all of that user's non-photographic content. Photographs will not be included in data export.
+We have added a rudimentary data export feature to our website. This export feature is only enabled for users logged in to the site. When the /export endpoint is accessed, we query the database for all the article (i.e., journal entries) and photo objects for that user in our database. Our server responds with a JSON object which includes all this data. Currently, users will need to download each image manually, using the URLs provided in the JSON we deliver. We would eventually like to package all that data up ourselves, and deliver an archive of some kind, in addition to or instead of the JSON data.
+
 ####3rd-Party API Integration
-As mentioned previously, we intend to leverage Facebook's Login API. Depending on the difficulty encountered in implementing Facebook login (which uses the non-standard Facebook Connect interface), we might also implement one or both of Twitter[4] Google's[5] competing sign-in products.
-Furthermore, we intend to provide some hooks to social network APIs that allow users to republish[6]  content created within the application more widely[7].
+We implemented Facebook's Login API, and this is being used for authentication on the web and in our mobile iOS app.
+
+We hope to further leverage the Facebook API to allow our content to be shared to the user's existing network of friends.
+
 ###Deep Dives
-###Advanced UX
+####Advanced UX
 The Cookem Cookalicious mobile app will be implemented as a universal iOS app and will include both iPhone and iPad specific interfaces. These interfaces may include advanced features such as the collection view water fall layout as well as advanced animations.
 
 The Cookem Cookalicious web app will support responsive design via AngularJS.
 
-Per the milestones below, we are planning on having UX design completed by Oct. 29. Both web and iOS will combine built-in views, 3rd party views, and custom views. We will design the UX with the full knowlege of built-in views and 3rd party views that are available to us.
+Per the milestones below, we are planning on having UX design completed by Nov 14th. Both web and iOS will combine built-in views, 3rd party views, and custom views. We will design the UX with the full knowledge of built-in views and 3rd party views that are available to us.
 
-###Public API
-The Cookem Cookalicious family of applications will provide users with access to the estimated nutritional content associated with the recipes that they view. For each ingredient we provide access to, we will map to an item in the USDA nutrient database [8]. 
-We also plan on providing a nutrition tracking feature. This will allow users to say that they ate a recipe and specify a number of servings. We are planning integrating with the Jawbone Up API [9] to push nutrition information to a user’s Jawbone Up account.
-We are also planning on integrating with the Yummy API to support recipe discovery [10].
-###UPC Scanning
-One of the convenieces that we can provide to our users when creating a recipe is that rather than doing a text based search for an ingredient, the user could simply scan the UPC code and the system would find the item automatically. To support this, we are planning on adding barcode scanning support via RedLaser [11]. RedLaser outputs a UPC code, which we will use to perform the item lookup. Item lookup support via the Nutritionix API. Nutritionix provides item information as well as nutritional information.
+#### Social Networking
+Presently, the CC exposes journal entries (articles) posted by all users across the entire site. In place of this arrangement, we intend to implement a basic friending or following mechanism, allowing users to follow one another, or to establish a 1-to-1 friendship. Adding friends on CC will allow for more a more personalized browsing experience.
+
+Implementing this functionality will require new database models that captures relationships between users, modifications to existing API endpoints (or entirely new "friend aware" endpoints), and new views in the iOS and web versions of CC.
+
+####Public API
+CC will allow users to search for and repurpose recipes sourced to the Yummly API, and to add new recipes from scratch. These recipes, in addition to the cooking journals and photos added by users will be content that we will expose via a set of public APIs.
+
 ###Milestones
 * Oct 15:
-
-		1) MEAN Stack up
-		2) User Accounts (authentication via Facebook)
-		3) Photo capture and thumbnailing
-			3.1) Capture via iOS app
-			3.2) Viewing via Web app
-	  
+		1) ~~MEAN Stack up~~
+		2) ~~User Accounts (authentication via Facebook)~~
+		3) ~~Photo capture~~ and thumbnailing
+			3.1) ~~Capture via iOS app~~
+			3.2) ~~Viewing via Web app~~ 
 * Oct 22: 
-
 		1) Recipe Logging on iOS
-			1.1) Viewing on Web
+			1.1) ~~Viewing on Web~~
 		2) Integrate with Yummy API for recipe creation
-		3) API For Data Export
-			3.1) Download interface on Web
+		3) ~~API For Data Export~~
+			3.1) ~~Download interface on Web~~
 
-* Oct 29: Advanced UI/UX Design Complete
-* Nov 10: API Integration Complete
-* Nov 24: UI/UX + UPC Scanning Integration Complete
-* Dec 10: Final Deliverable and Report
+* Nov 9: Photo thumbnailing service, iOS journal entry creation (text + image). Search via Yummly API [8]. Recipe creation. Add recipe data to journal entries.
+* Nov 15: Friending/following mechanism, and filtered friend views. Share to Facebook support.
+* Dec 10: Final Deliverable and Report.
 ###Division of Labor
 System Architecture: Both
 API Design and Integration: Both
@@ -90,10 +97,5 @@ SOA: James
 [5]: https://developers.google.com/accounts/docs/OpenID "Google+ Sign-In"
 [6]: https://dev.twitter.com/rest/reference/post/statuses/update "Twitter: POST statuses/update"
 [7]: https://developers.facebook.com/docs/sharing "Facebook Sharing Allow your users to post to Facebook from your app."
-[8]: http://ndb.nal.usda.gov/ndb/ “USDA National Nutrient Database for Standard Reference”
-
-[9]: https://jawbone.com/up/developer “UP for Developers”
-
-[10]: https://developer.yummly.com/ “The Yummly API” 
-
-[11]: http://redlaser.com/developers/ “RedLaser Developers”
+[8]: https://developer.yummly.com "Yummy API"
+[11]: http://redlaser.com/developers/ "RedLaser Developers"
