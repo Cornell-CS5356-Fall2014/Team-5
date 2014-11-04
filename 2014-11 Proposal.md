@@ -1,7 +1,7 @@
 #Cookem Cookalicious Project Proposal
 **Created 29 September 2014**
-
-**Last Updated 9 October 2014**
+**Updated 9 October 2014**
+**Last Updated 4 November 2014**
 ##Basic Information
 *Team Members*: 	Sean Herman (sjh293) & James Kizer (jdk288)
 *Product Name*:	Cook-em' Cookalicious (tentative)
