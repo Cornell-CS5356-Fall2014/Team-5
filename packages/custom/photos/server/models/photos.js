@@ -20,7 +20,7 @@ var PhotoSchema = new Schema({
   original: {
     type: Schema.ObjectId,
     ref: 'Image'
-  }
+  },
   thumbnail: {
     type: Schema.ObjectId,
     ref: 'Image' 

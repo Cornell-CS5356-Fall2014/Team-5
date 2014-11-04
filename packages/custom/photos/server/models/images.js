@@ -28,4 +28,4 @@ var ImageSchema = new Schema({
    }).exec(cb);
  };
 
-mongoose.model('Image', PhotoSchema);
+mongoose.model('PhotoImage', ImageSchema);
