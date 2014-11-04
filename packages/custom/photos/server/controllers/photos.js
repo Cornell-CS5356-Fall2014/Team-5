@@ -5,49 +5,10 @@
  */
 var mongoose = require('mongoose'),
   Photo = mongoose.model('Photo'),
+  Image = mongoose.model('Image'),
+  images = require('./images'),
   multiparty = require('multiparty'),
   util = require('util');
-
-var getImageOriginal = function(photo) {
-  return photo.image.original;
-};
-
-var getImageThumbnail = function(photo) {
-  return photo.image.thumbnail;
-};
-
-var getImageURL = function(photo, version) {
-  switch (version) {
-    case 'original':
-      break;
-    case 'thumbnail':
-      break;
-    default:
-      version = 'original';
-      break;
-  }
-  return ('/photos/image/' + photo._id + '?version=' + version);
-};
-
-var getPhotoMeta = function(photo) {
-  var meta = {
-    _id: photo._id,
-    created: photo.created,
-    contentType: photo.contentType,
-    filename: photo.fileName,
-    caption: photo.caption,
-    user: photo.user
-  };
-  meta.image = {}; meta.image.original = {};
-  meta.image.original.url = getImageURL(photo, 'original');
-  if (meta.image && meta.image.thumbnail) {
-    console.log('Image has a thumbnail');
-    meta.image.original.url = getImageURL(photo, 'thumbnail');
-  }
-  return meta;
-};
-
-exports.getPhotoMeta = getPhotoMeta;
 
 // Find photo by id
 exports.photo = function(req, res, next, id) {
@@ -63,7 +24,10 @@ exports.photo = function(req, res, next, id) {
 exports.create = function(req, res) {
   var form = new multiparty.Form();
   var photo = new Photo();
-  var photoBuffer = [];
+  var image = new Image();
+  var thumb = new Image();
+  var imageBuffer = [];
+  var contentType = null;
 
   form.on('part', function(part) {
     part.on('error', function(err) {
@@ -74,21 +38,36 @@ exports.create = function(req, res) {
 
     if (part.name === 'photo') {
 
-      //console.log('Part is the photo');
       photo.fileName = part.filename;
-      photo.contentType = part.headers ? part.headers['content-type'] : null;
-      //console.log('Set fileName to ' + fileName + ' and contentType to ' + contentType);
+      contentType = part.headers ? part.headers['content-type'] : null;
+      //photo.contentType = part.headers ? part.headers['content-type'] : null;
       
       photo.user = req.user;
 
       part.on('data', function(chunk){
-        //console.log('Processing photo chunk');
-        photoBuffer.push(chunk);
+        imageBuffer.push(chunk);
       });
 
       part.on('end', function() {
-        //console.log('Done processing photo stream. photoBuffer[] is length ' + photoBuffer.length);
-        photo.image.original = Buffer.concat(photoBuffer);
+        console.log('Done processing photo stream. imageBuffer[] is length ' + photoBuffer.length);
+        image.content = Buffer.concat(imageBuffer);
+        image.contentType = contentType;
+        photo.original = image;
+        image.save(function (err) {
+          if (err) throw err;
+          console.log('Finished saving image to database');
+        }
+        console.dir(photo);
+        images.thumbnail(photo.fileName, photo, image.data, function (err, buffer) {
+          if (err) throw err;
+          thumb.content = buffer;
+          thumb.contentType = contentType;
+          photo.thumbnail = thumb;
+          thumb.save(function (err) {
+            if (err) throw err;
+            console.log('Finished saving thumbnail to database');
+          });
+        });
       });
 
     } else if (part.name === 'caption') {
@@ -128,35 +107,6 @@ exports.create = function(req, res) {
       //console.log('All Done');
       res.send(getPhotoMeta(photo));
     });
-  });
-
-  form.parse(req);
-};
-
-exports.addThumbnail = function(req, res) {
-  var photo = req.photo;
-  var form = new multiparty.Form();
-  var photoBuffer = [];
-
-  form.on('part', function(part) {
-
-    part.on('error', function(err) {
-      return res.json(500, {
-        error: 'Cannot upload photo ' + err
-      });
-    });
-
-    if (part.name === 'photo') {
-      part.on('data', function(chunk){
-          //console.log('Processing photo chunk');
-          photoBuffer.push(chunk);
-      });
-
-      part.on('end', function() {
-        //console.log('Done processing photo stream. photoBuffer[] is length ' + photoBuffer.length);
-        photo.image.thumbnail = Buffer.concat(photoBuffer);
-      });
-    }
   });
 
   form.parse(req);
