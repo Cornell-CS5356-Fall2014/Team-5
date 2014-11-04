@@ -209,7 +209,7 @@ exports.showImage = function(req, res) {
 // List the photos
 exports.all = function(req, res) {
   var photoMeta = [];
-  Photo.find().sort('-created').populate('user', 'name username').exec(function(err, photos) {
+  Photo.find({}, {image: 0}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
     if (err) {
       return res.json(500, {
         error: 'Cannot list the photos'
@@ -224,17 +224,19 @@ exports.all = function(req, res) {
 
 // List the photos
 exports.userPhotos = function(req, res) {
-  var photoMeta = [];
+  //var photoMeta = [];
   //only find photos where user matches req.user
-  Photo.find({'user' : req.user}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
+  Photo.find({'user' : req.user}, {image: 0}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
     if (err) {
+      console.log('ERROR ' + err);
       return res.json(500, {
         error: 'Cannot list the photos'
       });
     }
-    photos.forEach(function(photo){
-      photoMeta.push(getPhotoMeta(photo));
-    });
-    res.status(200).send(photoMeta);
+    console.log('Photos to be exported: ' + util.inspect(photos));
+    //photos.forEach(function(photo){
+      //photoMeta.push(getPhotoMeta(photo));
+    //});
+    res.status(200).send(photos);
   });
 };
