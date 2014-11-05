@@ -54,8 +54,8 @@ var handlePhoto = function(user, part, photo, image, contentType) {
 
   photo.user = user;
   photo.fileName = part.filename;
-  photo.original = null;
-  photo.thumbnail = null;
+  photo.original = 0;
+  photo.thumbnail = 0;
   part.on('data', function(chunk){
     buffer.push(chunk);
   });
@@ -175,6 +175,7 @@ exports.userPhotos = function(req, res) {
         error: 'Cannot list the photos'
       });
     }
+    console.log(util.inspect(photos));
     res.status(200).send(photos);
   });
 };
