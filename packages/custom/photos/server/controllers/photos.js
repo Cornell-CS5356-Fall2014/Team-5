@@ -25,6 +25,7 @@ var saveThumbnail = function (photo, contentType, image, callback) {
   console.log('In saveThumbnail')
   console.log(util.inspect(photo));
   images.createThumbnail(photo.fileName, photo, image.content, function (err, buffer) {
+    console.log('In createThumbnail callback')
     if (err) return callback(err);
     thumb.content = buffer;
     thumb.contentType = contentType;
