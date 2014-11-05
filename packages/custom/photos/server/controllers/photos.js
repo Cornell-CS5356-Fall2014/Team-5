@@ -106,25 +106,6 @@ exports.create = function(req, res) {
       if (err) {
         return res.status(500).json({ error: 'Cannot upload photo ' + err});
       }
-<<<<<<< HEAD
-      //console.log('All Done');
-      res.send(getPhotoMeta(photo));
-    });
-  });
-
-  form.parse(req);
-};
-
-exports.addThumbnail = function(req, res) {
-  var photo = req.photo;
-  var form = new multiparty.Form();
-  var photoBuffer = [];
-
-  form.on('part', function(part) {
-
-    part.on('error', function(err) {
-      return res.status(500).json({ error: 'Cannot upload photo ' + err});
-=======
       saveThumbnail(photo, contentType, image, function (err, thumb) {
         if (err) console.log(err);
         photo.thumbnail = thumb;
@@ -134,7 +115,6 @@ exports.addThumbnail = function(req, res) {
         });
       });
       res.send(photo);
->>>>>>> development
     });
   });
 
@@ -185,95 +165,13 @@ exports.show = function(req, res) {
   res.json(req.photo);
 };
 
-<<<<<<< HEAD
-exports.showImage = function(req, res) {
-  var photo = req.photo;
-
-  console.log(getPhotoMeta(photo));
-  console.log(req.params)
-  console.log(req.query)
-  if (req.query && req.query.version) {
-    switch (req.query.version) {
-      case 'original':
-        console.log('Sending Original');
-        res.set('Content-Type', photo.contentType);
-        res.status(200).send(getImageOriginal(photo));
-        break;
-      case 'thumbnail':
-        if (photo && photo.image && photo.image.thumbnail) {
-          res.set('Content-Type', photo.contentType);
-          res.status(200).send(getImageThumbnail(photo));
-        } else {
-          res.status(404).json({ error: 'Image version does not exist.'});
-        }
-        break;
-      default:
-        res.status(404).json({ error: 'Image version does not exist.'});
-        break;
-    }
-  }
-  else if (photo && photo._id) {
-    console.log('In redirect');
-    //res.redirect(photo._id + '?version=original');
-    res.set('Content-Type', photo.contentType);
-    res.status(200).send(getImageOriginal(photo));
-  } else {
-    res.status(404).json({ error: 'Image version does not exist.'});
-  }
-};
-
-/*exports.showOriginal = function(req, res) {
-  if (req.photo) {
-    res.set('Content-Type', req.photo.contentType);
-    res.status(200).send(req.photo.image.original);
-  } else {
-    return res.json(500, {
-      error: 'Cannot show the photo'
-    });
-  }
-};*/
-
-// List the photos
-exports.all = function(req, res) {
-  var photoMeta = [];
-  Photo.find().sort('-created').populate('user', 'name username').exec(function(err, photos) {
-    if (err) {
-      res.status(500).json({ error: 'Cannot list the photos'});
-    }
-    photos.forEach(function(photo){
-      photoMeta.push(getPhotoMeta(photo));
-    });
-    res.status(200).send(photoMeta);
-  });
-};
-
-// List the photos
-exports.userPhotos = function(req, res) {
-  var photoMeta = [];
-  //only find photos where user matches req.user
-  Photo.find({'user' : req.user}, {image: 0}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
-=======
 exports.userPhotos = function(req, res) {
   Photo.find({'user' : req.user}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
->>>>>>> development
     if (err) {
-      res.status(500).json({ error: 'Cannot list the photos: ' + err});
+      return res.json(500, {
+        error: 'Cannot list the photos'
+      });
     }
-
-    else 
-    {
-
-      console.log(util.inspect(photos) + '\n\n');
-      //console.log('%s', photos);
-      // photos.forEach(function(photo){
-      //   photoMeta.push(getPhotoMeta(photo));
-      // });
-
-      res.status(200).send(photoMeta);
-    }
-<<<<<<< HEAD
-=======
     res.status(200).send(photos);
->>>>>>> development
   });
 };
