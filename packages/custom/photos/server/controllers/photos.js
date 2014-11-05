@@ -54,7 +54,8 @@ var handlePhoto = function(user, part, photo, image, contentType) {
 
   photo.user = user;
   photo.fileName = part.filename;
-
+  photo.original = null;
+  photo.thumbnail = null;
   part.on('data', function(chunk){
     buffer.push(chunk);
   });
