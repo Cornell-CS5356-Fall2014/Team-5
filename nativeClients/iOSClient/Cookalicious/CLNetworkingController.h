@@ -37,7 +37,10 @@
 -(void)downloadImageAtURL:(NSString *)urlString
                   success:(void (^)(NSURLResponse *response, UIImage *downloadedImage))success
                   failure:(void (^)(NSURLResponse *response, NSError *error))failure;
+//-(void)setImageOfImageView:(UIImageView *)imageView
+//             withURLString:(NSString *)urlString;
+
 -(void)setImageOfImageView:(UIImageView *)imageView
-             withURLString:(NSString *)urlString;
+               withImageId:(NSString *)imageId;
 
 @end

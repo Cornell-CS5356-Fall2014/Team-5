@@ -20,26 +20,32 @@ NSString * const kOriginalPhotoURL=@"original";
     self = [super init];
     if(self)
     {
-        _photoObjectID = [NSNumber numberWithLongLong:[[dictionary objectForKey:@"_id"] longLongValue]];
-        _owningUserID = [NSNumber numberWithLongLong:[[dictionary objectForKey:@"user._id"] longLongValue]];
+        
+        _photoObjectID = [dictionary objectForKey:@"_id"];
+        _owningUserID = [dictionary objectForKey:@"user._id"];
         _caption = [dictionary objectForKey:@"caption"];
         _createdDate = [[CLPhotoModel longDateFormatter] dateFromString:[dictionary objectForKey:@"created"]];
         _filename = [dictionary objectForKey:@"filename"];
+        _originalImageID = [dictionary objectForKey:@"original"];
+        if([dictionary objectForKey:@"thumbnail"])
+            _thumbnailImageID = [dictionary objectForKey:@"thumbnail"];
+        else
+            _thumbnailImageID = @"";
         
-        NSArray *photoURLKeys = @[kOriginalPhotoURL];
-        NSMutableDictionary *imageURLStringMutableDictionary = [[NSMutableDictionary alloc] init];
-        NSDictionary *imagesDictionary = [dictionary objectForKey:@"image"];
-        
-        [photoURLKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            
-            NSString *keyString = [NSString stringWithFormat:@"%@.url", obj];
-            
-            //[imageURLStringMutableDictionary setObject:[[imagesDictionary objectForKey:obj] objectForKey:@"url"] forKey:obj];
-            
-            [imageURLStringMutableDictionary setObject:[imagesDictionary valueForKeyPath:keyString] forKey:obj];
-        }];
-        
-        _imageURLStrings = [NSDictionary dictionaryWithDictionary:imageURLStringMutableDictionary];
+//        NSArray *photoURLKeys = @[kOriginalPhotoURL];
+//        NSMutableDictionary *imageURLStringMutableDictionary = [[NSMutableDictionary alloc] init];
+//        NSDictionary *imagesDictionary = [dictionary objectForKey:@"image"];
+//        
+//        [photoURLKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//            
+//            NSString *keyString = [NSString stringWithFormat:@"%@.url", obj];
+//            
+//            //[imageURLStringMutableDictionary setObject:[[imagesDictionary objectForKey:obj] objectForKey:@"url"] forKey:obj];
+//            
+//            [imageURLStringMutableDictionary setObject:[imagesDictionary valueForKeyPath:keyString] forKey:obj];
+//        }];
+//        
+//        _imageURLStrings = [NSDictionary dictionaryWithDictionary:imageURLStringMutableDictionary];
         
     }
     return self;

@@ -13,6 +13,7 @@
 
 static NSString *baseURLStringKey = @"BaseURL";
 static NSUInteger defaultRetryCount = 3;
+static NSString *cImagesPath = @"/images";
 
 @interface CLNetworkingController()
 
@@ -120,7 +121,7 @@ static NSUInteger defaultRetryCount = 3;
              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     //AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *parameters = @{@"name": name, @"filename": fName};
+//    NSDictionary *parameters = @{@"name": name, @"filename": fName};
     NSData *imageData = UIImagePNGRepresentation(image);
     //NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
     [self.operationManager POST:@"/photos" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -230,9 +231,16 @@ static NSUInteger defaultRetryCount = 3;
 }
 
 
+//-(void)setImageOfImageView:(UIImageView *)imageView
+//             withURLString:(NSString *)urlString
+//{
+//    [imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.operationManager.baseURL, urlString]]];
+//}
+
 -(void)setImageOfImageView:(UIImageView *)imageView
-             withURLString:(NSString *)urlString
+             withImageId:(NSString *)imageId
 {
-    [imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.operationManager.baseURL, urlString]]];
+    [imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", self.operationManager.baseURL, cImagesPath, imageId]]];
 }
+
 @end
