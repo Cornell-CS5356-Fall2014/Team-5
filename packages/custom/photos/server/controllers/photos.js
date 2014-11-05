@@ -182,7 +182,6 @@ exports.userPhotos = function(req, res) {
         error: 'Cannot list the photos'
       });
     }
-    console.log('Photos to be exported: ' + util.inspect(photos));
     res.status(200).send(photos);
   });
 };

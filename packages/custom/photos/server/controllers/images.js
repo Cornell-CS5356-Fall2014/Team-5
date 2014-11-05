@@ -47,12 +47,18 @@ exports.createThumbnail = function(filename, photo, buffer, callback) {
         }
         console.log('Finished resizing to ' + tmp_thumb);
         console.log('Attempting to read ' + tmp_thumb);
+        fs.unlink(tmp_orig, function (err) {
+          if (err) console.log('Error deleting ' + tmp_orig);
+        });
         fs.readFile(tmp_thumb, function (err, data) {
           if (err) {
             console.log('readFile error: ' + err);
             return callback(err);
           }
           console.log('Finished reading' + tmp_thumb);
+          fs.unlink(tmp_thumb, function (err) {
+            if (err) console.log('Error deleting ' + tmp_thumb);
+          });
           callback(null, data);
         });
       });

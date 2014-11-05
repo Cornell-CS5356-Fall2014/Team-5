@@ -8,15 +8,11 @@ angular.module('mean.photos').controller('PhotosController', ['$scope', '$http',
     };
 
     // Get the photos for this user
-    $http.get('/photos/').success(function(data) {
-      $scope.photos = data;
-      data.forEach(function(photo) {
-        if (photo.image && photo.image.thumbnail) {
-          photo.url = photo.image.thumbnail.url;
-        } else {
-          photo.url = photo.image.original.url;
-        }
-        //console.log('Photo image URL is ' + photo.url);
+    $http.get('/photos/').success(function(photoData) {
+      $scope.photos = photoData;
+      photoData.forEach(function(photo) {
+        if (photo.thumbnail) photo.preview = photo.thumbnail;
+        else photo.preview = photo.original;
       });
     });
 
