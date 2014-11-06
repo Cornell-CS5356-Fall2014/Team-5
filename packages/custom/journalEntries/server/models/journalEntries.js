@@ -19,11 +19,11 @@ var mongoose = require('mongoose'),
     type: Date,
     default: Date.now
   },
-  photoList: [{ type : ObjectId, ref: 'Photo' }],
+  photoList: [{ type : Schema.Types.ObjectId, ref: 'Photo' }],
   title: String,
   detailText: String,
-  likerList: [{ type : ObjectId, ref: 'User' }],
-  commentList: [{ type : ObjectId, ref: 'Comment' }],
+  likerList: [{ type : Schema.Types.ObjectId, ref: 'User' }],
+  commentList: [{ type : Schema.Types.ObjectId, ref: 'Comment' }],
 
 });
 
