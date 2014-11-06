@@ -120,10 +120,14 @@ exports.user = function(req, res, next, id) {
       if (err) return next(err);
       if (!user) return next(new Error('Failed to load User ' + id));
       req.profile = user;
+      console.log('Logging user');
+      console.log(util.inspect(user));
       if(!user.hasOwnProperty(friends)) {
         user.friends = []
         user.save(function(err) {
           if (err) return next(err);
+          console.log('Just updated user');
+          console.log(util.inspect(user));
           next();
         });
       }
