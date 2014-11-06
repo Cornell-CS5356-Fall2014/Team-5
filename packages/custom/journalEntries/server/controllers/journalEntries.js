@@ -50,6 +50,9 @@ function getEntries(req, res, userDicts) {
 }
 
 exports.create = function(req, res) {
+ 
+  console.log('request body');
+  console.log(util.inspect(arguments));
   var journalEntry = new JournalEntry(req.body);
 
   journalEntry.user = req.user;
