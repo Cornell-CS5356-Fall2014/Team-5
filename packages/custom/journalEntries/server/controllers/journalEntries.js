@@ -32,7 +32,7 @@ exports.getJournalEntriesIncludingFriends = function(includeFriendsEntries) {
 		return {'user' : user};
 	})
 
-	return function(req, res) {
+	return function retFunction(req, res) {
 
 		JournalEntry.find(userQueryDictArray).sort('-created').exec(function(err, journalEntries) {
 		    if (err) {
