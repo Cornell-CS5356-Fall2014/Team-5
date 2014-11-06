@@ -71,8 +71,8 @@ var UserSchema = new Schema({
   twitter: {},
   github: {},
   google: {},
-  linkedin: {}
-  friends: [{ type : ObjectId, ref: 'User' }],
+  linkedin: {},
+  friends: [{ type : ObjectId, ref: 'User' }]
 });
 
 /**
