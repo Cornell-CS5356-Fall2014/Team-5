@@ -6,8 +6,6 @@
 var mongoose = require('mongoose'),
   JournalEntry = mongoose.model('JournalEntry'),
   Comment = mongoose.model('Comment'),
-  images = require('./images'),
-  multiparty = require('multiparty'),
   util = require('util');
 
 // Find photo by id
