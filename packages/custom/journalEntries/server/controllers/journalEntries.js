@@ -20,31 +20,33 @@ exports.journalEntry = function(req, res, next, id) {
 
 // journalEntries.getJournalEntry
 
-exports.getJournalEntriesIncludingFriends = function(includeFriendsEntries) {
+exports.getJournalEntriesIncludingFriends = function(req, res) {
 	
 	var users = [req.user];
 	var userQueryDictArray = [];
-	if (includeFriendsEntries) {
-		users = users.concat(req.user.friends);
-	}
+	users = users.concat(req.user.friends);
 
 	var userQueryDictArray = users.map(function(user) {
 		return {'user' : user};
 	})
 
-	return function retFunction(req, res) {
+	return getEntries(req, res, userQueryDictArray)
+}
 
-		JournalEntry.find(userQueryDictArray).sort('-created').exec(function(err, journalEntries) {
-		    if (err) {
-		      return res.json(500, {
-		        error: 'Cannot list the journal entries'
-		      });
-		    }
-		    console.log(util.inspect(journalEntries));
-		    res.status(200).send(journalEntries);
-	  	});
-	}
+exports.getJournalEntriesIncludingFriends = function(req, res) {
+  return getEntries(req, res, {'user' : req.user})
+}
 
+function getEntries(req, res, userDicts) {
+  JournalEntry.find(userDicts).sort('-created').exec(function(err, journalEntries) {
+    if (err) {
+      return res.json(500, {
+        error: 'Cannot list the journal entries'
+      });
+    }
+    console.log(util.inspect(journalEntries));
+    res.status(200).send(journalEntries);
+  });
 }
 
 exports.create = function(req, res) {

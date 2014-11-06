@@ -20,12 +20,12 @@ module.exports = function(JournalEntries, app, auth, database) {
 
   app.route('/journalEntries')
     //note that 
-    .get(auth.requiresLogin, journalEntries.getJournalEntriesIncludingFriends(true))
+    .get(auth.requiresLogin, journalEntries.getJournalEntriesIncludingFriends)
     .post(auth.requiresLogin, journalEntries.create);
 
   app.route('/user/journalEntries')
     //note that 
-    .get(auth.requiresLogin, journalEntries.getJournalEntriesIncludingFriends(false))
+    .get(auth.requiresLogin, journalEntries.getJournalEntries)
 
   app.route('/journalEntries/:journalEntryId')
     .get(auth.requiresLogin, journalEntries.journalEntry)
