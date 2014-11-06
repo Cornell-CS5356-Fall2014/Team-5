@@ -5,16 +5,16 @@
  */
 var Module = require('meanio').Module;
 
-var Photos = new Module('photos');
+var JournalEntries = new Module('journalEntries');
 
 /*
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
-Photos.register(function(app, auth, database) {
+JournalEntries.register(function(app, auth, database) {
 
   //We enable routing. By default the Package Object is passed to the routes
-  Photos.routes(app, auth, database);
+  JournalEntries.routes(app, auth, database);
 
   //We are adding a link to the main menu for all authenticated users
   // Photos.menus.add({
@@ -48,5 +48,5 @@ Photos.register(function(app, auth, database) {
     });
     */
 
-  return Photos;
+  return JournalEntries;
 });
