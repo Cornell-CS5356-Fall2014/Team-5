@@ -20,7 +20,7 @@ exports.journalEntry = function(req, res, next, id) {
 
 // journalEntries.getJournalEntry
 
-exports.getJournalEntriesIncludingFriendsEntries = function(includeFriendsEntries) {
+exports.getJournalEntriesIncludingFriends = function(includeFriendsEntries) {
 	
 	var users = [req.user];
 	var userQueryDictArray = [];
