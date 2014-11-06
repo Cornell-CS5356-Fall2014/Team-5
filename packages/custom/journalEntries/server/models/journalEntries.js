@@ -20,8 +20,18 @@ var mongoose = require('mongoose'),
     default: Date.now
   },
   photoList: [{ type : Schema.Types.ObjectId, ref: 'Photo' }],
-  title: String,
-  detailText: String,
+
+  title: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  detailText: {
+    type: String,
+    required: true,
+    trim: true
+  },
+
   likerList: [{ type : Schema.Types.ObjectId, ref: 'User' }],
   commentList: [{ type : Schema.Types.ObjectId, ref: 'Comment' }],
 
@@ -30,6 +40,14 @@ var mongoose = require('mongoose'),
 /**
  * Validations
  */
+
+JournalEntrySchema.path('title').validate(function(title) {
+  return !!title;
+}, 'title cannot be blank');
+
+JournalEntrySchema.path('detailText').validate(function(content) {
+  return !!detailText;
+}, 'detailText cannot be blank');
 
  JournalEntrySchema.statics.load = function(id, cb) {
    this.findOne({

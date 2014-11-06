@@ -63,7 +63,22 @@ exports.create = function(req, res) {
         error: 'Cannot save the journal entry'
       });
     }
-    res.json(journalEntry);
+
+
+
+    console.log('Saved journal entry');
+    console.log(util.inspect(journalEntry));
+
+    JournalEntry.load(journalEntry._id, function (err, j) {
+      if (err) return next(err);
+      if (!journalEntry) return next(new Error('Failed to load journal entry ' + id));
+      console.log('reloaded journal entry');
+      console.log(util.inspect(j));
+      res.json(journalEntry);
+    });
+  
+
+    // res.json(journalEntry);
 
   });
 };
