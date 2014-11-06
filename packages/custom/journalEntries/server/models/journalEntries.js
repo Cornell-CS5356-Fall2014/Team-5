@@ -1,0 +1,40 @@
+'use strict';
+
+/**
+ * Module dependencies.
+ */
+var mongoose = require('mongoose'),
+  Schema = mongoose.Schema;
+
+ var JournalEntrySchema = new Schema({
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  createdDate: {
+    type: Date,
+    default: Date.now
+  },
+  modifiedDate: {
+    type: Date,
+    default: Date.now
+  },
+  photoList: [{ type : ObjectId, ref: 'Photo' }],
+  title: String,
+  detailText: String,
+  likerList: [{ type : ObjectId, ref: 'User' }],
+  commentList: [{ type : ObjectId, ref: 'Comment' }],
+
+});
+
+/**
+ * Validations
+ */
+
+ JournalEntrySchema.statics.load = function(id, cb) {
+   this.findOne({
+     _id: id
+   }).exec(cb);
+ };
+
+mongoose.model('JournalEntry', JournalEntrySchema);

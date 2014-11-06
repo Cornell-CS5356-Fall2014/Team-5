@@ -240,7 +240,7 @@ static NSString *cImagesPath = @"/images";
 -(void)setImageOfImageView:(UIImageView *)imageView
              withImageId:(NSString *)imageId
 {
-    [imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", self.operationManager.baseURL, cImagesPath, imageId]]];
+    [imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%@", self.operationManager.baseURL, cImagesPath, imageId]]];
 }
 
 @end

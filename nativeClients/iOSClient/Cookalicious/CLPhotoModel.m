@@ -22,7 +22,7 @@ NSString * const kOriginalPhotoURL=@"original";
     {
         
         _photoObjectID = [dictionary objectForKey:@"_id"];
-        _owningUserID = [dictionary objectForKey:@"user._id"];
+        _owningUserID = [dictionary valueForKeyPath:@"user._id"];
         _caption = [dictionary objectForKey:@"caption"];
         _createdDate = [[CLPhotoModel longDateFormatter] dateFromString:[dictionary objectForKey:@"created"]];
         _filename = [dictionary objectForKey:@"filename"];
@@ -31,22 +31,6 @@ NSString * const kOriginalPhotoURL=@"original";
             _thumbnailImageID = [dictionary objectForKey:@"thumbnail"];
         else
             _thumbnailImageID = @"";
-        
-//        NSArray *photoURLKeys = @[kOriginalPhotoURL];
-//        NSMutableDictionary *imageURLStringMutableDictionary = [[NSMutableDictionary alloc] init];
-//        NSDictionary *imagesDictionary = [dictionary objectForKey:@"image"];
-//        
-//        [photoURLKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//            
-//            NSString *keyString = [NSString stringWithFormat:@"%@.url", obj];
-//            
-//            //[imageURLStringMutableDictionary setObject:[[imagesDictionary objectForKey:obj] objectForKey:@"url"] forKey:obj];
-//            
-//            [imageURLStringMutableDictionary setObject:[imagesDictionary valueForKeyPath:keyString] forKey:obj];
-//        }];
-//        
-//        _imageURLStrings = [NSDictionary dictionaryWithDictionary:imageURLStringMutableDictionary];
-        
     }
     return self;
 }

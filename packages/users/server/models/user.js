@@ -72,6 +72,7 @@ var UserSchema = new Schema({
   github: {},
   google: {},
   linkedin: {}
+  friends: [{ type : ObjectId, ref: 'User' }],
 });
 
 /**

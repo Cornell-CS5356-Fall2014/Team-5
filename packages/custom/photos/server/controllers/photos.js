@@ -15,7 +15,10 @@ exports.photo = function(req, res, next, id) {
   Photo.load(id, function (err, photo) {
     if (err) return next(err);
     if (!photo) return next(new Error('Failed to load photo ' + id));
+    
+    if()
     req.photo = photo;
+
     next();
   });
 };

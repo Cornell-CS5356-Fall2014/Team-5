@@ -90,7 +90,7 @@ static NSString * const reuseIdentifier = @"Cell";
             [self.arrayOfPhotoObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 
                 CLPhotoModel *photo = (CLPhotoModel *)obj;
-                if(![photo.thumbnailImageID isEqualToString:@""])
+                if(![photo.thumbnailImageID isKindOfClass:[NSNull class]] && ![photo.thumbnailImageID isEqualToString:@""])
                     [[CLNetworkingController sharedController] setImageOfImageView:[self.imageViewArray objectAtIndex:idx] withImageId:photo.thumbnailImageID];
                 
             }];

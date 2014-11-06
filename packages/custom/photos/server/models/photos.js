@@ -19,11 +19,11 @@ var PhotoSchema = new Schema({
   },
   original: {
     type: Schema.ObjectId,
-    ref: 'Image'
+    ref: 'PhotoImage'
   },
   thumbnail: {
     type: Schema.ObjectId,
-    ref: 'Image' 
+    ref: 'PhotoImage' 
   }
 });
 
