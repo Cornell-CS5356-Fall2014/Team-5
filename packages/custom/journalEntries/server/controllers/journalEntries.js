@@ -33,7 +33,7 @@ exports.getJournalEntriesIncludingFriends = function(req, res) {
 	return getEntries(req, res, userQueryDictArray)
 }
 
-exports.getJournalEntriesIncludingFriends = function(req, res) {
+exports.getJournalEntries = function(req, res) {
   return getEntries(req, res, {'user' : req.user})
 }
 
