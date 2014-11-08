@@ -6,7 +6,7 @@
 var mongoose = require('mongoose'),
   JournalEntry = mongoose.model('JournalEntry'),
   Comment = mongoose.model('Comment'),
-  User = mongoose.model('User')
+  User = mongoose.model('User'),
   util = require('util');
 
 // Find photo by id
