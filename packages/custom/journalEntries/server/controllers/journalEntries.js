@@ -153,7 +153,8 @@ function journalEntryForPublicJSON(journalEntry, cb) {
 
           var userDictionary = {};
           users.forEach(function(user) {
-            userDictionary = { user._id : {id: user._id, name: user.name, username: user.username}}
+            var id = user._id
+            userDictionary = { id : {id: user._id, name: user.name, username: user.username}}
           });
 
           Photo
