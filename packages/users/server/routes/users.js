@@ -19,7 +19,7 @@ module.exports = function(MeanUser, app, auth, database, passport) {
     .get(users.me);
 
   app.route('/testLog')
-    .put(function(req, res) {
+    .post(function(req, res) {
       console.log(req.body.logText);
       res.status(200).send({});
     });
