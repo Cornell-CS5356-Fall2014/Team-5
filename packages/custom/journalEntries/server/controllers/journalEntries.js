@@ -184,17 +184,17 @@ function journalEntryForPublicJSON(journalEntry, cb) {
         return comment.user;
       });
 
-      console.log('Current user:');
-      console.log(util.inspect(journalEntry.user));
-      console.log('*******************************');
+      // console.log('Current user:');
+      // console.log(util.inspect(journalEntry.user));
+      // console.log('*******************************');
 
-      console.log('Likers:');
-      console.log(util.inspect(journalEntry.likerList));
-      console.log('*******************************');
+      // console.log('Likers:');
+      // console.log(util.inspect(journalEntry.likerList));
+      // console.log('*******************************');
 
-      console.log('Commenters:');
-      console.log(util.inspect(commentUsers));
-      console.log('*******************************');
+      // console.log('Commenters:');
+      // console.log(util.inspect(commentUsers));
+      // console.log('*******************************');
 
       var userSet = new Set([journalEntry.user].concat(journalEntry.likerList).concat(commentUsers));
       var userQueryDictArray = [];
@@ -205,21 +205,21 @@ function journalEntryForPublicJSON(journalEntry, cb) {
 
       //cb(null, journalEntry);
 
-      console.log('Users:');
-      console.log(util.inspect(userSet));
-      console.log('*******************************');
+      // console.log('Users:');
+      // console.log(util.inspect(userSet));
+      // console.log('*******************************');
 
-      console.log('User Query Dict');
-      console.log(util.inspect(userQueryDictArray));
-      console.log('*******************************');
+      // console.log('User Query Dict');
+      // console.log(util.inspect(userQueryDictArray));
+      // console.log('*******************************');
 
       User
         .find(userQueryDictArray)
         .exec(function(err, returnedUsers) {
 
-          console.log('In User');
-          console.log(util.inspect(returnedUsers));
-          console.log('*******************************');
+          // console.log('In User');
+          // console.log(util.inspect(returnedUsers));
+          // console.log('*******************************');
 
           if (err) {
             cb(err, null);
@@ -232,48 +232,57 @@ function journalEntryForPublicJSON(journalEntry, cb) {
             userDictionary[id] = {id: user._id, name: user.name, username: user.username};
           });
 
-          console.log('User Dictionary');
-          console.log(util.inspect(userDictionary));
-          console.log('*******************************');
+          // console.log('User Dictionary');
+          // console.log(util.inspect(userDictionary));
+          // console.log('*******************************');
 
-          cb(null, journalEntry);
+          //cb(null, journalEntry);
 
-          // Photo
-          //   .find(photoQueryDictArray)
-          //   .exec(function(err, photos) {
+          Photo
+            .find(photoQueryDictArray)
+            .exec(function(err, photos) {
 
-          //     console.log('In Photo');
-          //     console.log(util.inspect(photos));
+              console.log('In Photo');
+              console.log(util.inspect(photos));
 
-          //     if (err) {
-          //       cb(err, null);
-          //       return;
-          //     }
+              if (err) {
+                cb(err, null);
+                return;
+              }
 
-          //     commentsArray = comments.map(function(comment) {
-          //       return {user: userDictionary[comment.user], createdDate: comment.createdDate, text: comment.text};
-          //     });
+              commentsArray = comments.map(function(comment) {
+                return {user: userDictionary[comment.user], createdDate: comment.createdDate, text: comment.text};
+              });
 
-          //     photosArray = photos.map(function(photo) {
-          //       return {user: userDictionary[photo.user], created: photo.created, fileName: photo.fileName, 
-          //         caption: photo.caption, original: photo.original, thumbnail: photo.thumbnail};
-          //     });
+              console.log('Comments Array');
+              console.log(util.inspect(commentsArray));
 
-          //     likerArray = journalEntry.likerList.map(function(liker) {
-          //       return userDictionary[liker];
-          //     });
+              photosArray = photos.map(function(photo) {
+                return {user: userDictionary[photo.user], created: photo.created, fileName: photo.fileName, 
+                  caption: photo.caption, original: photo.original, thumbnail: photo.thumbnail};
+              });
 
-          //     var journalEntryDictionary =  {
-          //       user: userDictionary[journalEntry.user],
-          //       photoList: photosArray,
-          //       title: journalEntry.title,
-          //       detailText: journalEntry.detailText,
-          //       likerList: likerArray,
-          //       commentList: commentsArray
-          //     };
+              console.log('Photos Array');
+              console.log(util.inspect(photosArray));
 
-          //     cb(null, journalEntryDictionary);
-          //   });
+              likerArray = journalEntry.likerList.map(function(liker) {
+                return userDictionary[liker];
+              });
+
+              console.log('Likers Array');
+              console.log(util.inspect(likerArray));
+
+              var journalEntryDictionary =  {
+                user: userDictionary[journalEntry.user],
+                photoList: photosArray,
+                title: journalEntry.title,
+                detailText: journalEntry.detailText,
+                likerList: likerArray,
+                commentList: commentsArray
+              };
+
+              cb(null, journalEntryDictionary);
+            });
 
         });
 
