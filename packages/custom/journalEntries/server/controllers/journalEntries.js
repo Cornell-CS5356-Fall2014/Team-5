@@ -8,7 +8,9 @@ var mongoose = require('mongoose'),
   Comment = mongoose.model('Comment'),
   User = mongoose.model('User'),
   util = require('util'),
-  Promise = require('promise');
+  Promise = require('promise'),
+  Set = require('set');
+
 
 // Find photo by id
 exports.journalEntry = function(req, res, next, id) {
@@ -182,7 +184,7 @@ function journalEntryForPublicJSON(journalEntry, cb) {
         return comment.user;
       });
 
-      var users = new Set([journalEntry.user].concat(journalEntry.likerList).concat(commentUsers));
+      //var users = new Set([journalEntry.user].concat(journalEntry.likerList).concat(commentUsers));
       var userQueryDictArray = [];
 
       users.forEach(function(userId) {
