@@ -191,64 +191,69 @@ function journalEntryForPublicJSON(journalEntry, cb) {
         userQueryDictArray.push({_id : userId});
       });
 
-      cb(null, journalEntry);
+      //cb(null, journalEntry);
 
-      // User
-      //   .find(userQueryDictArray)
-      //   .exec(function(err, returnedUsers) {
+      User
+        .find(userQueryDictArray)
+        .exec(function(err, returnedUsers) {
 
-      //     console.log('In User');
-      //     console.log(util.inspect(users));
+          console.log('In User');
+          console.log(util.inspect(returnedUsers));
 
-      //     if (err) {
-      //       cb(err, null);
-      //       return;
-      //     }
+          if (err) {
+            cb(err, null);
+            return;
+          }
 
-      //     var userDictionary = {};
-      //     returnedUsers.forEach(function(user) {
-      //       var id = user._id;
-      //       userDictionary[id] = {id: user._id, name: user.name, username: user.username};
-      //     });
+          var userDictionary = {};
+          returnedUsers.forEach(function(user) {
+            var id = user._id;
+            userDictionary[id] = {id: user._id, name: user.name, username: user.username};
+          });
 
-      //     Photo
-      //       .find(photoQueryDictArray)
-      //       .exec(function(err, photos) {
+          console.log('User Dictionary');
+          console.log(util.inspect(userDictionary));
 
-      //         console.log('In Photo');
-      //         console.log(util.inspect(photos));
+          cb(null, journalEntry);
 
-      //         if (err) {
-      //           cb(err, null);
-      //           return;
-      //         }
+          // Photo
+          //   .find(photoQueryDictArray)
+          //   .exec(function(err, photos) {
 
-      //         commentsArray = comments.map(function(comment) {
-      //           return {user: userDictionary[comment.user], createdDate: comment.createdDate, text: comment.text};
-      //         });
+          //     console.log('In Photo');
+          //     console.log(util.inspect(photos));
 
-      //         photosArray = photos.map(function(photo) {
-      //           return {user: userDictionary[photo.user], created: photo.created, fileName: photo.fileName, 
-      //             caption: photo.caption, original: photo.original, thumbnail: photo.thumbnail};
-      //         });
+          //     if (err) {
+          //       cb(err, null);
+          //       return;
+          //     }
 
-      //         likerArray = journalEntry.likerList.map(function(liker) {
-      //           return userDictionary[liker];
-      //         });
+          //     commentsArray = comments.map(function(comment) {
+          //       return {user: userDictionary[comment.user], createdDate: comment.createdDate, text: comment.text};
+          //     });
 
-      //         var journalEntryDictionary =  {
-      //           user: userDictionary[journalEntry.user],
-      //           photoList: photosArray,
-      //           title: journalEntry.title,
-      //           detailText: journalEntry.detailText,
-      //           likerList: likerArray,
-      //           commentList: commentsArray
-      //         };
+          //     photosArray = photos.map(function(photo) {
+          //       return {user: userDictionary[photo.user], created: photo.created, fileName: photo.fileName, 
+          //         caption: photo.caption, original: photo.original, thumbnail: photo.thumbnail};
+          //     });
 
-      //         cb(null, journalEntryDictionary);
-      //       });
+          //     likerArray = journalEntry.likerList.map(function(liker) {
+          //       return userDictionary[liker];
+          //     });
 
-      //   });
+          //     var journalEntryDictionary =  {
+          //       user: userDictionary[journalEntry.user],
+          //       photoList: photosArray,
+          //       title: journalEntry.title,
+          //       detailText: journalEntry.detailText,
+          //       likerList: likerArray,
+          //       commentList: commentsArray
+          //     };
+
+          //     cb(null, journalEntryDictionary);
+          //   });
+
+        });
 
   });
   
