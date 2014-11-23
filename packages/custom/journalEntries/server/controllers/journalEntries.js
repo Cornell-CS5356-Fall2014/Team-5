@@ -193,12 +193,21 @@ function journalEntryForPublicJSON(journalEntry, cb) {
 
       //cb(null, journalEntry);
 
+      console.log('Users:');
+      console.log(util.inspect(users));
+      console.log('*******************************');
+
+      console.log('User Query Dict');
+      console.log(util.inspect(userQueryDictArray));
+      console.log('*******************************');
+
       User
         .find(userQueryDictArray)
         .exec(function(err, returnedUsers) {
 
           console.log('In User');
           console.log(util.inspect(returnedUsers));
+          console.log('*******************************');
 
           if (err) {
             cb(err, null);
@@ -213,6 +222,7 @@ function journalEntryForPublicJSON(journalEntry, cb) {
 
           console.log('User Dictionary');
           console.log(util.inspect(userDictionary));
+          console.log('*******************************');
 
           cb(null, journalEntry);
 
