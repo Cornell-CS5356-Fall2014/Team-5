@@ -69,7 +69,7 @@ function getEntries(req, res, userDicts) {
           resolve(journalEntryJSON);
         });
 
-        
+
         // console.log('Promise was successful!!');
         // console.log(util.inspect(journalEntry));
         // resolve(journalEntry);
@@ -143,20 +143,23 @@ function journalEntryForPublicJSON(journalEntry, cb) {
 
   // cb(null, journalEntry);
 
-  var commentQueryDictArray = journalEntry.comments.map(function(commentId) {
-    return {_id : commentId};
-  });
+  console.log('Printing comments');
+  console.log(util.inspect(journalEntry.comments));
 
-  console.log('Printing commentQueryDictionary');
-  console.log(util.inspect(commentQueryDictArray));
+  // var commentQueryDictArray = journalEntry.comments.map(function(commentId) {
+  //   return {_id : commentId};
+  // });
+
+  // console.log('Printing commentQueryDictionary');
+  // console.log(util.inspect(commentQueryDictArray));
 
 
-  var photoQueryDictArray = journalEntry.photos.map(function(photoId) {
-    return {_id : photoId};
-  });
+  // var photoQueryDictArray = journalEntry.photos.map(function(photoId) {
+  //   return {_id : photoId};
+  // });
 
-  console.log('Printing photoQueryDictArray');
-  console.log(util.inspect(photoQueryDictArray));
+  // console.log('Printing photoQueryDictArray');
+  // console.log(util.inspect(photoQueryDictArray));
 
   cb(null, journalEntry);
 
