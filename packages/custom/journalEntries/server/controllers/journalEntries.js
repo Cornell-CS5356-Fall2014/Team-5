@@ -47,7 +47,7 @@ function getEntries(req, res, userDicts) {
       });
     }
 
-    res.status(200).send(journalEntries);
+    //res.status(200).send(journalEntries);
 
     //journalEntriesTransforms = []
     var promises = journalEntries.map(function(journalEntry) {
@@ -151,88 +151,89 @@ function journalEntryForPublicJSON(journalEntry, cb) {
   console.log('Printing photoQueryDictArray');
   console.log(util.inspect(photoQueryDictArray));
 
+  cb(null, journalEntryDictionary);
 
-  Comment
-    .find(commentQueryDictArray)
-    .exec(function(err, comments) {
+  // Comment
+  //   .find(commentQueryDictArray)
+  //   .exec(function(err, comments) {
       
-      console.log('In Comment');
-      console.log(util.inspect(comments));
+  //     console.log('In Comment');
+  //     console.log(util.inspect(comments));
 
-      if (err) {
-        cb(err, null);
-        return;
-      }
+  //     if (err) {
+  //       cb(err, null);
+  //       return;
+  //     }
 
-      var commentUsers = comments.map(function(comment) {
-        return comment.user;
-      });
+  //     var commentUsers = comments.map(function(comment) {
+  //       return comment.user;
+  //     });
 
-      var users = new Set([journalEntry.user].concat(journalEntry.likerList).concat(commentUsers));
-      var userQueryDictArray = [];
+  //     var users = new Set([journalEntry.user].concat(journalEntry.likerList).concat(commentUsers));
+  //     var userQueryDictArray = [];
 
-      users.forEach(function(userId) {
-        userQueryDictArray.push({_id : userId});
-      });
+  //     users.forEach(function(userId) {
+  //       userQueryDictArray.push({_id : userId});
+  //     });
 
-      User
-        .find(userQueryDictArray)
-        .exec(function(err, returnedUsers) {
+  //     User
+  //       .find(userQueryDictArray)
+  //       .exec(function(err, returnedUsers) {
 
-          console.log('In User');
-          console.log(util.inspect(users));
+  //         console.log('In User');
+  //         console.log(util.inspect(users));
 
-          if (err) {
-            cb(err, null);
-            return;
-          }
+  //         if (err) {
+  //           cb(err, null);
+  //           return;
+  //         }
 
-          var userDictionary = {};
-          returnedUsers.forEach(function(user) {
-            var id = user._id;
-            userDictionary[id] = {id: user._id, name: user.name, username: user.username};
-          });
+  //         var userDictionary = {};
+  //         returnedUsers.forEach(function(user) {
+  //           var id = user._id;
+  //           userDictionary[id] = {id: user._id, name: user.name, username: user.username};
+  //         });
 
-          Photo
-            .find(photoQueryDictArray)
-            .exec(function(err, photos) {
+  //         Photo
+  //           .find(photoQueryDictArray)
+  //           .exec(function(err, photos) {
 
-              console.log('In Photo');
-              console.log(util.inspect(photos));
+  //             console.log('In Photo');
+  //             console.log(util.inspect(photos));
 
-              if (err) {
-                cb(err, null);
-                return;
-              }
+  //             if (err) {
+  //               cb(err, null);
+  //               return;
+  //             }
 
-              commentsArray = comments.map(function(comment) {
-                return {user: userDictionary[comment.user], createdDate: comment.createdDate, text: comment.text};
-              });
+  //             commentsArray = comments.map(function(comment) {
+  //               return {user: userDictionary[comment.user], createdDate: comment.createdDate, text: comment.text};
+  //             });
 
-              photosArray = photos.map(function(photo) {
-                return {user: userDictionary[photo.user], created: photo.created, fileName: photo.fileName, 
-                  caption: photo.caption, original: photo.original, thumbnail: photo.thumbnail};
-              });
+  //             photosArray = photos.map(function(photo) {
+  //               return {user: userDictionary[photo.user], created: photo.created, fileName: photo.fileName, 
+  //                 caption: photo.caption, original: photo.original, thumbnail: photo.thumbnail};
+  //             });
 
-              likerArray = journalEntry.likerList.map(function(liker) {
-                return userDictionary[liker];
-              });
+  //             likerArray = journalEntry.likerList.map(function(liker) {
+  //               return userDictionary[liker];
+  //             });
 
-              var journalEntryDictionary =  {
-                user: userDictionary[journalEntry.user],
-                photoList: photosArray,
-                title: journalEntry.title,
-                detailText: journalEntry.detailText,
-                likerList: likerArray,
-                commentList: commentsArray
-              };
+  //             var journalEntryDictionary =  {
+  //               user: userDictionary[journalEntry.user],
+  //               photoList: photosArray,
+  //               title: journalEntry.title,
+  //               detailText: journalEntry.detailText,
+  //               likerList: likerArray,
+  //               commentList: commentsArray
+  //             };
 
-              cb(null, journalEntryDictionary);
-            });
+  //             cb(null, journalEntryDictionary);
+  //           });
 
-        });
+  //       });
 
-  });
+  // });
   
 }
 
