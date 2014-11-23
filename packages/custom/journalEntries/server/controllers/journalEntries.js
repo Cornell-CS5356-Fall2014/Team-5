@@ -184,7 +184,7 @@ function journalEntryForPublicJSON(journalEntry, cb) {
         return comment.user;
       });
 
-      //var users = new Set([journalEntry.user].concat(journalEntry.likerList).concat(commentUsers));
+      var users = new Set([journalEntry.user].concat(journalEntry.likerList).concat(commentUsers));
       var userQueryDictArray = [];
 
       users.forEach(function(userId) {
