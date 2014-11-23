@@ -53,21 +53,21 @@ function getEntries(req, res, userDicts) {
     var promises = journalEntries.map(function(journalEntry) {
       return new Promise(function(resolve, reject) {
 
-        testFunction(journalEntry, function(err, journalEntryJSON) {
+        // testFunction(journalEntry, function(err, journalEntryJSON) {
+        //   if (err) reject(err);
+        //   //journalEntriesTransforms.push(journalEntryJSON);
+        //   console.log('Promise was successful!!');
+        //   console.log(util.inspect(journalEntryJSON));
+        //   resolve(journalEntryJSON);
+        // });
+
+        journalEntryForPublicJSON(journalEntry, function(err, journalEntryJSON) {
           if (err) reject(err);
           //journalEntriesTransforms.push(journalEntryJSON);
           console.log('Promise was successful!!');
           console.log(util.inspect(journalEntryJSON));
           resolve(journalEntryJSON);
         });
-
-        // journalEntryForPublicJSON(journalEntry, function(err, journalEntryJSON) {
-        //   if (err) reject(err);
-        //   //journalEntriesTransforms.push(journalEntryJSON);
-        //   console.log('Promise was successful!!');
-        //   console.log(util.inspect(journalEntries));
-        //   resolve(journalEntryJSON);
-        // });
         // console.log('Promise was successful!!');
         // console.log(util.inspect(journalEntry));
         // resolve(journalEntry);
@@ -140,13 +140,25 @@ function journalEntryForPublicJSON(journalEntry, cb) {
     return {_id : commentId};
   });
 
+  console.log('Printing commentQueryDictionary');
+  console.log(util.inspect(commentQueryDictArray));
+
+
   var photoQueryDictArray = journalEntry.photos.map(function(photoId) {
     return {_id : photoId};
   });
 
+  console.log('Printing photoQueryDictArray');
+  console.log(util.inspect(photoQueryDictArray));
+
+
   Comment
     .find(commentQueryDictArray)
     .exec(function(err, comments) {
+      
+      console.log('In Comment');
+      console.log(util.inspect(comments));
+
       if (err) {
         cb(err, null);
         return;
@@ -165,21 +177,28 @@ function journalEntryForPublicJSON(journalEntry, cb) {
 
       User
         .find(userQueryDictArray)
-        .exec(function(err, users) {
+        .exec(function(err, returnedUsers) {
+
+          console.log('In User');
+          console.log(util.inspect(users));
+
           if (err) {
             cb(err, null);
             return;
           }
 
           var userDictionary = {};
-          users.forEach(function(user) {
-            var id = user._id
-            userDictionary = { id : {id: user._id, name: user.name, username: user.username}}
+          returnedUsers.forEach(function(user) {
+            var id = user._id;
+            userDictionary[id] = {id: user._id, name: user.name, username: user.username};
           });
 
           Photo
             .find(photoQueryDictArray)
             .exec(function(err, photos) {
+
+              console.log('In Photo');
+              console.log(util.inspect(photos));
 
               if (err) {
                 cb(err, null);
@@ -206,14 +225,14 @@ function journalEntryForPublicJSON(journalEntry, cb) {
                 detailText: journalEntry.detailText,
                 likerList: likerArray,
                 commentList: commentsArray
-              }
+              };
 
               cb(null, journalEntryDictionary);
             });
 
         });
 
-    });
+  });
   
 }
 
