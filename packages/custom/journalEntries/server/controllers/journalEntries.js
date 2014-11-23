@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
   JournalEntry = mongoose.model('JournalEntry'),
   Comment = mongoose.model('Comment'),
   User = mongoose.model('User'),
+  Photo = mongoose.model('Photo'),
   util = require('util'),
   Promise = require('promise'),
   Set = require('set');
