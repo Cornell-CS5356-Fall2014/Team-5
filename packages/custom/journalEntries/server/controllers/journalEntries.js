@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
   Comment = mongoose.model('Comment'),
   User = mongoose.model('User'),
   util = require('util'),
-  Promise = require('Promise');
+  Promise = require('promise');
 
 // Find photo by id
 exports.journalEntry = function(req, res, next, id) {
