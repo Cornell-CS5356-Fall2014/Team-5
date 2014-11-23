@@ -184,17 +184,29 @@ function journalEntryForPublicJSON(journalEntry, cb) {
         return comment.user;
       });
 
-      var users = new Set([journalEntry.user].concat(journalEntry.likerList).concat(commentUsers));
+      console.log('Current user:');
+      console.log(util.inspect(journalEntry.user));
+      console.log('*******************************');
+
+      console.log('Likers:');
+      console.log(util.inspect(journalEntry.likerList));
+      console.log('*******************************');
+
+      console.log('Commenters:');
+      console.log(util.inspect(commentUsers));
+      console.log('*******************************');
+
+      var userSet = new Set([journalEntry.user].concat(journalEntry.likerList).concat(commentUsers));
       var userQueryDictArray = [];
 
-      users.get().forEach(function(userId) {
+      userSet.get().forEach(function(userId) {
         userQueryDictArray.push({_id : userId});
       });
 
       //cb(null, journalEntry);
 
       console.log('Users:');
-      console.log(util.inspect(users));
+      console.log(util.inspect(userSet));
       console.log('*******************************');
 
       console.log('User Query Dict');
