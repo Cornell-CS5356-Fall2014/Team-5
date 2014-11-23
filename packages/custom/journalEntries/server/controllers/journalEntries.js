@@ -233,9 +233,9 @@ function journalEntryForPublicJSON(journalEntry, cb) {
             userDictionary[id] = {id: user._id, name: user.name, username: user.username};
           });
 
-          // console.log('User Dictionary');
-          // console.log(util.inspect(userDictionary));
-          // console.log('*******************************');
+          console.log('Photo Query Dictionary Array');
+          console.log(util.inspect(photoQueryDictArray));
+          console.log('*******************************');
 
           //cb(null, journalEntry);
 
