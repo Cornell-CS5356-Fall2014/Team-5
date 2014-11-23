@@ -136,22 +136,27 @@ function testFunction(journalEntry, cb){
 
 function journalEntryForPublicJSON(journalEntry, cb) {
 
-  var commentQueryDictArray = journalEntry.comments.map(function(commentId) {
-    return {_id : commentId};
-  });
+  // console.log('Printing photoQueryDictArray');
+  console.log(util.inspect(journalEntry));
 
-  console.log('Printing commentQueryDictionary');
-  console.log(util.inspect(commentQueryDictArray));
+  cb(null, journalEntry);
+
+  // var commentQueryDictArray = journalEntry.comments.map(function(commentId) {
+  //   return {_id : commentId};
+  // });
+
+  // console.log('Printing commentQueryDictionary');
+  // console.log(util.inspect(commentQueryDictArray));
 
 
-  var photoQueryDictArray = journalEntry.photos.map(function(photoId) {
-    return {_id : photoId};
-  });
+  // var photoQueryDictArray = journalEntry.photos.map(function(photoId) {
+  //   return {_id : photoId};
+  // });
 
-  console.log('Printing photoQueryDictArray');
-  console.log(util.inspect(photoQueryDictArray));
+  // console.log('Printing photoQueryDictArray');
+  // console.log(util.inspect(photoQueryDictArray));
 
-  cb(null, journalEntryDictionary);
+  // cb(null, journalEntryDictionary);
 
   // Comment
   //   .find(commentQueryDictArray)
