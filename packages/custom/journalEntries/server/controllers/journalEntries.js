@@ -251,14 +251,14 @@ function journalEntryForPublicJSON(journalEntry, cb) {
                 return;
               }
 
-              commentsArray = comments.map(function(comment) {
+              var commentsArray = comments.map(function(comment) {
                 return {user: userDictionary[comment.user], createdDate: comment.createdDate, text: comment.text};
               });
 
               console.log('Comments Array');
               console.log(util.inspect(commentsArray));
 
-              photosArray = photos.map(function(photo) {
+              var photosArray = photos.map(function(photo) {
                 return {user: userDictionary[photo.user], created: photo.created, fileName: photo.fileName, 
                   caption: photo.caption, original: photo.original, thumbnail: photo.thumbnail};
               });
@@ -266,7 +266,7 @@ function journalEntryForPublicJSON(journalEntry, cb) {
               console.log('Photos Array');
               console.log(util.inspect(photosArray));
 
-              likerArray = journalEntry.likerList.map(function(liker) {
+              var likerArray = journalEntry.likerList.map(function(liker) {
                 return userDictionary[liker];
               });
 
