@@ -48,7 +48,7 @@ function getEntries(req, res, userDicts) {
     }
 
     //journalEntriesTransforms = []
-    promises = journalEntries.map(function(journalEntry) {
+    var promises = journalEntries.map(function(journalEntry) {
       return new Promise(function(resolve, reject) {
         journalEntryForPublicJSON(journalEntry, function(err, journalEntryJSON) {
           if (err) reject(err);
