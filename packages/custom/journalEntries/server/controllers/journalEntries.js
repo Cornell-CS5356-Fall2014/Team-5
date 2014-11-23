@@ -144,7 +144,10 @@ function journalEntryForPublicJSON(journalEntry, cb) {
   // cb(null, journalEntry);
 
   console.log('Printing comments');
-  console.log(util.inspect(journalEntry.comments));
+  console.log(util.inspect(journalEntry.commentList));
+
+  console.log('Printing photos');
+  console.log(util.inspect(journalEntry.photoList));
 
   // var commentQueryDictArray = journalEntry.comments.map(function(commentId) {
   //   return {_id : commentId};
