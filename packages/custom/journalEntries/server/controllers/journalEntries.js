@@ -47,24 +47,26 @@ function getEntries(req, res, userDicts) {
       });
     }
 
-    //journalEntriesTransforms = []
-    var promises = journalEntries.map(function(journalEntry) {
-      return new Promise(function(resolve, reject) {
-        journalEntryForPublicJSON(journalEntry, function(err, journalEntryJSON) {
-          if (err) reject(err);
-          //journalEntriesTransforms.push(journalEntryJSON);
-          console.log('Promise was successful!!');
-          console.log(util.inspect(journalEntries));
-          resolve(journalEntryJSON);
-        });
-      });
-    });
+    res.status(200).send(journalEntries);
+    
+    // //journalEntriesTransforms = []
+    // var promises = journalEntries.map(function(journalEntry) {
+    //   return new Promise(function(resolve, reject) {
+    //     journalEntryForPublicJSON(journalEntry, function(err, journalEntryJSON) {
+    //       if (err) reject(err);
+    //       //journalEntriesTransforms.push(journalEntryJSON);
+    //       console.log('Promise was successful!!');
+    //       console.log(util.inspect(journalEntries));
+    //       resolve(journalEntryJSON);
+    //     });
+    //   });
+    // });
 
-    Promise.all(promises).then(function(journalEntriesTransforms) {
-      console.log('All Promise was successful!!');
-      console.log(util.inspect(journalEntries));
-      res.status(200).send(journalEntries);
-    });
+    // Promise.all(promises).then(function(journalEntriesTransforms) {
+    //   console.log('All Promise was successful!!');
+    //   console.log(util.inspect(journalEntries));
+    //   res.status(200).send(journalEntries);
+    // });
 
     
   });
