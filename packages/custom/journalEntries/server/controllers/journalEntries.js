@@ -187,7 +187,7 @@ function journalEntryForPublicJSON(journalEntry, cb) {
       var users = new Set([journalEntry.user].concat(journalEntry.likerList).concat(commentUsers));
       var userQueryDictArray = [];
 
-      users.get.forEach(function(userId) {
+      users.get().forEach(function(userId) {
         userQueryDictArray.push({_id : userId});
       });
 
