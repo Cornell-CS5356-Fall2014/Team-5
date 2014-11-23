@@ -241,10 +241,10 @@ function journalEntryForPublicJSON(journalEntry, cb) {
 
           Photo
             .find(photoQueryDictArray)
-            .exec(function(err, photos) {
+            .exec(function(err, returnedPhotos) {
 
               console.log('In Photo');
-              console.log(util.inspect(photos));
+              console.log(util.inspect(returnedPhotos));
 
               if (err) {
                 cb(err, null);
@@ -258,7 +258,7 @@ function journalEntryForPublicJSON(journalEntry, cb) {
               console.log('Comments Array');
               console.log(util.inspect(commentsArray));
 
-              var photosArray = photos.map(function(photo) {
+              var photosArray = returnedPhotos.map(function(photo) {
                 return {user: userDictionary[photo.user], created: photo.created, fileName: photo.fileName, 
                   caption: photo.caption, original: photo.original, thumbnail: photo.thumbnail};
               });
