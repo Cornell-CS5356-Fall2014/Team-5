@@ -53,21 +53,21 @@ function getEntries(req, res, userDicts) {
     var promises = journalEntries.map(function(journalEntry) {
       return new Promise(function(resolve, reject) {
 
-        // testFunction(journalEntry, function(err, journalEntryJSON) {
-        //   if (err) reject(err);
-        //   //journalEntriesTransforms.push(journalEntryJSON);
-        //   console.log('Promise was successful!!');
-        //   console.log(util.inspect(journalEntryJSON));
-        //   resolve(journalEntryJSON);
-        // });
-
-        journalEntryForPublicJSON(journalEntry, function(err, journalEntryJSON) {
+        testFunction(journalEntry, function(err, journalEntryJSON) {
           if (err) reject(err);
           //journalEntriesTransforms.push(journalEntryJSON);
           console.log('Promise was successful!!');
           console.log(util.inspect(journalEntryJSON));
           resolve(journalEntryJSON);
         });
+
+        // journalEntryForPublicJSON(journalEntry, function(err, journalEntryJSON) {
+        //   if (err) reject(err);
+        //   //journalEntriesTransforms.push(journalEntryJSON);
+        //   console.log('Promise was successful!!');
+        //   console.log(util.inspect(journalEntryJSON));
+        //   resolve(journalEntryJSON);
+        // });
         // console.log('Promise was successful!!');
         // console.log(util.inspect(journalEntry));
         // resolve(journalEntry);
