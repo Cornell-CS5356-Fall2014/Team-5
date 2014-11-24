@@ -139,188 +139,188 @@ function testFunction(journalEntry, cb){
 
 }
 
-function journalEntryForPublicJSON(journalEntry, cb) {
+// function journalEntryForPublicJSON(journalEntry, cb) {
 
-  // console.log('Printing photoQueryDictArray');
-  // console.log(util.inspect(journalEntry));
+//   // console.log('Printing photoQueryDictArray');
+//   // console.log(util.inspect(journalEntry));
 
-  // cb(null, journalEntry);
+//   // cb(null, journalEntry);
 
-  // console.log('Printing comments');
-  // console.log(util.inspect(journalEntry.commentList));
+//   // console.log('Printing comments');
+//   // console.log(util.inspect(journalEntry.commentList));
 
-  // console.log('Printing photos');
-  // console.log(util.inspect(journalEntry.photoList));
+//   // console.log('Printing photos');
+//   // console.log(util.inspect(journalEntry.photoList));
 
   
-  var photoArray = [];
-  var photoPromiseArray = journalEntry.photoList.map(function(photoId) {
+//   var photoArray = [];
+//   var photoPromiseArray = journalEntry.photoList.map(function(photoId) {
 
-    return Photo.findById(photoId).exec(function(err, photo) {
+//     return Photo.findById(photoId).exec(function(err, photo) {
 
-      if(err) 
+//       if(err) 
 
-    });
+//     });
 
-  });
+//   });
 
-  var arrayPromise = initialPromise = new Promise;
-  for (i=0; i<photoPromiseArray.length; i++)
-    arrayPromise = arrayPromise.chain(photoPromiseArray[i]);
-  initialPromise.fulfill();
-
-
-
-  var commentQueryDictArray = journalEntry.commentList.map(function(commentId) {
-    return {_id : commentId};
-  });
-
-  if (commentQueryDictArray.length == 0) {
-    commentQueryDictArray = {_id : 0};
-  }
-  // console.log('Printing commentQueryDictionary');
-  // console.log(util.inspect(commentQueryDictArray));
+//   var arrayPromise = initialPromise = new Promise;
+//   for (i=0; i<photoPromiseArray.length; i++)
+//     arrayPromise = arrayPromise.chain(photoPromiseArray[i]);
+//   initialPromise.fulfill();
 
 
-  var photoQueryDictArray = journalEntry.photoList.map(function(photoId) {
-    return {_id : photoId};
-  });
 
-  if (photoQueryDictArray.length == 0) {
-    photoQueryDictArray = {_id : 0};
-  }
+//   var commentQueryDictArray = journalEntry.commentList.map(function(commentId) {
+//     return {_id : commentId};
+//   });
 
-  // console.log('Printing photoQueryDictArray');
-  // console.log(util.inspect(photoQueryDictArray));
+//   if (commentQueryDictArray.length == 0) {
+//     commentQueryDictArray = {_id : 0};
+//   }
+//   // console.log('Printing commentQueryDictionary');
+//   // console.log(util.inspect(commentQueryDictArray));
 
-  // cb(null, journalEntry);
 
-  Comment
-    .find(commentQueryDictArray)
-    .exec(function(err, comments) {
+//   var photoQueryDictArray = journalEntry.photoList.map(function(photoId) {
+//     return {_id : photoId};
+//   });
+
+//   if (photoQueryDictArray.length == 0) {
+//     photoQueryDictArray = {_id : 0};
+//   }
+
+//   // console.log('Printing photoQueryDictArray');
+//   // console.log(util.inspect(photoQueryDictArray));
+
+//   // cb(null, journalEntry);
+
+//   Comment
+//     .find(commentQueryDictArray)
+//     .exec(function(err, comments) {
       
-      console.log('In Comment');
-      console.log(util.inspect(comments));
+//       console.log('In Comment');
+//       console.log(util.inspect(comments));
 
-      if (err) {
-        cb(err, null);
-        return;
-      }
+//       if (err) {
+//         cb(err, null);
+//         return;
+//       }
 
-      cb(null, journalEntry);
+//       cb(null, journalEntry);
 
-      // var commentUsers = comments.map(function(comment) {
-      //   return comment.user;
-      // });
+//       // var commentUsers = comments.map(function(comment) {
+//       //   return comment.user;
+//       // });
 
-      // // console.log('Current user:');
-      // // console.log(util.inspect(journalEntry.user));
-      // // console.log('*******************************');
+//       // // console.log('Current user:');
+//       // // console.log(util.inspect(journalEntry.user));
+//       // // console.log('*******************************');
 
-      // // console.log('Likers:');
-      // // console.log(util.inspect(journalEntry.likerList));
-      // // console.log('*******************************');
+//       // // console.log('Likers:');
+//       // // console.log(util.inspect(journalEntry.likerList));
+//       // // console.log('*******************************');
 
-      // // console.log('Commenters:');
-      // // console.log(util.inspect(commentUsers));
-      // // console.log('*******************************');
+//       // // console.log('Commenters:');
+//       // // console.log(util.inspect(commentUsers));
+//       // // console.log('*******************************');
 
-      // var userSet = new Set([journalEntry.user].concat(journalEntry.likerList).concat(commentUsers));
-      // var userQueryDictArray = [];
+//       // var userSet = new Set([journalEntry.user].concat(journalEntry.likerList).concat(commentUsers));
+//       // var userQueryDictArray = [];
 
-      // userSet.get().forEach(function(userId) {
-      //   userQueryDictArray.push({_id : userId});
-      // });
+//       // userSet.get().forEach(function(userId) {
+//       //   userQueryDictArray.push({_id : userId});
+//       // });
 
-      // //cb(null, journalEntry);
+//       // //cb(null, journalEntry);
 
-      // // console.log('Users:');
-      // // console.log(util.inspect(userSet));
-      // // console.log('*******************************');
+//       // // console.log('Users:');
+//       // // console.log(util.inspect(userSet));
+//       // // console.log('*******************************');
 
-      // // console.log('User Query Dict');
-      // // console.log(util.inspect(userQueryDictArray));
-      // // console.log('*******************************');
-
-
+//       // // console.log('User Query Dict');
+//       // // console.log(util.inspect(userQueryDictArray));
+//       // // console.log('*******************************');
 
 
-      // User
-      //   .find(userQueryDictArray)
-      //   .exec(function(err, returnedUsers) {
 
-      //     // console.log('In User');
-      //     // console.log(util.inspect(returnedUsers));
-      //     // console.log('*******************************');
 
-      //     if (err) {
-      //       cb(err, null);
-      //       return;
-      //     }
+//       // User
+//       //   .find(userQueryDictArray)
+//       //   .exec(function(err, returnedUsers) {
 
-      //     var userDictionary = {};
-      //     returnedUsers.forEach(function(user) {
-      //       var id = user._id;
-      //       userDictionary[id] = {id: user._id, name: user.name, username: user.username};
-      //     });
+//       //     // console.log('In User');
+//       //     // console.log(util.inspect(returnedUsers));
+//       //     // console.log('*******************************');
 
-      //     console.log('Photo Query Dictionary Array');
-      //     console.log(util.inspect(photoQueryDictArray));
-      //     console.log('*******************************');
+//       //     if (err) {
+//       //       cb(err, null);
+//       //       return;
+//       //     }
 
-      //     //cb(null, journalEntry);
+//       //     var userDictionary = {};
+//       //     returnedUsers.forEach(function(user) {
+//       //       var id = user._id;
+//       //       userDictionary[id] = {id: user._id, name: user.name, username: user.username};
+//       //     });
 
-      //     Photo
-      //       .find(photoQueryDictArray)
-      //       .exec(function(err, returnedPhotos) {
+//       //     console.log('Photo Query Dictionary Array');
+//       //     console.log(util.inspect(photoQueryDictArray));
+//       //     console.log('*******************************');
 
-      //         console.log('In Photo');
-      //         console.log(util.inspect(returnedPhotos));
+//       //     //cb(null, journalEntry);
 
-      //         if (err) {
-      //           cb(err, null);
-      //           return;
-      //         }
+//       //     Photo
+//       //       .find(photoQueryDictArray)
+//       //       .exec(function(err, returnedPhotos) {
 
-      //         var commentsArray = comments.map(function(comment) {
-      //           return {user: userDictionary[comment.user], createdDate: comment.createdDate, text: comment.text};
-      //         });
+//       //         console.log('In Photo');
+//       //         console.log(util.inspect(returnedPhotos));
 
-      //         // console.log('Comments Array');
-      //         // console.log(util.inspect(commentsArray));
+//       //         if (err) {
+//       //           cb(err, null);
+//       //           return;
+//       //         }
 
-      //         var photosArray = returnedPhotos.map(function(photo) {
-      //           return {user: userDictionary[photo.user], created: photo.created, fileName: photo.fileName, 
-      //             caption: photo.caption, original: photo.original, thumbnail: photo.thumbnail};
-      //         });
+//       //         var commentsArray = comments.map(function(comment) {
+//       //           return {user: userDictionary[comment.user], createdDate: comment.createdDate, text: comment.text};
+//       //         });
 
-      //         // console.log('Photos Array');
-      //         // console.log(util.inspect(photosArray));
+//       //         // console.log('Comments Array');
+//       //         // console.log(util.inspect(commentsArray));
 
-      //         var likerArray = journalEntry.likerList.map(function(liker) {
-      //           return userDictionary[liker];
-      //         });
+//       //         var photosArray = returnedPhotos.map(function(photo) {
+//       //           return {user: userDictionary[photo.user], created: photo.created, fileName: photo.fileName, 
+//       //             caption: photo.caption, original: photo.original, thumbnail: photo.thumbnail};
+//       //         });
 
-      //         // console.log('Likers Array');
-      //         // console.log(util.inspect(likerArray));
+//       //         // console.log('Photos Array');
+//       //         // console.log(util.inspect(photosArray));
 
-      //         var journalEntryDictionary =  {
-      //           user: userDictionary[journalEntry.user],
-      //           photoList: photosArray,
-      //           title: journalEntry.title,
-      //           detailText: journalEntry.detailText,
-      //           likerList: likerArray,
-      //           commentList: commentsArray
-      //         };
+//       //         var likerArray = journalEntry.likerList.map(function(liker) {
+//       //           return userDictionary[liker];
+//       //         });
 
-      //         cb(null, journalEntryDictionary);
-      //       });
+//       //         // console.log('Likers Array');
+//       //         // console.log(util.inspect(likerArray));
 
-      //   });
+//       //         var journalEntryDictionary =  {
+//       //           user: userDictionary[journalEntry.user],
+//       //           photoList: photosArray,
+//       //           title: journalEntry.title,
+//       //           detailText: journalEntry.detailText,
+//       //           likerList: likerArray,
+//       //           commentList: commentsArray
+//       //         };
 
-  });
+//       //         cb(null, journalEntryDictionary);
+//       //       });
+
+//       //   });
+
+//   });
   
-}
+// }
 
 // exports.journalEntriesForUsers = function(req, res) {
 //   JournalEntry.find({'user' : req.user}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
