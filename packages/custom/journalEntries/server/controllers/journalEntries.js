@@ -54,38 +54,25 @@ function getEntries(req, res, userDicts) {
 
     console.log(util.inspect(journalEntries));
 
-    //journalEntriesTransforms = []
-    // var promises = journalEntries.map(function(journalEntry) {
-    //   return new Promise(function(resolve, reject) {
+    journalEntriesTransforms = []
+    var promises = journalEntries.map(function(journalEntry) {
+      return new Promise(function(resolve, reject) {
 
-    //     // testFunction(journalEntry, function(err, journalEntryJSON) {
-    //     //   if (err) reject(err);
-    //     //   //journalEntriesTransforms.push(journalEntryJSON);
-    //     //   console.log('Promise was successful!!');
-    //     //   console.log(util.inspect(journalEntryJSON));
-    //     //   resolve(journalEntryJSON);
-    //     // });
+        journalEntryForPublicJSON(journalEntry, function(err, journalEntryJSON) {
+          if (err) reject(err);
+          //journalEntriesTransforms.push(journalEntryJSON);
+          console.log('Promise was successful!!');
+          console.log(util.inspect(journalEntryJSON));
+          resolve(journalEntryJSON);
+        });
+      });
+    });
 
-    //     journalEntryForPublicJSON(journalEntry, function(err, journalEntryJSON) {
-    //       if (err) reject(err);
-    //       //journalEntriesTransforms.push(journalEntryJSON);
-    //       console.log('Promise was successful!!');
-    //       console.log(util.inspect(journalEntryJSON));
-    //       resolve(journalEntryJSON);
-    //     });
-
-
-    //     // console.log('Promise was successful!!');
-    //     // console.log(util.inspect(journalEntry));
-    //     // resolve(journalEntry);
-    //   });
-    // });
-
-    // Promise.all(promises).then(function(journalEntriesTransforms) {
-    //   console.log('All Promise was successful!!');
-    //   console.log(util.inspect(journalEntriesTransforms));
-    //   res.status(200).send(journalEntriesTransforms);
-    // });
+    Promise.all(promises).then(function(journalEntriesTransforms) {
+      console.log('All Promise was successful!!');
+      console.log(util.inspect(journalEntriesTransforms));
+      res.status(200).send(journalEntriesTransforms);
+    });
 
     
   });
@@ -136,6 +123,12 @@ exports.create = function(req, res) {
 };
 
 function testFunction(journalEntry, cb){
+
+  cb(null, journalEntry);
+
+}
+
+function journalEntryForPublicJSON(journalEntry, cb) {
 
   cb(null, journalEntry);
 
