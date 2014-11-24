@@ -156,6 +156,9 @@ function journalEntryForPublicJSON(journalEntry, cb) {
     return {_id : commentId};
   });
 
+  if (commentQueryDictArray.length == 0) {
+    commentQueryDictArray = [{}];
+  }
   // console.log('Printing commentQueryDictionary');
   // console.log(util.inspect(commentQueryDictArray));
 
@@ -164,6 +167,10 @@ function journalEntryForPublicJSON(journalEntry, cb) {
     return {_id : photoId};
   });
 
+  if (photoQueryDictArray.length == 0) {
+    photoQueryDictArray = [{}];
+  }
+  
   // console.log('Printing photoQueryDictArray');
   // console.log(util.inspect(photoQueryDictArray));
 
@@ -173,8 +180,8 @@ function journalEntryForPublicJSON(journalEntry, cb) {
     .find(commentQueryDictArray)
     .exec(function(err, comments) {
       
-      console.log('In Comment');
-      console.log(util.inspect(comments));
+      // console.log('In Comment');
+      // console.log(util.inspect(comments));
 
       if (err) {
         cb(err, null);
@@ -213,6 +220,9 @@ function journalEntryForPublicJSON(journalEntry, cb) {
       // console.log('User Query Dict');
       // console.log(util.inspect(userQueryDictArray));
       // console.log('*******************************');
+
+
+
 
       User
         .find(userQueryDictArray)
@@ -255,23 +265,23 @@ function journalEntryForPublicJSON(journalEntry, cb) {
                 return {user: userDictionary[comment.user], createdDate: comment.createdDate, text: comment.text};
               });
 
-              console.log('Comments Array');
-              console.log(util.inspect(commentsArray));
+              // console.log('Comments Array');
+              // console.log(util.inspect(commentsArray));
 
               var photosArray = returnedPhotos.map(function(photo) {
                 return {user: userDictionary[photo.user], created: photo.created, fileName: photo.fileName, 
                   caption: photo.caption, original: photo.original, thumbnail: photo.thumbnail};
               });
 
-              console.log('Photos Array');
-              console.log(util.inspect(photosArray));
+              // console.log('Photos Array');
+              // console.log(util.inspect(photosArray));
 
               var likerArray = journalEntry.likerList.map(function(liker) {
                 return userDictionary[liker];
               });
 
-              console.log('Likers Array');
-              console.log(util.inspect(likerArray));
+              // console.log('Likers Array');
+              // console.log(util.inspect(likerArray));
 
               var journalEntryDictionary =  {
                 user: userDictionary[journalEntry.user],
