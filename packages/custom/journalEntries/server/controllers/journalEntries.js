@@ -61,16 +61,16 @@ function getEntries(req, res, userDicts) {
         journalEntryForPublicJSON(journalEntry, function(err, journalEntryJSON) {
           if (err) reject(err);
           //journalEntriesTransforms.push(journalEntryJSON);
-          console.log('Promise was successful!!');
-          console.log(util.inspect(journalEntryJSON));
+          // console.log('Promise was successful!!');
+          // console.log(util.inspect(journalEntryJSON));
           resolve(journalEntryJSON);
         });
       });
     });
 
     Promise.all(promises).then(function(journalEntriesTransforms) {
-      console.log('All Promise was successful!!');
-      console.log(util.inspect(journalEntriesTransforms));
+      // console.log('All Promise was successful!!');
+      // console.log(util.inspect(journalEntriesTransforms));
       res.status(200).send(journalEntriesTransforms);
     });
 
