@@ -54,7 +54,7 @@ function getEntries(req, res, userDicts) {
 
     console.log(util.inspect(journalEntries));
 
-    journalEntriesTransforms = []
+    //var journalEntriesTransforms = []
     var promises = journalEntries.map(function(journalEntry) {
       return new Promise(function(resolve, reject) {
 
