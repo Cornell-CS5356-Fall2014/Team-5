@@ -152,6 +152,25 @@ function journalEntryForPublicJSON(journalEntry, cb) {
   // console.log('Printing photos');
   // console.log(util.inspect(journalEntry.photoList));
 
+  
+  var photoArray = [];
+  var photoPromiseArray = journalEntry.photoList.map(function(photoId) {
+
+    return Photo.findById(photoId).exec(function(err, photo) {
+
+      if(err) 
+
+    });
+
+  });
+
+  var arrayPromise = initialPromise = new Promise;
+  for (i=0; i<photoPromiseArray.length; i++)
+    arrayPromise = arrayPromise.chain(photoPromiseArray[i]);
+  initialPromise.fulfill();
+
+
+
   var commentQueryDictArray = journalEntry.commentList.map(function(commentId) {
     return {_id : commentId};
   });
