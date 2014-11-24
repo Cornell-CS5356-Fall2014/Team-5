@@ -52,6 +52,8 @@ function getEntries(req, res, userDicts) {
 
     res.status(200).send(journalEntries);
 
+    console.log(util.inspect(journalEntries));
+
     //journalEntriesTransforms = []
     // var promises = journalEntries.map(function(journalEntry) {
     //   return new Promise(function(resolve, reject) {
