@@ -157,7 +157,7 @@ function journalEntryForPublicJSON(journalEntry, cb) {
   });
 
   if (commentQueryDictArray.length == 0) {
-    commentQueryDictArray = [{}];
+    commentQueryDictArray = {};
   }
   // console.log('Printing commentQueryDictionary');
   // console.log(util.inspect(commentQueryDictArray));
@@ -168,9 +168,9 @@ function journalEntryForPublicJSON(journalEntry, cb) {
   });
 
   if (photoQueryDictArray.length == 0) {
-    photoQueryDictArray = [{}];
+    photoQueryDictArray = {};
   }
-  
+
   // console.log('Printing photoQueryDictArray');
   // console.log(util.inspect(photoQueryDictArray));
 
