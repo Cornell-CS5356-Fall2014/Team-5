@@ -80,12 +80,12 @@ function getEntries(req, res, userDicts) {
 
 exports.create = function(req, res) {
  
-  console.log('request body');
+  // console.log('request body');
   // console.log(util.inspect(arguments));
 
-  console.log(req.body);
-  console.log(typeof(req.body.photoList[0]));
-  console.log(Array.isArray(req.body.photoList));
+  // console.log(req.body);
+  // console.log(typeof(req.body.photoList[0]));
+  // console.log(Array.isArray(req.body.photoList));
 
   var params = {
                 user : req.user,
@@ -96,13 +96,13 @@ exports.create = function(req, res) {
                 commentList : []
               };
 
-  console.log('params');
-  console.log(util.inspect(params));
+  // console.log('params');
+  // console.log(util.inspect(params));
 
   var journalEntry = new JournalEntry(params);
 
-  console.log('Creating journal entry');
-  console.log(util.inspect(journalEntry));
+  // console.log('Creating journal entry');
+  // console.log(util.inspect(journalEntry));
 
   journalEntry.save(function(err) {
     if (err) {
@@ -117,14 +117,14 @@ exports.create = function(req, res) {
     JournalEntry.load(journalEntry._id, function (err, j) {
       if (err) return next(err);
       if (!journalEntry) return next(new Error('Failed to load journal entry ' + id));
-      console.log('reloaded journal entry');
-      console.log(util.inspect(j));
+      // console.log('reloaded journal entry');
+      // console.log(util.inspect(j));
       res.json(journalEntry);
 
-      journalEntryForPublicJSON(journalEntry, function(err, journalEntryJSON) {
-        if (err) return next(err);
-        res.json(journalEntryJSON);
-      });
+      // journalEntryForPublicJSON(journalEntry, function(err, journalEntryJSON) {
+      //   if (err) return next(err);
+      //   res.json(journalEntryJSON);
+      // });
     });
   });
 };
