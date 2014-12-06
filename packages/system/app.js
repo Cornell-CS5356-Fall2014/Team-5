@@ -6,7 +6,7 @@
 var Module = require('meanio').Module,
   favicon = require('serve-favicon'),
   express = require('express');
-  //bodyParser = require('body-parser');
+  bodyParser = require('body-parser');
 
 var SystemPackage = new Module('system');
 
@@ -32,7 +32,7 @@ SystemPackage.register(function(app, auth, database) {
   // Adding robots and humans txt
   app.use(express.static(__dirname + '/public/assets/static'));
 
-  //app.use(bodyParser.json());
+  app.use(bodyParser.json());
 
   return SystemPackage;
 });
