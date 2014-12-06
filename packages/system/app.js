@@ -32,7 +32,7 @@ SystemPackage.register(function(app, auth, database) {
   // Adding robots and humans txt
   app.use(express.static(__dirname + '/public/assets/static'));
 
-  app.use(bodyParser.json());
+  //app.use(bodyParser.json());
 
   return SystemPackage;
 });
