@@ -45,7 +45,7 @@ JournalEntrySchema.path('title').validate(function(title) {
   return !!title;
 }, 'title cannot be blank');
 
-JournalEntrySchema.path('detailText').validate(function(content) {
+JournalEntrySchema.path('detailText').validate(function(detailText) {
   return !!detailText;
 }, 'detailText cannot be blank');
 
