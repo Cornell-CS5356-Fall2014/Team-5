@@ -5,7 +5,7 @@
  */
 var Module = require('meanio').Module,
   favicon = require('serve-favicon'),
-  express = require('express');
+  express = require('express'),
   bodyParser = require('body-parser');
 
 var SystemPackage = new Module('system');
