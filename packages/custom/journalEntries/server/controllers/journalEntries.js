@@ -85,6 +85,7 @@ exports.create = function(req, res) {
 
   console.log(req.body);
   console.log(typeof(req.body.photoList));
+  console.log(Array.isArray(req.body.photoList));
 
   var params = {
                 user : req.user,
