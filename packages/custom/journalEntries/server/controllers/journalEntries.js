@@ -84,12 +84,12 @@ exports.create = function(req, res) {
   // console.log(util.inspect(arguments));
 
   console.log(req.body);
-  console.log(typeof(req.body.photoList));
+  console.log(typeof(req.body.photoList[0]));
   console.log(Array.isArray(req.body.photoList));
 
   var params = {
                 user : req.user,
-                photoList : req.body.photoList.parse(),
+                photoList : req.body.photoList,
                 title : req.body.title,
                 detailText : req.body.detailText,
                 likerList : [],
