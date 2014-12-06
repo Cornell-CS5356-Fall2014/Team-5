@@ -34,6 +34,11 @@ var mongoose = require('mongoose'),
 
   likerList: [{ type : Schema.Types.ObjectId, ref: 'User' }],
   commentList: [{ type : Schema.Types.ObjectId, ref: 'Comment' }],
+  recipeId: {
+    type: String,
+    required: false,
+    trim: true
+  },
 
 });
 

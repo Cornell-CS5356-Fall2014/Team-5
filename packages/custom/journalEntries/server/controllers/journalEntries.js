@@ -93,7 +93,8 @@ exports.create = function(req, res) {
                 title : req.body.title,
                 detailText : req.body.detailText,
                 likerList : [],
-                commentList : []
+                commentList : [],
+                recipeId : req.body.recipeId
               };
 
   // console.log('params');
