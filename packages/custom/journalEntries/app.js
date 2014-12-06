@@ -7,12 +7,16 @@ var Module = require('meanio').Module;
 
 var JournalEntries = new Module('journalEntries');
 
+
+
 /*
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
 JournalEntries.register(function(app, auth, database) {
 
+  app.use(express.bodyParser());
+  
   //We enable routing. By default the Package Object is passed to the routes
   JournalEntries.routes(app, auth, database);
 

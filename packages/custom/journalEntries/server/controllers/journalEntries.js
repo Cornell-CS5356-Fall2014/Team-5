@@ -80,8 +80,8 @@ function getEntries(req, res, userDicts) {
 
 exports.create = function(req, res) {
  
-  console.log('request body');
-  console.log(util.inspect(arguments));
+  // console.log('request body');
+  // console.log(util.inspect(arguments));
 
   var params = {
                 user : req.user,
@@ -90,7 +90,10 @@ exports.create = function(req, res) {
                 detailText : req.body.detailText,
                 likerList : [],
                 commentList : []
-              }
+              };
+
+  console.log('params');
+  console.log(util.inspect(params));
 
   var journalEntry = new JournalEntry(params);
 
