@@ -3,7 +3,8 @@
 /*
  * Defining the Package
  */
-var Module = require('meanio').Module;
+var Module = require('meanio').Module,
+  bodyParser = require('body-parser');
 
 var JournalEntries = new Module('journalEntries');
 
@@ -16,6 +17,7 @@ var JournalEntries = new Module('journalEntries');
 JournalEntries.register(function(app, auth, database) {
 
   //app.use(express.bodyParser());
+  app.use(bodyParser.json());
 
   //We enable routing. By default the Package Object is passed to the routes
   JournalEntries.routes(app, auth, database);
