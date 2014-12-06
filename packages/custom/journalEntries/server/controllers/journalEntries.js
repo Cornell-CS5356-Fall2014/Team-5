@@ -80,9 +80,10 @@ function getEntries(req, res, userDicts) {
 
 exports.create = function(req, res) {
  
-  // console.log('request body');
+  console.log('request body');
   // console.log(util.inspect(arguments));
 
+  console.log(req.body);
   var params = {
                 user : req.user,
                 photoList : req.body.photoList.parse(),
