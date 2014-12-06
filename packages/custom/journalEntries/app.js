@@ -15,8 +15,8 @@ var JournalEntries = new Module('journalEntries');
  */
 JournalEntries.register(function(app, auth, database) {
 
-  app.use(express.bodyParser());
-  
+  //app.use(express.bodyParser());
+
   //We enable routing. By default the Package Object is passed to the routes
   JournalEntries.routes(app, auth, database);
 
