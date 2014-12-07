@@ -196,6 +196,9 @@ exports.addUserToFollowing = function(req, res, next) {
         err: 'Cannot get the user'
       });
 
+
+
+    console.log(util.inspect(req.user));
     if (!req.user.following.prototype.contains(userToFollowId)) {
       req.user.following.push(userToFollow._id);
       userToFollow.followers.push(req.user._id);
