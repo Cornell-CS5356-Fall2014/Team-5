@@ -35,13 +35,19 @@
           </div>
         </div>
       </div>
-
     </div>
+
+    <div ng-if="yummlyHTML">
+      <div class="panel panel-default">
+        <div class="panel-body" ng-bind-html="yummlyHTML"></div>
+      </div>
+    </div>
+
     </br>
   </div>
   <!--<h2>{{package.name}}</h2>-->
   </br>
-  <p class="alert alert-warning">MEAN versions prior to 0.3.2 will be in /node_modules/recipes</p>
+
   </br>
 </div>
 
