@@ -122,8 +122,9 @@ exports.user = function(req, res, next, id) {
       req.profile = user;
       console.log('Logging user');
       console.log(util.inspect(user));
-      if(!user.hasOwnProperty(friends)) {
-        user.friends = []
+      if(!user.hasOwnProperty(following)) {
+        user.following = []
+        user.followers = []
         user.save(function(err) {
           if (err) return next(err);
           console.log('Just updated user');
@@ -135,6 +136,94 @@ exports.user = function(req, res, next, id) {
         next();
       }
     });
+};
+
+function getUser(id, cb) {
+
+  User
+    .findOne({
+      _id: id
+    })
+    .exec(function(err, user) {
+      if (err) return cb(err, null);
+
+      if (!user) return cb(new Error('Failed to load User ' + id), null);
+      //req.profile = user;
+      //console.log('Logging user');
+      //console.log(util.inspect(user));
+      if(!user.hasOwnProperty(following)) {
+        user.following = [];
+        user.followers = [];
+        user.save(function(err) {
+          if (err) return cb(err, null);
+          console.log('Just updated user');
+          console.log(util.inspect(user));
+          cb(null, user);
+        });
+      }
+      else {
+        cb(null, user);
+      }
+    });
+
+}
+
+exports.allUsers = function(req, res) {
+  User
+    .find()
+    .exec(function(err, allUsers) {
+      if (err) return res.json(500, {
+        err: 'Cannot get the users'
+      });
+
+      if (!allUsers)
+        return res.json(500, {
+          new Error('Failed to load Users'): 'Cannot get the users'
+        });
+
+      res.json(allUsers);
+    });
+};
+
+/**
+ * Add Following
+ */
+
+exports.addUserToFollowing = function(req, res, next, userToFollowId) {
+
+  getUser(userToFollowId, function(err, userToFollow) {
+    if (err) 
+      return res.json(500, {
+        err: 'Cannot get the user'
+      });
+
+    if (!req.user.following.contains(userToFollowId)) {
+      req.user.following.push(userToFollow._id);
+      userToFollow.followers.push(req.user._id);
+      req.user.save(function(err1) {
+        userToFollow.save(function(err2) {
+          if (err1 || err2) 
+            return res.json(500, {
+              error: 'Cannot save the user'
+            });
+          return res.status(200);
+        });
+      });
+
+    }
+    else
+    {
+      return res.status(200);
+    }
+  });
+};
+
+exports.getFollowing = function(req, res) {
+  res.json(req.user.following);
+};
+
+exports.getFollowers = function(req, res) {
+  res.json(req.user.followers);
 };
 
 /**

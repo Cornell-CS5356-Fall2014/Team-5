@@ -112,8 +112,8 @@ exports.create = function(req, res) {
       });
     }
 
-    console.log('Saved journal entry');
-    console.log(util.inspect(journalEntry));
+    // console.log('Saved journal entry');
+    // console.log(util.inspect(journalEntry));
 
     JournalEntry.load(journalEntry._id, function (err, j) {
       if (err) return next(err);

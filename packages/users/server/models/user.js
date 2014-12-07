@@ -72,7 +72,8 @@ var UserSchema = new Schema({
   github: {},
   google: {},
   linkedin: {},
-  friends: [Schema.Types.ObjectId]
+  following: [Schema.Types.ObjectId],
+  followers: [Schema.Types.ObjectId]
 });
 
 /**
