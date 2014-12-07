@@ -217,17 +217,18 @@ exports.addUserToFollowing = function(req, res, next) {
         console.log('Saving user 2');
         userToFollow.save(function(err2) {
           if (err1 || err2) 
-            return res.json(500, {
+            res.json(500, {
               error: 'Cannot save the user'
             });
-          return res.status(200);
+          else
+            res.status(200);
         });
       });
 
     }
     else
     {
-      return res.status(200);
+      res.status(200);
     }
   });
 };
