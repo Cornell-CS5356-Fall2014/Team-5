@@ -66,6 +66,15 @@ module.exports = function(MeanUser, app, auth, database, passport) {
       failureRedirect: '#!/login'
     }), users.authCallback);
 
+
+  app.post('/auth/facebook/token',
+    passport.authenticate('facebook-token'),
+    function (req, res) {
+      // do something with req.user
+      //res.send(req.user? 200 : 401);
+      res.status(200).send({});
+    }
+  );
   // Setting the github oauth routes
   app.route('/auth/github')
     .get(passport.authenticate('github', {

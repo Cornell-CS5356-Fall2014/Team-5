@@ -6,33 +6,29 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
-// Photo Schema
 var PhotoSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
   },
-  contentType: String,
   fileName: String,
   caption: String,
   user: {
     type: Schema.ObjectId,
     ref: 'User'
   },
-  image: {
-    original: {
-      type: Buffer,
-      required: true
-    }
+  original: {
+    type: Schema.ObjectId,
+    ref: 'Image'
+  },
+  thumbnail: {
+    type: Schema.ObjectId,
+    ref: 'Image' 
   }
 });
 
 /**
  * Validations
- */
-
-/**
- * Statics
  */
 
  PhotoSchema.statics.load = function(id, cb) {

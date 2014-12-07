@@ -1,10 +1,11 @@
 'use strict';
 
 module.exports = {
+  src: '.env',
   db: 'mongodb://localhost/mean-test',
   port: 3001,
   app: {
-    name: 'MEAN - A Modern Stack - Test'
+    name: 'Cookem Cookalicious - TESTING'
   },
   facebook: {
     clientID: process.env['FB_CLIENT_ID'],

@@ -1,0 +1,47 @@
+<div class="" data-ng-controller="RecipesController" xmlns="http://www.w3.org/1999/html">
+  <div class="jumbotron">
+    <h1>Recipes</h1>
+    <div class="row">
+      <form ng-submit="submit()">
+      <div class="input-group">
+        <input type="text" class="form-control" name="query" ng-model="query">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Search</button>
+      </span>
+      </div>
+      </form>
+    </div>
+    </br></br>
+    <div ng-if="!recipes">
+      <img src="/recipes/assets/img/man_cooking.jpg" class="img-rounded" align="center" />
+    </div>
+    <div ng-if="recipes">
+      <div class="row">
+        <div class="col-sm-6 col-md-4" ng-repeat="recipe in recipes">
+          <div class="thumbnail">
+            <div ng-if="recipe.imageUrlsBySize && recipe.imageUrlsBySize[90]">
+              <img src="{{recipe.imageUrlsBySize[90]}}" alt="...">
+            </div>
+            <div ng-if="!recipe.imageUrlsBySize">
+              <img data-src="holder.js/300x300" alt="...">
+            </div>
+            <div class="caption">
+              <h3>{{recipe.recipeName}}</h3>
+              <p>...</p>
+              <p>
+                <a href="#" class="btn btn-primary" role="button">Save</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </br>
+  </div>
+  <!--<h2>{{package.name}}</h2>-->
+  </br>
+  <p class="alert alert-warning">MEAN versions prior to 0.3.2 will be in /node_modules/recipes</p>
+  </br>
+</div>
+

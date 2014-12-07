@@ -5,23 +5,10 @@
  */
 var mongoose = require('mongoose'),
   Photo = mongoose.model('Photo'),
-  multiparty = require('multiparty');
-  //util = require('util');
-
-//var getPhotoBody = function(photo) {
-  //return photo.image.original;
-//};
-
-var getPhotoMeta = function(photo) {
-  return {
-    _id: photo._id,
-    created: photo.created,
-    contentType: photo.contentType,
-    filename: photo.fileName,
-    caption: photo.caption,
-    user: photo.user
-  };
-};
+  PhotoImage = mongoose.model('PhotoImage'),
+  images = require('./images'),
+  multiparty = require('multiparty'),
+  util = require('util');
 
 // Find photo by id
 exports.photo = function(req, res, next, id) {
@@ -33,58 +20,84 @@ exports.photo = function(req, res, next, id) {
   });
 };
 
+var saveThumbnail = function (photo, contentType, image, callback) {
+  var thumb = new PhotoImage();
+  images.createThumbnail(photo.fileName, photo, image.content, function (err, buffer) {
+    if (err) return callback(err);
+    thumb.content = buffer;
+    thumb.contentType = contentType;
+    photo.thumbnail = thumb;
+    thumb.save(function (err) {
+      if (err) return callback(err);
+      console.log('Finished saving thumbnail to database');
+      callback(null, thumb);
+    });
+  });
+};
+
+var saveImage = function (buffer, photo, contentType, image) {
+  console.log('Done processing photo stream (length: ' + buffer.length + ')');
+  image.content = Buffer.concat(buffer);
+  image.contentType = contentType;
+  photo.original = image;
+  image.save(function (err) {
+    if (err) throw err;
+    console.log('Finished saving image to database');
+  });
+  console.log(util.inspect(photo));
+};
+
+var handlePhoto = function(user, part, photo, image, contentType) {
+  var buffer = [];
+
+  photo.user = user;
+  photo.fileName = part.filename;
+
+  part.on('data', function(chunk){
+    buffer.push(chunk);
+  });
+  part.on('end', function() {
+    saveImage(buffer, photo, contentType, image);
+  });
+};
+
+var handleCaption = function (part, photo) {
+  var caption = '';
+  part.setEncoding('utf8');
+
+  part.on('data', function(chunk){
+    caption = caption.concat(chunk);
+  });
+  part.on('end', function(){
+    photo.caption = caption;
+  });
+};
+
 // Create a photo
 exports.create = function(req, res) {
   var form = new multiparty.Form();
   var photo = new Photo();
-  var photoData = [];
+  var image = new PhotoImage();
+  var contentType = null;
 
   form.on('part', function(part) {
-      part.on('error', function(err) {
-        return res.json(500, {
-          error: 'Cannot upload photo ' + err
-        });
+    part.on('error', function(err) {
+      return res.json(500, {
+        error: 'Cannot upload photo ' + err
       });
-
-      if (part.name === 'photo') {
-
-        //console.log('Part is the photo');
-        photo.fileName = part.filename;
-        photo.contentType = part.headers ? part.headers['content-type'] : null;
-        //console.log('Set fileName to ' + fileName + ' and contentType to ' + contentType);
-        
-        photo.user = req.user;
-
-        part.on('data', function(chunk){
-          //console.log('Processing photo chunk');
-          photoData.push(chunk);
-        });
-
-        part.on('end', function() {
-          //console.log('Done processing photo stream. PhotoData[] is length ' + photoData.length);
-          photo.image.original = Buffer.concat(photoData);
-        });
-
-      } else if (part.name === 'caption') {
-
-        var caption = '';
-        //console.log('Part is the caption');
-        part.setEncoding('utf8');
-
-        part.on('data', function(chunk){
-          caption = caption.concat(chunk);
-        });
-        part.on('end', function(){
-          photo.caption = caption;
-        });
-
-      } else {
-        throw new Error('Unexpected form name: ' + part.name);
-      }
-
-      //console.log(util.inspect(part) + '\n\n');
-      part.resume();
     });
+
+    if (part.name === 'photo') {
+      contentType = part.headers ? part.headers['content-type'] : null;
+      handlePhoto(req.user, part, photo, image, contentType);
+
+    } else if (part.name === 'caption') {
+      handleCaption(part, photo);
+    } else {
+      throw new Error('Unexpected form name: ' + part.name);
+    }
+    //part.resume();
+  });
 
   form.on('error', function(err) {
       return res.json(500, {
@@ -93,23 +106,53 @@ exports.create = function(req, res) {
     });
 
   form.on('close', function() {
-    photo.save(function(err) {
+    photo.save(function (err) {
       if (err) {
         return res.json(500, {
           error: 'Cannot upload the photo ' + err
         });
       }
-      //console.log('All Done');
-      res.send(getPhotoMeta(photo));
+      saveThumbnail(photo, contentType, image, function (err, thumb) {
+        if (err) console.log(err);
+        photo.thumbnail = thumb;
+        photo.save(function (err) {
+          if (err) console.log(err);
+          console.log('Added thumbnail to photo');
+        });
+      });
+      res.send(photo);
     });
   });
 
   form.parse(req);
 };
 
+// Update photo metadata
+exports.update = function(req, res) {
+  var photo = req.photo;
+  if (req.body && req.body.caption) {
+    photo.caption = req.body.caption;
+  }
+  if (req.body && req.body.filename) {
+    photo.fileName = req.body.filename;
+  }
+
+  photo.save(function (err) {  
+    if (err) {
+      return res.json(500, {
+        error: 'Cannot update the photo'
+      });
+    }
+    res.send(photo);
+  });
+};
+
 // Delete a photo
 exports.destroy = function(req, res) {
   var photo = req.photo;
+  var images = [];
+  if (photo.original) images.push(photo.original);
+  if (photo.thumbnail) images.push(photo.thumbnail);
 
   photo.remove(function(err) {
     if (err) {
@@ -117,35 +160,28 @@ exports.destroy = function(req, res) {
         error: 'Cannot delete the photo'
       });
     }
-    res.send('TODO: Destroy response');
+    images.forEach(function (image) {
+      image.remove(function (err) {
+        if (err) console.log(err);
+      });
+    });
+    res.send(photo);
   });
 };
 
 exports.show = function(req, res) {
-  if (req.photo) {
-    //console.log('Got the photo');
-    //console.log(util.inspect(req.photo));
-    res.set('Content-Type', req.photo.contentType);
-    res.status(200).send(req.photo.image.original);
-  } else {
-    return res.json(500, {
-      error: 'Cannot show the photo'
-    });
-  }
+  console.log('Params are: \n' + util.inspect(req.params));
+  console.log('Query is: \n' + util.inspect(req.query));
+  res.json(req.photo);
 };
 
-// List the photos
-exports.all = function(req, res) {
-  var photoMeta = [];
-  Photo.find().sort('-created').populate('user', 'name username').exec(function(err, photos) {
+exports.userPhotos = function(req, res) {
+  Photo.find({'user' : req.user}).sort('-created').populate('user', 'name username').exec(function(err, photos) {
     if (err) {
       return res.json(500, {
         error: 'Cannot list the photos'
       });
     }
-    photos.forEach(function(photo){
-      photoMeta.push(getPhotoMeta(photo));
-    });
-    res.status(200).send(photoMeta);
+    res.status(200).send(photos);
   });
 };
