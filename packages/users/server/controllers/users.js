@@ -308,8 +308,8 @@ exports.removeUserFromFollowing = function(req, res, next) {
       //req.user.following.push(userToFollow._id);
       //userToFollow.followers.push(req.user._id);
 
-      followingIndex = req.user.following.indexOf(userToFollow._id);
-      followersIndex = userToFollow.followers.indexOf(req.user._id);
+      var followingIndex = req.user.following.indexOf(userToFollow._id);
+      var followersIndex = userToFollow.followers.indexOf(req.user._id);
 
       req.user.following = req.user.following(0, followingIndex).concat(req.user.following(followingIndex+1)); 
       userToFollow.following = userToFollow.following(0, followersIndex).concat(userToFollow.following(followersIndex+1)); 
