@@ -207,6 +207,8 @@ exports.addUserToFollowing = function(req, res, next) {
       if (id == userToFollowId) found = true;
     });
 
+    console.log('finished looking in following list');
+
     if (!found) {
       req.user.following.push(userToFollow._id);
       userToFollow.followers.push(req.user._id);
