@@ -233,6 +233,108 @@ exports.addUserToFollowing = function(req, res, next) {
   });
 };
 
+
+exports.addUserToFollowing = function(req, res, next) {
+
+  var userToFollowId = req.body.userId;
+
+  getUser(userToFollowId, function(err, userToFollow) {
+    if (err) 
+      return res.json(500, {
+        err: 'Cannot get the user'
+      });
+
+
+
+    console.log(util.inspect(typeof(req.user.following)));
+
+
+    console.log('looking in following list');
+    var found = false;
+    req.user.following.forEach(function(id){
+      if (id == userToFollowId) found = true;
+    });
+
+    console.log('finished looking in following list');
+
+    if (!found) {
+      req.user.following.push(userToFollow._id);
+      userToFollow.followers.push(req.user._id);
+      console.log('Saving user 1');
+      req.user.save(function(err1) {
+        console.log('Saving user 2');
+        userToFollow.save(function(err2) {
+          if (err1 || err2) 
+            res.json(500, {
+              error: 'Cannot save the user'
+            }).send();
+          else
+            res.status(200).send();
+        });
+      });
+
+    }
+    else
+    {
+      res.status(200).send();
+    }
+  });
+};
+
+exports.removeUserFromFollowing = function(req, res, next) {
+
+  var userToFollowId = req.body.userId;
+
+  getUser(userToFollowId, function(err, userToFollow) {
+    if (err) 
+      return res.json(500, {
+        err: 'Cannot get the user'
+      });
+
+
+
+    console.log(util.inspect(typeof(req.user.following)));
+
+
+    console.log('looking in following list');
+    var found = false;
+    req.user.following.forEach(function(id){
+      if (id == userToFollowId) found = true;
+    });
+
+    console.log('finished looking in following list');
+
+    if (found) {
+      //req.user.following.push(userToFollow._id);
+      //userToFollow.followers.push(req.user._id);
+
+      followingIndex = req.user.following.indexOf(userToFollow._id);
+      followersIndex = userToFollow.followers.indexOf(req.user._id);
+
+      req.user.following = req.user.following(0, followingIndex).concat(req.user.following(followingIndex+1)); 
+      userToFollow.following = userToFollow.following(0, followersIndex).concat(userToFollow.following(followersIndex+1)); 
+      
+      console.log('Saving user 1');
+      req.user.save(function(err1) {
+        console.log('Saving user 2');
+        userToFollow.save(function(err2) {
+          if (err1 || err2) 
+            res.json(500, {
+              error: 'Cannot save the user'
+            }).send();
+          else
+            res.status(200).send();
+        });
+      });
+
+    }
+    else
+    {
+      res.status(200).send();
+    }
+  });
+};
+
 exports.getFollowing = function(req, res) {
   res.json(req.user.following);
 };

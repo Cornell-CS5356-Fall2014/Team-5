@@ -26,7 +26,8 @@ module.exports = function(MeanUser, app, auth, database, passport) {
 
   app.route('/following')
     .get(auth.requiresLogin, users.getFollowing)
-    .post(auth.requiresLogin, users.addUserToFollowing);
+    .post(auth.requiresLogin, users.addUserToFollowing)
+    .delete(auth.requiresLogin, users.removeUserFromFollowing);
 
   app.route('/followers')
     .get(auth.requiresLogin, users.getFollowers);
