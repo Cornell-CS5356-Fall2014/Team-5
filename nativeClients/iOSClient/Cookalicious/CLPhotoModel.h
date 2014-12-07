@@ -12,12 +12,17 @@ NSString * const kOriginalPhotoURL;
 
 @interface CLPhotoModel : NSObject
 
-@property (strong, nonatomic) NSNumber *photoObjectID;
-@property (strong, nonatomic) NSNumber *owningUserID;
+@property (strong, nonatomic) NSString *photoObjectID;
+@property (strong, nonatomic) NSString *owningUserID;
 @property (strong, nonatomic) NSString *caption;
 @property (strong, nonatomic) NSDate *createdDate;
 @property (strong, nonatomic) NSString *filename;
-@property (strong, nonatomic) NSDictionary *imageURLStrings;
+@property (strong, nonatomic) NSString *originalImageID;
+@property (strong, nonatomic) NSString *thumbnailImageID;
+
+//@property (strong, nonatomic) NSDictionary *imageURLStrings;
+
+
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 

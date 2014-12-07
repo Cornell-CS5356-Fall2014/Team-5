@@ -18,6 +18,23 @@ module.exports = function(MeanUser, app, auth, database, passport) {
   app.route('/users/me')
     .get(users.me);
 
+  app.route('/testLog')
+    .post(function(req, res) {
+      console.log(req.body.logText);
+      res.status(200).send({});
+    });
+
+  app.route('/following')
+    .get(auth.requiresLogin, users.getFollowing)
+    .post(auth.requiresLogin, users.addUserToFollowing)
+    .delete(auth.requiresLogin, users.removeUserFromFollowing);
+
+  app.route('/followers')
+    .get(auth.requiresLogin, users.getFollowers);
+
+  app.route('/users')
+    .get(auth.requiresLogin, users.allUsers)
+
   // Setting up the users api
   app.route('/register')
     .post(users.create);
@@ -36,6 +53,7 @@ module.exports = function(MeanUser, app, auth, database, passport) {
     .get(function(req, res) {
       res.send(req.isAuthenticated() ? req.user : '0');
     });
+
 
   // Setting the local strategy route
   app.route('/login')

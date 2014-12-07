@@ -22,6 +22,12 @@
 
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+-(void)postUserPhoto:(NSString*)name
+               fName:(NSString *)fName
+               image:(UIImage *)image
+           OnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 -(void)isloggedInOnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
 
           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
@@ -31,7 +37,10 @@
 -(void)downloadImageAtURL:(NSString *)urlString
                   success:(void (^)(NSURLResponse *response, UIImage *downloadedImage))success
                   failure:(void (^)(NSURLResponse *response, NSError *error))failure;
+//-(void)setImageOfImageView:(UIImageView *)imageView
+//             withURLString:(NSString *)urlString;
+
 -(void)setImageOfImageView:(UIImageView *)imageView
-             withURLString:(NSString *)urlString;
+               withImageId:(NSString *)imageId;
 
 @end

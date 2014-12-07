@@ -23,6 +23,10 @@
 @property (strong, nonatomic) NSArray *arrayOfPhotoObjects;
 @property (strong, nonatomic) NSMutableArray *arrayOfImages;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
+
+
 @end
 
 @implementation CLFeedCollectionViewController
@@ -32,12 +36,19 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"The Food Feed";
+    //self.navigationItem.title = @"The Food Feed";
     
-    UIBarButtonItem *logoutItem = [[UIBarButtonItem alloc]initWithTitle:@"Logout" style:UIBarButtonItemStyleDone target:self.navigationController action:@selector(presentLogInViewController)];
+//    UIBarButtonItem *logoutItem = [[UIBarButtonItem alloc]initWithTitle:@"Logout" style:UIBarButtonItemStyleDone target:self.navigationController action:@selector(presentLogInViewController)];
+//    
+//    self.navigationItem.rightBarButtonItem = logoutItem;
     
-    self.navigationItem.rightBarButtonItem = logoutItem;
-    self.navigationItem.hidesBackButton = YES;
+    self.logoutButton.target = self.navigationController;
+    self.logoutButton.action = @selector(presentLogInViewController);
+    
+//    UIBarButtonItem *cameraItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:<#(SEL)#>];
+//    self.navigationItem.leftBarButtonItem = cameraItem;
+//    
+//    self.navigationItem.hidesBackButton = YES;
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -48,6 +59,18 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
+    //[self loadPhotos:nil];
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self loadPhotos:nil];
+}
+
+-(void)loadPhotos:(void (^)(void))completion
+{
     [[CLNetworkingController sharedController] getUserPhotosOnSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if([responseObject isKindOfClass:[NSArray class]])
@@ -67,15 +90,21 @@ static NSString * const reuseIdentifier = @"Cell";
             [self.arrayOfPhotoObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 
                 CLPhotoModel *photo = (CLPhotoModel *)obj;
-                [[CLNetworkingController sharedController] setImageOfImageView:[self.imageViewArray objectAtIndex:idx] withURLString: [photo.imageURLStrings objectForKey:kOriginalPhotoURL]];
+                if(![photo.thumbnailImageID isKindOfClass:[NSNull class]] && ![photo.thumbnailImageID isEqualToString:@""])
+                    [[CLNetworkingController sharedController] setImageOfImageView:[self.imageViewArray objectAtIndex:idx] withImageId:photo.thumbnailImageID];
                 
             }];
             
             [self.collectionView reloadData];
         }
         
+        if (completion)
+            completion();
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+        if (completion)
+            completion();
         
     }];
 }
