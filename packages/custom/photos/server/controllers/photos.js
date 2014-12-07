@@ -23,10 +23,10 @@ exports.photo = function(req, res, next, id) {
 
 var saveThumbnail = function (photo, contentType, image, callback) {
   var thumb = new PhotoImage();
-  console.log('In saveThumbnail')
+  console.log('In saveThumbnail');
   console.log(util.inspect(photo));
   images.createThumbnail(photo.fileName, photo, image.content, function (err, buffer) {
-    console.log('In createThumbnail callback')
+    console.log('In createThumbnail callback');
     if (err) return callback(err);
     thumb.content = buffer;
     thumb.contentType = contentType;

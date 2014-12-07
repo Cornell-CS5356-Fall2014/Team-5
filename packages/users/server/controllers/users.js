@@ -124,8 +124,8 @@ exports.user = function(req, res, next, id) {
       console.log('Logging user');
       console.log(util.inspect(user));
       if(!user.hasOwnProperty('following')) {
-        user.following = []
-        user.followers = []
+        user.following = [];
+        user.followers = [];
         user.save(function(err) {
           if (err) return next(err);
           console.log('Just updated user');
@@ -204,7 +204,7 @@ exports.addUserToFollowing = function(req, res, next) {
     console.log('looking in following list');
     var found = false;
     req.user.following.forEach(function(id){
-      if (id == userToFollowId) found = true;
+      if (id === userToFollowId) found = true;
     });
 
     console.log('finished looking in following list');
@@ -252,7 +252,7 @@ exports.addUserToFollowing = function(req, res, next) {
     console.log('looking in following list');
     var found = false;
     req.user.following.forEach(function(id){
-      if (id == userToFollowId) found = true;
+      if (id === userToFollowId) found = true;
     });
 
     console.log('finished looking in following list');
@@ -311,8 +311,8 @@ exports.removeUserFromFollowing = function(req, res, next) {
       var followingIndex = req.user.following.indexOf(userToFollow._id);
       var followersIndex = userToFollow.followers.indexOf(req.user._id);
 
-      if(followingIndex != -1) req.user.following = req.user.following.slice(0, followingIndex).concat(req.user.following.slice(followingIndex+1)); 
-      if(followersIndex != -1) userToFollow.following = userToFollow.following.slice(0, followersIndex).concat(userToFollow.following.slice(followersIndex+1)); 
+      if(followingIndex !== -1) req.user.following = req.user.following.slice(0, followingIndex).concat(req.user.following.slice(followingIndex+1));
+      if(followersIndex !== -1) userToFollow.following = userToFollow.following.slice(0, followersIndex).concat(userToFollow.following.slice(followersIndex+1));
       
       console.log('Saving user 1');
       req.user.save(function(err1) {

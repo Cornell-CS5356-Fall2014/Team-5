@@ -25,10 +25,10 @@ module.exports = function(JournalEntries, app, auth, database) {
 
   app.route('/user/journalEntries')
     //note that 
-    .get(auth.requiresLogin, journalEntries.getJournalEntries)
+    .get(auth.requiresLogin, journalEntries.getJournalEntries);
 
   app.route('/journalEntries/:journalEntryId')
-    .get(auth.requiresLogin, journalEntries.journalEntry)
+    .get(auth.requiresLogin, journalEntries.journalEntry);
 
   // Finish with setting up the photoId param
   app.param('journalEntryId', journalEntries.journalEntry);

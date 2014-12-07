@@ -5,12 +5,12 @@
  */
 var mongoose = require('mongoose'),
   JournalEntry = mongoose.model('JournalEntry'),
-  Comment = mongoose.model('Comment'),
-  User = mongoose.model('User'),
-  Photo = mongoose.model('Photo'),
-  util = require('util'),
-  Promise = require('promise'),
-  Set = require('set');
+  //Comment = mongoose.model('Comment'),
+  //User = mongoose.model('User'),
+  //Photo = mongoose.model('Photo'),
+  util = require('util');//,
+  //Promise = require('promise'),
+  //Set = require('set');
 
 
 // Find photo by id
@@ -23,23 +23,8 @@ exports.journalEntry = function(req, res, next, id) {
   });
 };
 
-// journalEntries.getJournalEntry
-
-exports.getJournalEntriesIncludingFriends = function(req, res) {
-	
-	var users = [req.user];
-	var userQueryDictArray = [];
-	users = users.concat(req.user.friends);
-
-	var userQueryDictArray = users.map(function(user) {
-		return {'user' : user};
-	})
-
-	return getEntries(req, res, userQueryDictArray)
-}
-
-exports.getJournalEntries = function(req, res) {
-  return getEntries(req, res, {'user' : req.user})
+function journalEntryForPublicJSON(journalEntry, cb) {
+  cb(null, journalEntry);
 }
 
 function getEntries(req, res, userDicts) {
@@ -74,11 +59,28 @@ function getEntries(req, res, userDicts) {
       res.status(200).send(journalEntriesTransforms);
     });
 
-    
+
   });
 }
 
-exports.create = function(req, res) {
+exports.getJournalEntriesIncludingFriends = function(req, res) {
+	
+	var users = [req.user];
+	var userQueryDictArray;
+	users = users.concat(req.user.friends);
+
+	userQueryDictArray = users.map(function(user) {
+		return {'user' : user};
+	});
+
+	return getEntries(req, res, userQueryDictArray);
+};
+
+exports.getJournalEntries = function(req, res) {
+  return getEntries(req, res, {'user' : req.user});
+};
+
+exports.create = function(req, res, next) {
  
   // console.log('request body');
   // console.log(util.inspect(arguments));
@@ -117,7 +119,7 @@ exports.create = function(req, res) {
 
     JournalEntry.load(journalEntry._id, function (err, j) {
       if (err) return next(err);
-      if (!journalEntry) return next(new Error('Failed to load journal entry ' + id));
+      if (!journalEntry) return next(new Error('Failed to load journal entry ' + err.message));
       // console.log('reloaded journal entry');
       // console.log(util.inspect(j));
       res.json(journalEntry);
@@ -130,17 +132,9 @@ exports.create = function(req, res) {
   });
 };
 
-function testFunction(journalEntry, cb){
-
-  cb(null, journalEntry);
-
-}
-
-function journalEntryForPublicJSON(journalEntry, cb) {
-
-  cb(null, journalEntry);
-
-}
+//function testFunction(journalEntry, cb){
+//  cb(null, journalEntry);
+//}
 
 // function journalEntryForPublicJSON(journalEntry, cb) {
 

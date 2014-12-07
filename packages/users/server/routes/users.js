@@ -33,7 +33,7 @@ module.exports = function(MeanUser, app, auth, database, passport) {
     .get(auth.requiresLogin, users.getFollowers);
 
   app.route('/users')
-    .get(auth.requiresLogin, users.allUsers)
+    .get(auth.requiresLogin, users.allUsers);
 
   // Setting up the users api
   app.route('/register')
