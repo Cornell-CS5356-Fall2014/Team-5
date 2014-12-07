@@ -297,10 +297,10 @@ exports.removeUserFromFollowing = function(req, res, next) {
 
 
     console.log('looking in following list');
-    var found = false;
-    req.user.following.forEach(function(id){
-      if (id == userToFollowId) found = true;
-    });
+    var found = true;
+    // req.user.following.forEach(function(id){
+    //   if (id == userToFollowId) found = true;
+    // });
 
     console.log('finished looking in following list');
 
@@ -311,8 +311,8 @@ exports.removeUserFromFollowing = function(req, res, next) {
       var followingIndex = req.user.following.indexOf(userToFollow._id);
       var followersIndex = userToFollow.followers.indexOf(req.user._id);
 
-      req.user.following = req.user.following(0, followingIndex).concat(req.user.following(followingIndex+1)); 
-      userToFollow.following = userToFollow.following(0, followersIndex).concat(userToFollow.following(followersIndex+1)); 
+      if(followingIndex != -1) req.user.following = req.user.following(0, followingIndex).concat(req.user.following(followingIndex+1)); 
+      if(followersIndex != -1) userToFollow.following = userToFollow.following(0, followersIndex).concat(userToFollow.following(followersIndex+1)); 
       
       console.log('Saving user 1');
       req.user.save(function(err1) {
