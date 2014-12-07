@@ -18,6 +18,17 @@ exports.authCallback = function(req, res) {
   res.redirect('/');
 };
 
+exports.list = function(req, res) {
+  User.find({}, {hashed_password: 0, salt: 0, provider: 0}).exec(function(err, users) {
+    if (err) {
+      return res.status(400).json({
+        msg: 'No users :( ' + err.message
+      });
+    }
+    res.send(users);
+  });
+};
+
 /**
  * Show login form
  */

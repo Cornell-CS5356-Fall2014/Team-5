@@ -13,6 +13,9 @@ var logFB = function(req, res, next) {
 
 module.exports = function(MeanUser, app, auth, database, passport) {
 
+  app.route('/users/list')
+      .get(auth.requiresLogin, users.list);
+
   app.route('/logout')
     .get(users.signout);
   app.route('/users/me')
