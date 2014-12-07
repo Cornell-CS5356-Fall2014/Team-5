@@ -198,7 +198,7 @@ exports.addUserToFollowing = function(req, res, next) {
 
 
 
-    console.log(util.inspect(typeof(req.user.following));
+    console.log(util.inspect(typeof(req.user.following)));
     if (!req.user.following.contains(userToFollowId)) {
       req.user.following.push(userToFollow._id);
       userToFollow.followers.push(req.user._id);
