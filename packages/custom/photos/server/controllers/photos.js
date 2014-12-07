@@ -16,13 +16,17 @@ exports.photo = function(req, res, next, id) {
     if (err) return next(err);
     if (!photo) return next(new Error('Failed to load photo ' + id));
     req.photo = photo;
+
     next();
   });
 };
 
 var saveThumbnail = function (photo, contentType, image, callback) {
   var thumb = new PhotoImage();
+  console.log('In saveThumbnail');
+  console.log(util.inspect(photo));
   images.createThumbnail(photo.fileName, photo, image.content, function (err, buffer) {
+    console.log('In createThumbnail callback');
     if (err) return callback(err);
     thumb.content = buffer;
     thumb.contentType = contentType;
@@ -52,7 +56,8 @@ var handlePhoto = function(user, part, photo, image, contentType) {
 
   photo.user = user;
   photo.fileName = part.filename;
-
+  photo.original = null;
+  photo.thumbnail = null;
   part.on('data', function(chunk){
     buffer.push(chunk);
   });
@@ -82,9 +87,7 @@ exports.create = function(req, res) {
 
   form.on('part', function(part) {
     part.on('error', function(err) {
-      return res.json(500, {
-        error: 'Cannot upload photo ' + err
-      });
+      return res.status(500).json({ error: 'Cannot upload photo ' + err});
     });
 
     if (part.name === 'photo') {
@@ -100,17 +103,13 @@ exports.create = function(req, res) {
   });
 
   form.on('error', function(err) {
-      return res.json(500, {
-        error: 'Cannot upload photo ' + err
-      });
+      return res.status(500).json({ error: 'Cannot upload photo ' + err});
     });
 
   form.on('close', function() {
     photo.save(function (err) {
       if (err) {
-        return res.json(500, {
-          error: 'Cannot upload the photo ' + err
-        });
+        return res.status(500).json({ error: 'Cannot upload photo ' + err});
       }
       saveThumbnail(photo, contentType, image, function (err, thumb) {
         if (err) console.log(err);
@@ -139,9 +138,7 @@ exports.update = function(req, res) {
 
   photo.save(function (err) {  
     if (err) {
-      return res.json(500, {
-        error: 'Cannot update the photo'
-      });
+      return res.status(500).json({ error: 'Cannot update the photo '});
     }
     res.send(photo);
   });
@@ -156,9 +153,7 @@ exports.destroy = function(req, res) {
 
   photo.remove(function(err) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot delete the photo'
-      });
+      return res.status(500).json({ error: 'Cannot delete the photo '});
     }
     images.forEach(function (image) {
       image.remove(function (err) {
@@ -182,6 +177,7 @@ exports.userPhotos = function(req, res) {
         error: 'Cannot list the photos'
       });
     }
+    console.log(util.inspect(photos));
     res.status(200).send(photos);
   });
 };

@@ -10,4 +10,6 @@
 
 @interface CLFeedCollectionViewController : UICollectionViewController
 
+-(void)loadPhotos:(void (^)(void))completion;
+
 @end

@@ -57,9 +57,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FL9-DF-luI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="62.5" y="14.5"/>
+            <point key="canvasLocation" x="50.5" y="-121.5"/>
         </scene>
-        <!--Feed Collection View Controller-->
+        <!--The Food Feed-->
         <scene sceneID="HBm-Ly-ITn">
             <objects>
                 <collectionViewController id="kAg-ad-Lum" customClass="CLFeedCollectionViewController" sceneMemberID="viewController">
@@ -84,8 +84,20 @@
                             <outlet property="delegate" destination="kAg-ad-Lum" id="7P5-rp-mIp"/>
                         </connections>
                     </collectionView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="The Food Feed" id="gyu-lX-zKI">
+                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="P4K-BY-jgc">
+                            <connections>
+                                <segue destination="gyE-Fk-SW7" kind="show" identifier="segueToPhotoPicker" id="TVZ-hk-mZY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="CNF-Gz-adZ"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="cameraButton" destination="P4K-BY-jgc" id="tXm-kx-Yy4"/>
+                        <outlet property="logoutButton" destination="CNF-Gz-adZ" id="Wvp-xJ-UPw"/>
                         <outlet property="waterfallLayout" destination="lgN-4d-q9O" id="Lst-WB-1wi"/>
                     </connections>
                 </collectionViewController>
@@ -197,16 +209,23 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="GHq-4O-cyt"/>
-                    <navigationItem key="navigationItem" title="Photo Picker" id="jGU-kB-5ME"/>
+                    <navigationItem key="navigationItem" title="Photo Picker" id="jGU-kB-5ME">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="Xif-6q-ALc">
+                            <connections>
+                                <action selector="uploadPhoto:" destination="gyE-Fk-SW7" id="JMU-9Z-zf2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="imageView" destination="3fC-Eg-REc" id="mtv-9L-rmo"/>
                         <outlet property="toolBar" destination="IMO-zg-Fr7" id="AHU-kf-Tp1"/>
+                        <outlet property="uploadButton" destination="Xif-6q-ALc" id="M5h-IB-XDR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="euW-CT-xjZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="212.5" y="-686.5"/>
+            <point key="canvasLocation" x="358.5" y="867.5"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

@@ -22,11 +22,15 @@ exports.image = function(req, res, next, id) {
 var size = {width: 100, height: 100};
 
 exports.createThumbnail = function(filename, photo, buffer, callback) {
+  console.log('In createThumbnail');
   console.log(arguments);
-  var ext = '.' + filename.split('.').pop();
+  // var ext = '.' + filename.split('.').pop();
+  // var tmpPath = path.join(process.env.HOME);
+  // var tmp_orig = path.join(tmpPath, photo._id.toString() + ext);
+  // var tmp_thumb = path.join(tmpPath, photo._id.toString() + '_thumb' + ext);
   var tmpPath = path.join(process.env.HOME);
-  var tmp_orig = path.join(tmpPath, photo._id.toString() + ext);
-  var tmp_thumb = path.join(tmpPath, photo._id.toString() + '_thumb' + ext);
+  var tmp_orig = path.join(tmpPath, photo._id.toString());
+  var tmp_thumb = path.join(tmpPath, photo._id.toString() + '_thumb');
 
   console.log('Attempting to write ' + tmp_orig);
   if (!Buffer.isBuffer(buffer)) {

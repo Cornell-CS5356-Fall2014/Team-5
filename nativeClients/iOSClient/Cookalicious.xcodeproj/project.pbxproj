@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		40BA98742D564CB188DC718C /* libPods-Cookalicious.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B4D2E68710A4A60AD754915 /* libPods-Cookalicious.a */; };
 		48092D7319F32005009EBC3F /* CLPhotoCaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48092D7219F32005009EBC3F /* CLPhotoCaptureViewController.m */; };
-		48092D7519F32419009EBC3F /* CLPhotoCaptureOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48092D7419F32419009EBC3F /* CLPhotoCaptureOverlayView.xib */; };
 		4826E14D19F6B67D00E79107 /* CLNetworkingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826E14C19F6B67D00E79107 /* CLNetworkingController.m */; };
 		4826E15119F7383C00E79107 /* CLFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826E15019F7383C00E79107 /* CLFeedViewController.m */; };
 		4826E15419F73A1A00E79107 /* CLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826E15319F73A1A00E79107 /* CLNavigationController.m */; };
@@ -42,7 +41,6 @@
 		3B4D2E68710A4A60AD754915 /* libPods-Cookalicious.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cookalicious.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48092D7119F32005009EBC3F /* CLPhotoCaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhotoCaptureViewController.h; sourceTree = "<group>"; };
 		48092D7219F32005009EBC3F /* CLPhotoCaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPhotoCaptureViewController.m; sourceTree = "<group>"; };
-		48092D7419F32419009EBC3F /* CLPhotoCaptureOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLPhotoCaptureOverlayView.xib; sourceTree = "<group>"; };
 		4826E14B19F6B67D00E79107 /* CLNetworkingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNetworkingController.h; sourceTree = "<group>"; };
 		4826E14C19F6B67D00E79107 /* CLNetworkingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNetworkingController.m; sourceTree = "<group>"; };
 		4826E14F19F7383C00E79107 /* CLFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLFeedViewController.h; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				4857D42419F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.h */,
 				4857D42519F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m */,
 				488D975619F1E1C20002B4E8 /* Main.storyboard */,
-				48092D7419F32419009EBC3F /* CLPhotoCaptureOverlayView.xib */,
 				488D975919F1E1C20002B4E8 /* Images.xcassets */,
 				488D975B19F1E1C20002B4E8 /* LaunchScreen.xib */,
 				488D974C19F1E1C20002B4E8 /* Supporting Files */,
@@ -291,7 +288,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48092D7519F32419009EBC3F /* CLPhotoCaptureOverlayView.xib in Resources */,
 				488D975819F1E1C20002B4E8 /* Main.storyboard in Resources */,
 				488D975D19F1E1C20002B4E8 /* LaunchScreen.xib in Resources */,
 				488D975A19F1E1C20002B4E8 /* Images.xcassets in Resources */,

@@ -13,6 +13,7 @@
 
 static NSString *baseURLStringKey = @"BaseURL";
 static NSUInteger defaultRetryCount = 3;
+static NSString *cImagesPath = @"/images";
 
 @interface CLNetworkingController()
 
@@ -113,6 +114,26 @@ static NSUInteger defaultRetryCount = 3;
     }];
 }
 
+-(void)postUserPhoto:(NSString*)name
+               fName:(NSString *)fName
+               image:(UIImage *)image
+           OnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    //AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    NSDictionary *parameters = @{@"name": name, @"filename": fName};
+    NSData *imageData = UIImagePNGRepresentation(image);
+    //NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
+    [self.operationManager POST:@"/photos" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFormData:imageData name:@"photo"];
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+}
+
 -(void)isloggedInOnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
 
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
@@ -210,9 +231,16 @@ static NSUInteger defaultRetryCount = 3;
 }
 
 
+//-(void)setImageOfImageView:(UIImageView *)imageView
+//             withURLString:(NSString *)urlString
+//{
+//    [imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.operationManager.baseURL, urlString]]];
+//}
+
 -(void)setImageOfImageView:(UIImageView *)imageView
-             withURLString:(NSString *)urlString
+             withImageId:(NSString *)imageId
 {
-    [imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.operationManager.baseURL, urlString]]];
+    [imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%@", self.operationManager.baseURL, cImagesPath, imageId]]];
 }
+
 @end

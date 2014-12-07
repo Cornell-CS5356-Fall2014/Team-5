@@ -9,7 +9,8 @@ var mongoose = require('mongoose'),
   config = require('meanio').loadConfig(),
   crypto = require('crypto'),
   nodemailer = require('nodemailer'),
-  templates = require('../template');
+  templates = require('../template'),
+  util = require('util');
 
 /**
  * Auth callback
@@ -120,8 +121,226 @@ exports.user = function(req, res, next, id) {
       if (err) return next(err);
       if (!user) return next(new Error('Failed to load User ' + id));
       req.profile = user;
-      next();
+      console.log('Logging user');
+      console.log(util.inspect(user));
+      if(!user.hasOwnProperty('following')) {
+        user.following = [];
+        user.followers = [];
+        user.save(function(err) {
+          if (err) return next(err);
+          console.log('Just updated user');
+          console.log(util.inspect(user));
+          next();
+        });
+      }
+      else {
+        next();
+      }
     });
+};
+
+function getUser(id, cb) {
+
+  User
+    .findOne({
+      _id: id
+    })
+    .exec(function(err, user) {
+      if (err) return cb(err, null);
+
+      //req.profile = user;
+      //console.log('Logging user');
+      //console.log(util.inspect(user));
+      if(!user.hasOwnProperty('following')) {
+        user.following = [];
+        user.followers = [];
+        user.save(function(err) {
+          if (err) return cb(err, null);
+          console.log('Just updated user');
+          console.log(util.inspect(user));
+          cb(null, user);
+        });
+      }
+      else {
+        cb(null, user);
+      }
+    });
+
+}
+
+exports.allUsers = function(req, res) {
+  User
+    .find()
+    .exec(function(err, allUsers) {
+      if (err) return res.json(500, {
+        err: 'Cannot get the users'
+      });
+
+      if (!allUsers) return res.status(500).send('errors');
+
+      res.json(allUsers);
+    });
+};
+
+/**
+ * Add Following
+ */
+
+exports.addUserToFollowing = function(req, res, next) {
+
+  var userToFollowId = req.body.userId;
+
+  getUser(userToFollowId, function(err, userToFollow) {
+    if (err) 
+      return res.json(500, {
+        err: 'Cannot get the user'
+      });
+
+
+
+    console.log(util.inspect(typeof(req.user.following)));
+
+
+    console.log('looking in following list');
+    var found = false;
+    req.user.following.forEach(function(id){
+      if (id === userToFollowId) found = true;
+    });
+
+    console.log('finished looking in following list');
+
+    if (!found) {
+      req.user.following.push(userToFollow._id);
+      userToFollow.followers.push(req.user._id);
+      console.log('Saving user 1');
+      req.user.save(function(err1) {
+        console.log('Saving user 2');
+        userToFollow.save(function(err2) {
+          if (err1 || err2) 
+            res.json(500, {
+              error: 'Cannot save the user'
+            }).send();
+          else
+            res.status(200).send();
+        });
+      });
+
+    }
+    else
+    {
+      res.status(200).send();
+    }
+  });
+};
+
+
+exports.addUserToFollowing = function(req, res, next) {
+
+  var userToFollowId = req.body.userId;
+
+  getUser(userToFollowId, function(err, userToFollow) {
+    if (err) 
+      return res.json(500, {
+        err: 'Cannot get the user'
+      });
+
+
+
+    console.log(util.inspect(typeof(req.user.following)));
+
+
+    console.log('looking in following list');
+    var found = false;
+    req.user.following.forEach(function(id){
+      if (id === userToFollowId) found = true;
+    });
+
+    console.log('finished looking in following list');
+
+    if (!found) {
+      req.user.following.push(userToFollow._id);
+      userToFollow.followers.push(req.user._id);
+      console.log('Saving user 1');
+      req.user.save(function(err1) {
+        console.log('Saving user 2');
+        userToFollow.save(function(err2) {
+          if (err1 || err2) 
+            res.json(500, {
+              error: 'Cannot save the user'
+            }).send();
+          else
+            res.status(200).send();
+        });
+      });
+
+    }
+    else
+    {
+      res.status(200).send();
+    }
+  });
+};
+
+exports.removeUserFromFollowing = function(req, res, next) {
+
+  var userToFollowId = req.body.userId;
+
+  getUser(userToFollowId, function(err, userToFollow) {
+    if (err) 
+      return res.json(500, {
+        err: 'Cannot get the user'
+      });
+
+
+
+    console.log(util.inspect(typeof(req.user.following)));
+
+
+    console.log('looking in following list');
+    var found = true;
+    // req.user.following.forEach(function(id){
+    //   if (id == userToFollowId) found = true;
+    // });
+
+    console.log('finished looking in following list');
+
+    if (found) {
+      //req.user.following.push(userToFollow._id);
+      //userToFollow.followers.push(req.user._id);
+
+      var followingIndex = req.user.following.indexOf(userToFollow._id);
+      var followersIndex = userToFollow.followers.indexOf(req.user._id);
+
+      if(followingIndex !== -1) req.user.following = req.user.following.slice(0, followingIndex).concat(req.user.following.slice(followingIndex+1));
+      if(followersIndex !== -1) userToFollow.following = userToFollow.following.slice(0, followersIndex).concat(userToFollow.following.slice(followersIndex+1));
+      
+      console.log('Saving user 1');
+      req.user.save(function(err1) {
+        console.log('Saving user 2');
+        userToFollow.save(function(err2) {
+          if (err1 || err2) 
+            res.json(500, {
+              error: 'Cannot save the user'
+            }).send();
+          else
+            res.status(200).send();
+        });
+      });
+
+    }
+    else
+    {
+      res.status(200).send();
+    }
+  });
+};
+
+exports.getFollowing = function(req, res) {
+  res.json(req.user.following);
+};
+
+exports.getFollowers = function(req, res) {
+  res.json(req.user.followers);
 };
 
 /**

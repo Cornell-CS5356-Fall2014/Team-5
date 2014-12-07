@@ -1,3 +1,9 @@
 <section data-ng-controller="IndexController">
-  <h1 mean-token="'home-default'">This is the home view from the development branch</h1>
+  <div ng-if="user">
+    <h2 class="navbar-text">Welcome {{user.name}}</h2>
+    </br></br>
+  </div>
+  <div class="well well-lg" align="center">
+      <img src="system/assets/img/banner.jpg" alt="" class="img-rounded" >
+  </div>
 </section>
