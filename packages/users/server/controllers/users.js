@@ -186,8 +186,6 @@ exports.allUsers = function(req, res) {
  * Add Following
  */
 
-function 
-
 exports.addUserToFollowing = function(req, res, next) {
 
   var userToFollowId = req.body.userId;
