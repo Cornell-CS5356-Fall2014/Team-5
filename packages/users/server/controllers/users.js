@@ -186,6 +186,8 @@ exports.allUsers = function(req, res) {
  * Add Following
  */
 
+function 
+
 exports.addUserToFollowing = function(req, res, next) {
 
   var userToFollowId = req.body.userId;
@@ -199,7 +201,14 @@ exports.addUserToFollowing = function(req, res, next) {
 
 
     console.log(util.inspect(typeof(req.user.following)));
-    if (!req.user.following.contains(userToFollowId)) {
+
+
+    var found = false;
+    req.user.following.forEach(function(id){
+      if (id == userToFollowId) found = true;
+    });
+
+    if (!found) {
       req.user.following.push(userToFollow._id);
       userToFollow.followers.push(req.user._id);
       req.user.save(function(err1) {
