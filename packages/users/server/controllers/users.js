@@ -147,8 +147,6 @@ function getUser(id, cb) {
     .exec(function(err, user) {
       if (err) return cb(err, null);
 
-      var newError = new Error('Failed to load User ' + id);
-      if (!user) return cb(newError, null);
       //req.profile = user;
       //console.log('Logging user');
       //console.log(util.inspect(user));
