@@ -40,6 +40,13 @@ footer {
 footer p {
 	padding: 5px 0 12px 10px
 }
+
+.panel {
+    margin-left: auto;
+    margin-right: auto;
+    alignment: center;
+}
+
 /*.ng-invalid.ng-dirty{*/
     /*border-color:#FA787E;*/
 /*}*/
