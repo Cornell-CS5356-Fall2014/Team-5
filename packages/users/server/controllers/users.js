@@ -175,10 +175,7 @@ exports.allUsers = function(req, res) {
         err: 'Cannot get the users'
       });
 
-      if (!allUsers)
-        return res.json(500, {
-          new Error('Failed to load Users'): 'Cannot get the users'
-        });
+      if (!allUsers) return res.status(500).send('errors');
 
       res.json(allUsers);
     });
