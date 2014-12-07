@@ -219,16 +219,16 @@ exports.addUserToFollowing = function(req, res, next) {
           if (err1 || err2) 
             res.json(500, {
               error: 'Cannot save the user'
-            });
+            }).send();
           else
-            res.status(200);
+            res.status(200).send();
         });
       });
 
     }
     else
     {
-      res.status(200);
+      res.status(200).send();
     }
   });
 };
