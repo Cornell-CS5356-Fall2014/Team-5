@@ -122,7 +122,7 @@ exports.user = function(req, res, next, id) {
       req.profile = user;
       console.log('Logging user');
       console.log(util.inspect(user));
-      if(!user.hasOwnProperty(following)) {
+      if(!user.hasOwnProperty('following')) {
         user.following = []
         user.followers = []
         user.save(function(err) {
@@ -150,7 +150,7 @@ function getUser(id, cb) {
       //req.profile = user;
       //console.log('Logging user');
       //console.log(util.inspect(user));
-      if(!user.hasOwnProperty(following)) {
+      if(!user.hasOwnProperty('following')) {
         user.following = [];
         user.followers = [];
         user.save(function(err) {
@@ -187,7 +187,7 @@ exports.allUsers = function(req, res) {
 
 exports.addUserToFollowing = function(req, res, next) {
 
-  var userToFollowId = req.body.userId
+  var userToFollowId = req.body.userId;
 
   getUser(userToFollowId, function(err, userToFollow) {
     if (err) 
