@@ -185,8 +185,10 @@ exports.allUsers = function(req, res) {
  * Add Following
  */
 
-exports.addUserToFollowing = function(req, res, next, userToFollowId) {
+exports.addUserToFollowing = function(req, res, next) {
 
+  userToFollowId = req.body.userId
+  
   getUser(userToFollowId, function(err, userToFollow) {
     if (err) 
       return res.json(500, {
