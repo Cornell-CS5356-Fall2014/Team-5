@@ -201,6 +201,7 @@ exports.addUserToFollowing = function(req, res, next) {
     console.log(util.inspect(typeof(req.user.following)));
 
 
+    console.log('looking in following list');
     var found = false;
     req.user.following.forEach(function(id){
       if (id == userToFollowId) found = true;
