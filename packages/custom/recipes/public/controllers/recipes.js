@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.recipes').controller('RecipesController', ['$scope', 'Global', 'Recipes', '$http', ['ngSanitize'],
-  function($scope, Global, Recipes, $http) {
+angular.module('mean.recipes').controller('RecipesController', ['$scope', 'Global', 'Recipes', '$http', '$sce',
+  function($scope, Global, Recipes, $http, $sce) {
     $scope.global = Global;
     $scope.package = {
       name: 'recipes'
@@ -17,7 +17,8 @@ angular.module('mean.recipes').controller('RecipesController', ['$scope', 'Globa
             .success(function(data, status, headers, config) {
               if (data.attribution && data.attribution.html) {
                 console.log('Got attribution html ' + data.attribution.html);
-                $scope.yummlyHTML = data.attribution.html;
+                //$scope.yummlyHTML = data.attribution.html;
+                $scope.yummlyHTML = $sce.trustAsHtml(data.attribution.html);
               }
               $scope.recipes = [];
               //var result = angular.fromJson(data);
