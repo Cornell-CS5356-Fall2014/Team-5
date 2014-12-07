@@ -209,7 +209,9 @@ exports.addUserToFollowing = function(req, res, next) {
     if (!found) {
       req.user.following.push(userToFollow._id);
       userToFollow.followers.push(req.user._id);
+      console.log('Saving user 1');
       req.user.save(function(err1) {
+        console.log('Saving user 2');
         userToFollow.save(function(err2) {
           if (err1 || err2) 
             return res.json(500, {
