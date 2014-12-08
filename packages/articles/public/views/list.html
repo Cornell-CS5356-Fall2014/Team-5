@@ -2,14 +2,49 @@
 
   <span ng-if="journals">
     <div class="col-sm-8 blog-main">
-      <div class="blog-post" ng-repeat="oneJournal in journals">
-        <h2 class="blog-post-title">{{oneJournal.title}}</h2>
-        <p class="blog-post-meta">{{oneJournal.createdDate}} by <a href="#">{{oneJournal.user.name}}</a></p>
-        <a class="btn btn-default" href="#" role="button" data-ng-href="#!/journal/{{journal._id}}">Read »</a>
-        <hr>
+      <div class="blog-post" ng-repeat="journal in journals">
+        <h2 class="blog-post-title">{{journal.title}}</h2>
+        <p class="blog-post-meta">{{journal.createdDate}} by <a href="#">{{journal.user.name}}</a></p>
+        <!--<a class="btn btn-default" href="#" role="button" data-ng-href="#!/journal/{{journal._id}}">Read »</a>-->
+        <!--<hr>-->
+        </br>
+
+        <div class="well well-sm">
+          <div class="thumbnail">
+            <!--<div ng-if="journal.recipe && journal.recipe.displayImage" class="ng-scope">-->
+              <!--<img src="{{journal.recipe.displayImage}}" alt="...">-->
+            <!--</div>&lt;!&ndash; end ngIf: recipe.displayImage &ndash;&gt;-->
+            <!-- ngIf: !recipe.displayImage -->
+            <div class="caption">
+              <h3 class="ng-binding">{{journal.recipe.name}}</h3>
+              <p>...</p>
+              <p>
+                <a href="/#!/recipes/{{journal.recipe.id}}" class="btn btn-default" role="button">View</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <span ng-if="journal.photoList">
+          <div class="row">
+            <div class="col-xs-6 col-md-3" ng-repeat="photo in journal.photos">
+              <a href="/images/{{photo.original}}" class="thumbnail">
+                <img src="/images/{{photo.thumbnail}}" alt="{{photo.caption}}">
+              </a>
+            </div>
+            {{photo.thumbnail}}
+          </div>
+        </span>
+
+        <p>
+          {{journal.detailText}}
+        </p>
+
       </div>
     </div>
   </span>
+
+  <hr>
 
   <span ng-if="!journals">
     <div class="alert alert-warning alert-dismissible" role="alert">
