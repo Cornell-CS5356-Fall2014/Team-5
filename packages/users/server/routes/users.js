@@ -35,6 +35,14 @@ module.exports = function(MeanUser, app, auth, database, passport) {
   app.route('/users')
     .get(auth.requiresLogin, users.allUsers);
 
+  app.route('/users/:otherUserId')
+      .get(auth.requiresLogin, users.oneUser);
+
+  app.param('otherUserId', function (req, res, next, otherUserId) {
+    console.log('Setting otherUserId to ' + otherUserId);
+    next();
+  });
+
   // Setting up the users api
   app.route('/register')
     .post(users.create);
@@ -93,53 +101,5 @@ module.exports = function(MeanUser, app, auth, database, passport) {
       res.status(200).send({});
     }
   );
-  // Setting the github oauth routes
-  app.route('/auth/github')
-    .get(passport.authenticate('github', {
-      failureRedirect: '#!/login'
-    }), users.signin);
-
-  app.route('/auth/github/callback')
-    .get(passport.authenticate('github', {
-      failureRedirect: '#!/login'
-    }), users.authCallback);
-
-  // Setting the twitter oauth routes
-  app.route('/auth/twitter')
-    .get(passport.authenticate('twitter', {
-      failureRedirect: '#!/login'
-    }), users.signin);
-
-  app.route('/auth/twitter/callback')
-    .get(passport.authenticate('twitter', {
-      failureRedirect: '#!/login'
-    }), users.authCallback);
-
-  // Setting the google oauth routes
-  app.route('/auth/google')
-    .get(passport.authenticate('google', {
-      failureRedirect: '#!/login',
-      scope: [
-        'https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/userinfo.email'
-      ]
-    }), users.signin);
-
-  app.route('/auth/google/callback')
-    .get(passport.authenticate('google', {
-      failureRedirect: '#!/login'
-    }), users.authCallback);
-
-  // Setting the linkedin oauth routes
-  app.route('/auth/linkedin')
-    .get(passport.authenticate('linkedin', {
-      failureRedirect: '#!/login',
-      scope: ['r_emailaddress']
-    }), users.signin);
-
-  app.route('/auth/linkedin/callback')
-    .get(passport.authenticate('linkedin', {
-      failureRedirect: '#!/login'
-    }), users.authCallback);
 
 };

@@ -11,8 +11,11 @@ angular.module('mean.photos').controller('PhotosController', ['$scope', '$http',
     $http.get('/photos/').success(function(photoData) {
       $scope.photos = photoData;
       photoData.forEach(function(photo) {
-        if (photo.thumbnail) photo.preview = photo.thumbnail;
-        else photo.preview = photo.original;
+        if (photo.thumbnail) {
+          photo.preview = photo.thumbnail;
+        } else {
+          photo.preview = photo.original;
+        }
       });
     });
 

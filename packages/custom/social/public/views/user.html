@@ -1,0 +1,66 @@
+<section data-ng-controller="SocialController" data-ng-init="findOtherUser()">
+    <!--<h1 ng-if="otherUser.name">{{otherUser.name}} Profile</h1>-->
+    <span ng-if="otherUser.name">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h2>Users {{otherUser.name}} follows</h2></div>
+            <div class="panel-body">
+                <!--<p>...</p>-->
+            </div>
+
+            <!-- Followers Table -->
+            <span ng-if="followers">
+                <table class="table">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                    <tr ng-repeat="follower in followers">
+                        <td>{{$index + 1}}</td>
+                        <td>{{follower.name}}</td>
+                        <td>{{follower.email}}</td>
+                    </tr>
+                </table>
+            </span>
+            <span ng-if="!followers">
+                <div class="well well-sm">
+                    No Followers
+                    <!--<div class="alert alert-info" role="alert"></div>-->
+                </div>
+            </span>
+        </div>
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h2>Users following {{otherUser.name}}</h2></div>
+            <div class="panel-body">
+                <!--<p>...</p>-->
+            </div>
+
+            <!-- Followers Table -->
+            <span ng-if="following">
+                <table class="table">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                    <tr ng-repeat="follower in following">
+                        <td>{{$index + 1}}</td>
+                        <td>{{follower.name}}</td>
+                        <td>{{follower.email}}</td>
+                    </tr>
+                </table>
+            </span>
+            <span ng-if="!following">
+                <div class="well well-sm">
+                    No following
+                    <!--<div class="alert alert-info" role="alert"></div>-->
+                </div>
+            </span>
+        </div>
+
+    </span>
+    <h1 ng-if="!otherUser.name">Cannot find user {{otherUserId}}</h1>
+</section>
