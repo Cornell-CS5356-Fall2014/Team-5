@@ -1,13 +1,15 @@
 'use strict';
 
-angular.module('mean.recipes').controller('RecipesController', ['$scope', 'Global', 'Recipes', '$http', '$sce',
-  function($scope, Global, Recipes, $http, $sce) {
+angular.module('mean.recipes').controller('RecipesController', ['$scope', 'Global', 'Recipes', '$http', '$sce', '$stateParams',
+  function($scope, Global, Recipes, $http, $sce, $stateParams) {
     $scope.global = Global;
     $scope.package = {
       name: 'recipes'
     };
     $scope.recipes = null;
     $scope.yummlyHTML = null;
+    $scope.selectedRecipe = null;
+    $scope.selectedHTML = null;
 
     $scope.submit = function() {
       console.log('Submitted');
@@ -37,8 +39,36 @@ angular.module('mean.recipes').controller('RecipesController', ['$scope', 'Globa
       }
     };
 
+    $scope.findOne = function() {
+      console.log('Trying get Yummly recipeId ' + $stateParams.recipeId);
+      $http.get('/recipes/' + $stateParams.recipeId)
+          .success(function(oneRecipe) {
+            console.log('Got recipe ' + oneRecipe.id);
+            oneRecipe.displayImage = getImage(oneRecipe);
+            if (oneRecipe.displayImage) console.log(oneRecipe.displayImage);
+            $scope.selectedRecipe = oneRecipe;
+            $scope.selectedHTML =  $sce.trustAsHtml(oneRecipe.attribution.html);
+          });
+    };
+
     var getImage = function(recipe) {
-      if (recipe.imageUrlsBySize && recipe.imageUrlsBySize[90]) {
+      var tmp;
+      if (recipe.images) {
+        tmp = recipe.images.pop();
+
+        if (tmp.hostedLargeUrl) {
+          return tmp.hostedLargeUrl;
+        } else if (tmp.hostedMediumUrl) {
+          return tmp.hostedMediumUrl;
+        } else if (tmp.hostedSmallUrl) {
+          return tmp.hostedSmallUrl;
+        } else if (tmp.imageUrlsBySize && tmp.imageUrlsBySize[360]) {
+          return tmp.imageUrlsBySize[360];
+        } else if (tmp.imageUrlsBySize && tmp.imageUrlsBySize[90]) {
+          return tmp.imageUrlsBySize[90];
+        }
+
+      } else if (recipe.imageUrlsBySize && recipe.imageUrlsBySize[90]) {
         return recipe.imageUrlsBySize[90];
       } else if (recipe.smallImageUrls) {
         return recipe.smallImageUrls.pop();
