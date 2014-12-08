@@ -43,4 +43,17 @@
 -(void)setImageOfImageView:(UIImageView *)imageView
                withImageId:(NSString *)imageId;
 
+-(void)getPhotos:(NSArray *)photoIds
+       onSuccess:(void (^)(id responseObject))success
+
+         failure:(void (^)())failure;
+
+-(void)postNewJournalEntry:(NSDictionary *)journalEntryDictionary
+                 onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+-(void)searchForRecipe:(NSString *)searchString
+             onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end

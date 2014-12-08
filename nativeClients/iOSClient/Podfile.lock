@@ -2,43 +2,98 @@ PODS:
   - AFNetworkActivityLogger (2.0.3):
     - AFNetworking/NSURLConnection (~> 2.0)
     - AFNetworking/NSURLSession (~> 2.0)
-  - AFNetworking (2.4.1):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
+  - AFNetworking (2.5.0):
+    - AFNetworking/NSURLConnection (= 2.5.0)
+    - AFNetworking/NSURLSession (= 2.5.0)
+    - AFNetworking/Reachability (= 2.5.0)
+    - AFNetworking/Security (= 2.5.0)
+    - AFNetworking/Serialization (= 2.5.0)
+    - AFNetworking/UIKit (= 2.5.0)
+  - AFNetworking/NSURLConnection (2.5.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-    - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.4.1):
+  - AFNetworking/NSURLSession (2.5.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.4.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.4.1)
-  - AFNetworking/Security (2.4.1)
-  - AFNetworking/Serialization (2.4.1)
-  - AFNetworking/UIKit (2.4.1):
+  - AFNetworking/Reachability (2.5.0)
+  - AFNetworking/Security (2.5.0)
+  - AFNetworking/Serialization (2.5.0)
+  - AFNetworking/UIKit (2.5.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Bolts (1.1.3)
   - CHTCollectionViewWaterfallLayout (0.8)
-  - Facebook-iOS-SDK (3.19.0):
+  - Facebook-iOS-SDK (3.21.1):
     - Bolts (~> 1.0)
+  - iCarousel (1.8.1)
+  - JVFloatLabeledTextField (1.0.0)
+  - OMGHTTPURLRQ (2.1):
+    - OMGHTTPURLRQ/RQ (= 2.1)
+  - OMGHTTPURLRQ/FormURLEncode (2.1)
+  - OMGHTTPURLRQ/RQ (2.1):
+    - OMGHTTPURLRQ/FormURLEncode
+    - OMGHTTPURLRQ/UserAgent
+  - OMGHTTPURLRQ/UserAgent (2.1)
+  - PromiseKit (1.2):
+    - PromiseKit/CALayer (= 1.2)
+    - PromiseKit/NSNotificationCenter (= 1.2)
+    - PromiseKit/NSURLConnection (= 1.2)
+    - PromiseKit/Pause (= 1.2)
+    - PromiseKit/UIActionSheet (= 1.2)
+    - PromiseKit/UIAlertView (= 1.2)
+    - PromiseKit/UIView (= 1.2)
+    - PromiseKit/UIViewController (= 1.2)
+    - PromiseKit/Until (= 1.2)
+    - PromiseKit/When (= 1.2)
+  - PromiseKit-AFNetworking (0.1.5):
+    - AFNetworking (~> 2.0)
+    - PromiseKit/Promise
+  - PromiseKit/CALayer (1.2):
+    - PromiseKit/Promise
+  - PromiseKit/NSNotificationCenter (1.2):
+    - PromiseKit/Promise
+  - PromiseKit/NSURLConnection (1.2):
+    - OMGHTTPURLRQ
+    - PromiseKit/Promise
+  - PromiseKit/Pause (1.2):
+    - PromiseKit/Promise
+  - PromiseKit/Promise (1.2)
+  - PromiseKit/UIActionSheet (1.2):
+    - PromiseKit/Promise
+  - PromiseKit/UIAlertView (1.2):
+    - PromiseKit/Promise
+  - PromiseKit/UIView (1.2):
+    - PromiseKit/Promise
+  - PromiseKit/UIViewController (1.2):
+    - PromiseKit/Promise
+  - PromiseKit/Until (1.2):
+    - PromiseKit/Promise
+    - PromiseKit/When
+  - PromiseKit/When (1.2):
+    - PromiseKit/Promise
 
 DEPENDENCIES:
   - AFNetworkActivityLogger (~> 2.0)
   - AFNetworking (~> 2.0)
   - CHTCollectionViewWaterfallLayout
   - Facebook-iOS-SDK (~> 3.0)
+  - iCarousel (~> 1.8)
+  - JVFloatLabeledTextField (~> 1.0)
+  - PromiseKit
+  - PromiseKit-AFNetworking
 
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: d6a2d2755fada3a1fbf1f490ec0dd92224e092a4
-  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
   Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
   CHTCollectionViewWaterfallLayout: 14b7950cbe45ae9297e7759148d69b022bac047d
-  Facebook-iOS-SDK: cb7d74759d0b1ba546e6e6f1dde407b0d4e448d6
+  Facebook-iOS-SDK: 18c26e86ab25c17854a2ee2a8f60562099c6600f
+  iCarousel: 5acab560f10dc13da2440c89f35a0ad278b5147d
+  JVFloatLabeledTextField: c2b8124e439cf2b05fe5bb38f44358743588c1bd
+  OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5
+  PromiseKit: 89cb68ff4093e71221a63ca7272d427bf34c4560
+  PromiseKit-AFNetworking: 16db750b394dcd12aa8527eb1bb9f209a36a49f7
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.35.0

@@ -23,6 +23,11 @@
 		488D975A19F1E1C20002B4E8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 488D975919F1E1C20002B4E8 /* Images.xcassets */; };
 		488D975D19F1E1C20002B4E8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488D975B19F1E1C20002B4E8 /* LaunchScreen.xib */; };
 		488D976919F1E1C20002B4E8 /* CookaliciousTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 488D976819F1E1C20002B4E8 /* CookaliciousTests.m */; };
+		48B836521A3513E90075DA3A /* CLNewJournalEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B836511A3513E90075DA3A /* CLNewJournalEntryViewController.m */; };
+		48B836551A35145E0075DA3A /* CLJournalEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B836541A35145E0075DA3A /* CLJournalEntryModel.m */; };
+		48B836581A3529BC0075DA3A /* CLRecipeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B836571A3529BC0075DA3A /* CLRecipeModel.m */; };
+		48B8365C1A353A710075DA3A /* CLRecipeSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B8365B1A353A710075DA3A /* CLRecipeSearchViewController.m */; };
+		48B8365F1A35468C0075DA3A /* CLSearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B8365E1A35468C0075DA3A /* CLSearchResultsTableViewController.m */; };
 		B04AA200C4C74FB5893190D3 /* libPods-CookaliciousTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33320F88E40640A683F529F8 /* libPods-CookaliciousTests.a */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D1643B49C19F9E0043AFB17 /* Pods-CookaliciousTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookaliciousTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CookaliciousTests/Pods-CookaliciousTests.release.xcconfig"; sourceTree = "<group>"; };
 		33320F88E40640A683F529F8 /* libPods-CookaliciousTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CookaliciousTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4D2E68710A4A60AD754915 /* libPods-Cookalicious.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cookalicious.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48092D7119F32005009EBC3F /* CLPhotoCaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhotoCaptureViewController.h; sourceTree = "<group>"; };
@@ -68,8 +74,19 @@
 		488D976219F1E1C20002B4E8 /* CookaliciousTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookaliciousTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		488D976719F1E1C20002B4E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		488D976819F1E1C20002B4E8 /* CookaliciousTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CookaliciousTests.m; sourceTree = "<group>"; };
-		5AD7E86585264E178A3AA36B /* Pods-CookaliciousTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookaliciousTests.xcconfig"; path = "Pods/Pods-CookaliciousTests.xcconfig"; sourceTree = "<group>"; };
-		F3C2B2A345354D07AEDEC9BA /* Pods-Cookalicious.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cookalicious.xcconfig"; path = "Pods/Pods-Cookalicious.xcconfig"; sourceTree = "<group>"; };
+		48B836501A3513E90075DA3A /* CLNewJournalEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNewJournalEntryViewController.h; sourceTree = "<group>"; };
+		48B836511A3513E90075DA3A /* CLNewJournalEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNewJournalEntryViewController.m; sourceTree = "<group>"; };
+		48B836531A35145E0075DA3A /* CLJournalEntryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJournalEntryModel.h; sourceTree = "<group>"; };
+		48B836541A35145E0075DA3A /* CLJournalEntryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJournalEntryModel.m; sourceTree = "<group>"; };
+		48B836561A3529BC0075DA3A /* CLRecipeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLRecipeModel.h; sourceTree = "<group>"; };
+		48B836571A3529BC0075DA3A /* CLRecipeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLRecipeModel.m; sourceTree = "<group>"; };
+		48B8365A1A353A710075DA3A /* CLRecipeSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLRecipeSearchViewController.h; sourceTree = "<group>"; };
+		48B8365B1A353A710075DA3A /* CLRecipeSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLRecipeSearchViewController.m; sourceTree = "<group>"; };
+		48B8365D1A35468C0075DA3A /* CLSearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSearchResultsTableViewController.h; sourceTree = "<group>"; };
+		48B8365E1A35468C0075DA3A /* CLSearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSearchResultsTableViewController.m; sourceTree = "<group>"; };
+		5B03D8EA2F8F3C618E2B030B /* Pods-Cookalicious.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cookalicious.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cookalicious/Pods-Cookalicious.debug.xcconfig"; sourceTree = "<group>"; };
+		D40F5467123A76E33A2D6B70 /* Pods-Cookalicious.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cookalicious.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cookalicious/Pods-Cookalicious.release.xcconfig"; sourceTree = "<group>"; };
+		E4FF9DE71B7C877587686AA2 /* Pods-CookaliciousTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookaliciousTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CookaliciousTests/Pods-CookaliciousTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +123,10 @@
 			children = (
 				4857D41E19F87F590004C5A0 /* CLPhotoModel.h */,
 				4857D41F19F87F590004C5A0 /* CLPhotoModel.m */,
+				48B836531A35145E0075DA3A /* CLJournalEntryModel.h */,
+				48B836541A35145E0075DA3A /* CLJournalEntryModel.m */,
+				48B836561A3529BC0075DA3A /* CLRecipeModel.h */,
+				48B836571A3529BC0075DA3A /* CLRecipeModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -127,9 +148,8 @@
 				488D974B19F1E1C20002B4E8 /* Cookalicious */,
 				488D976519F1E1C20002B4E8 /* CookaliciousTests */,
 				488D974A19F1E1C20002B4E8 /* Products */,
-				F3C2B2A345354D07AEDEC9BA /* Pods-Cookalicious.xcconfig */,
 				8EFC9A56ED404197ACAD237C /* Frameworks */,
-				5AD7E86585264E178A3AA36B /* Pods-CookaliciousTests.xcconfig */,
+				E7F0435E860C0F7C74A5FB27 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,15 +169,10 @@
 				488D975119F1E1C20002B4E8 /* AppDelegate.m */,
 				4866475D19F6114900DC63A1 /* Launch */,
 				4826E14E19F6B68800E79107 /* Controllers */,
-				4826E14F19F7383C00E79107 /* CLFeedViewController.h */,
 				4857D41D19F87F410004C5A0 /* Models */,
-				4826E15019F7383C00E79107 /* CLFeedViewController.m */,
-				4857D41A19F8748A0004C5A0 /* CLFeedCollectionViewController.h */,
-				4857D41B19F8748A0004C5A0 /* CLFeedCollectionViewController.m */,
+				48B836591A3533B40075DA3A /* View Controllers */,
 				4826E15219F73A1A00E79107 /* CLNavigationController.h */,
 				4826E15319F73A1A00E79107 /* CLNavigationController.m */,
-				48092D7119F32005009EBC3F /* CLPhotoCaptureViewController.h */,
-				48092D7219F32005009EBC3F /* CLPhotoCaptureViewController.m */,
 				4857D42419F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.h */,
 				4857D42519F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m */,
 				488D975619F1E1C20002B4E8 /* Main.storyboard */,
@@ -194,6 +209,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		48B836591A3533B40075DA3A /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				48B8365A1A353A710075DA3A /* CLRecipeSearchViewController.h */,
+				48B8365B1A353A710075DA3A /* CLRecipeSearchViewController.m */,
+				48B836501A3513E90075DA3A /* CLNewJournalEntryViewController.h */,
+				48B836511A3513E90075DA3A /* CLNewJournalEntryViewController.m */,
+				4857D41A19F8748A0004C5A0 /* CLFeedCollectionViewController.h */,
+				4857D41B19F8748A0004C5A0 /* CLFeedCollectionViewController.m */,
+				4826E15019F7383C00E79107 /* CLFeedViewController.m */,
+				4826E14F19F7383C00E79107 /* CLFeedViewController.h */,
+				48092D7119F32005009EBC3F /* CLPhotoCaptureViewController.h */,
+				48092D7219F32005009EBC3F /* CLPhotoCaptureViewController.m */,
+				48B8365D1A35468C0075DA3A /* CLSearchResultsTableViewController.h */,
+				48B8365E1A35468C0075DA3A /* CLSearchResultsTableViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 		8EFC9A56ED404197ACAD237C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +235,17 @@
 				33320F88E40640A683F529F8 /* libPods-CookaliciousTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E7F0435E860C0F7C74A5FB27 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5B03D8EA2F8F3C618E2B030B /* Pods-Cookalicious.debug.xcconfig */,
+				D40F5467123A76E33A2D6B70 /* Pods-Cookalicious.release.xcconfig */,
+				E4FF9DE71B7C877587686AA2 /* Pods-CookaliciousTests.debug.xcconfig */,
+				1D1643B49C19F9E0043AFB17 /* Pods-CookaliciousTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,7 +361,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-CookaliciousTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CookaliciousTests/Pods-CookaliciousTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5B23ACABA40E4D839B01E98D /* Check Pods Manifest.lock */ = {
@@ -361,7 +406,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-Cookalicious-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cookalicious/Pods-Cookalicious-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -371,6 +416,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48B8365C1A353A710075DA3A /* CLRecipeSearchViewController.m in Sources */,
+				48B836581A3529BC0075DA3A /* CLRecipeModel.m in Sources */,
+				48B836551A35145E0075DA3A /* CLJournalEntryModel.m in Sources */,
 				4826E15119F7383C00E79107 /* CLFeedViewController.m in Sources */,
 				4826E14D19F6B67D00E79107 /* CLNetworkingController.m in Sources */,
 				48092D7319F32005009EBC3F /* CLPhotoCaptureViewController.m in Sources */,
@@ -378,8 +426,10 @@
 				4866475919F6108F00DC63A1 /* CLLoadingScreenViewController.m in Sources */,
 				4857D42019F87F590004C5A0 /* CLPhotoModel.m in Sources */,
 				488D974F19F1E1C20002B4E8 /* main.m in Sources */,
+				48B836521A3513E90075DA3A /* CLNewJournalEntryViewController.m in Sources */,
 				4857D42619F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m in Sources */,
 				4826E15419F73A1A00E79107 /* CLNavigationController.m in Sources */,
+				48B8365F1A35468C0075DA3A /* CLSearchResultsTableViewController.m in Sources */,
 				4866475C19F6113F00DC63A1 /* CLLogInViewController.m in Sources */,
 				4857D41C19F8748A0004C5A0 /* CLFeedCollectionViewController.m in Sources */,
 			);
@@ -503,7 +553,7 @@
 		};
 		488D976D19F1E1C20002B4E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3C2B2A345354D07AEDEC9BA /* Pods-Cookalicious.xcconfig */;
+			baseConfigurationReference = 5B03D8EA2F8F3C618E2B030B /* Pods-Cookalicious.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -515,7 +565,7 @@
 		};
 		488D976E19F1E1C20002B4E8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3C2B2A345354D07AEDEC9BA /* Pods-Cookalicious.xcconfig */;
+			baseConfigurationReference = D40F5467123A76E33A2D6B70 /* Pods-Cookalicious.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -527,7 +577,7 @@
 		};
 		488D977019F1E1C20002B4E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5AD7E86585264E178A3AA36B /* Pods-CookaliciousTests.xcconfig */;
+			baseConfigurationReference = E4FF9DE71B7C877587686AA2 /* Pods-CookaliciousTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -547,7 +597,7 @@
 		};
 		488D977119F1E1C20002B4E8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5AD7E86585264E178A3AA36B /* Pods-CookaliciousTests.xcconfig */;
+			baseConfigurationReference = 1D1643B49C19F9E0043AFB17 /* Pods-CookaliciousTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

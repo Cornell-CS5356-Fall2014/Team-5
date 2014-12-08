@@ -8,6 +8,11 @@ pod 'AFNetworking', '~> 2.0'
 pod 'AFNetworkActivityLogger', '~> 2.0'
 pod 'CHTCollectionViewWaterfallLayout'
 pod 'Facebook-iOS-SDK', '~> 3.0'
+pod 'iCarousel', '~> 1.8'
+pod 'JVFloatLabeledTextField', '~> 1.0'
+pod 'PromiseKit'
+pod 'PromiseKit-AFNetworking'
+
 
 end
 
@@ -17,6 +22,10 @@ pod 'AFNetworking', '~> 2.0'
 pod 'AFNetworkActivityLogger', '~> 2.0'
 pod 'CHTCollectionViewWaterfallLayout'
 pod 'Facebook-iOS-SDK', '~> 3.0'
+pod 'iCarousel', '~> 1.8'
+pod 'JVFloatLabeledTextField', '~> 1.0'
+pod 'PromiseKit'
+pod 'PromiseKit-AFNetworking'
 
 end
 
