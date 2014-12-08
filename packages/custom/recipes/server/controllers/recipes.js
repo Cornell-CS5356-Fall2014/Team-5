@@ -46,7 +46,7 @@ var handleYummlyAPIResponse = function(res, yummlyInMessage) {
         responseData.push(chunk);
     });
     yummlyInMessage.on('end', function() {
-        res.json(responseData.join());
+        res.send(responseData.join());
     });
     yummlyInMessage.on('error', function(err) {
         console.log('Got error: ' + err.message);
