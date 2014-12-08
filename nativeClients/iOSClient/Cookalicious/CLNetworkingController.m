@@ -425,4 +425,37 @@ static NSString *cImagesPath = @"/images";
     }];
 }
 
+-(void)getJournalEntriesOnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    [self.operationManager GET:@"/journalEntries" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if(success)
+            success(operation, responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if(failure)
+            failure(operation, error);
+        
+    }];
+}
+
+-(void)getUser:(NSString *)userId
+     onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    [self.operationManager GET:[NSString stringWithFormat:@"/users/%@", userId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if(success)
+            success(operation, responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if(failure)
+            failure(operation, error);
+        
+    }];
+}
+
 @end

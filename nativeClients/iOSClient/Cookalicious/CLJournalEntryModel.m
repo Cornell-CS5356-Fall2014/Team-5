@@ -55,6 +55,7 @@
         _userId = [dictionary valueForKeyPath:@"user"];
         _detailText = [dictionary objectForKey:@"detailText"];
         _recipeId = [dictionary valueForKeyPath:@"recipeId"];
+        _title = [dictionary valueForKeyPath:@"title"];
         _commentList = [[NSArray alloc]init];
         _likerList = [[NSArray alloc] initWithArray:[dictionary objectForKey:@"likerList"]];
         _photoList = [[NSArray alloc] initWithArray:[dictionary objectForKey:@"photoList"]];

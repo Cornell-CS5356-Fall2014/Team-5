@@ -14,6 +14,7 @@
 		4826E15419F73A1A00E79107 /* CLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826E15319F73A1A00E79107 /* CLNavigationController.m */; };
 		482FDD1A1A35862100512CE2 /* CLUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 482FDD191A35862100512CE2 /* CLUserModel.m */; };
 		482FDD1D1A35877400512CE2 /* CLSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 482FDD1C1A35877400512CE2 /* CLSettingsTableViewController.m */; };
+		482FDD211A3609C000512CE2 /* CLJournalEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 482FDD201A3609C000512CE2 /* CLJournalEntryView.m */; };
 		4857D41C19F8748A0004C5A0 /* CLFeedCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4857D41B19F8748A0004C5A0 /* CLFeedCollectionViewController.m */; };
 		4857D42019F87F590004C5A0 /* CLPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4857D41F19F87F590004C5A0 /* CLPhotoModel.m */; };
 		4857D42619F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4857D42519F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m */; };
@@ -60,6 +61,8 @@
 		482FDD191A35862100512CE2 /* CLUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUserModel.m; sourceTree = "<group>"; };
 		482FDD1B1A35877400512CE2 /* CLSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSettingsTableViewController.h; sourceTree = "<group>"; };
 		482FDD1C1A35877400512CE2 /* CLSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSettingsTableViewController.m; sourceTree = "<group>"; };
+		482FDD1F1A3609C000512CE2 /* CLJournalEntryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJournalEntryView.h; sourceTree = "<group>"; };
+		482FDD201A3609C000512CE2 /* CLJournalEntryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJournalEntryView.m; sourceTree = "<group>"; };
 		4857D41A19F8748A0004C5A0 /* CLFeedCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLFeedCollectionViewController.h; sourceTree = "<group>"; };
 		4857D41B19F8748A0004C5A0 /* CLFeedCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLFeedCollectionViewController.m; sourceTree = "<group>"; };
 		4857D41E19F87F590004C5A0 /* CLPhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhotoModel.h; sourceTree = "<group>"; };
@@ -127,6 +130,15 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		482FDD1E1A36099800512CE2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				482FDD1F1A3609C000512CE2 /* CLJournalEntryView.h */,
+				482FDD201A3609C000512CE2 /* CLJournalEntryView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		4857D41D19F87F410004C5A0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +191,7 @@
 				488D975019F1E1C20002B4E8 /* AppDelegate.h */,
 				488D975119F1E1C20002B4E8 /* AppDelegate.m */,
 				4866475D19F6114900DC63A1 /* Launch */,
+				482FDD1E1A36099800512CE2 /* Views */,
 				4826E14E19F6B68800E79107 /* Controllers */,
 				4857D41D19F87F410004C5A0 /* Models */,
 				48B836591A3533B40075DA3A /* View Controllers */,
@@ -445,6 +458,7 @@
 				48B836521A3513E90075DA3A /* CLNewJournalEntryViewController.m in Sources */,
 				4857D42619F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m in Sources */,
 				4826E15419F73A1A00E79107 /* CLNavigationController.m in Sources */,
+				482FDD211A3609C000512CE2 /* CLJournalEntryView.m in Sources */,
 				482FDD1D1A35877400512CE2 /* CLSettingsTableViewController.m in Sources */,
 				48B8365F1A35468C0075DA3A /* CLSearchResultsTableViewController.m in Sources */,
 				4866475C19F6113F00DC63A1 /* CLLogInViewController.m in Sources */,
