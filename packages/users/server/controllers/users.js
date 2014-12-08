@@ -153,19 +153,20 @@ function getUser(id, cb) {
       //req.profile = user;
       //console.log('Logging user');
       //console.log(util.inspect(user));
-      if(!user.hasOwnProperty('following')) {
-        user.following = [];
-        user.followers = [];
-        user.save(function(err) {
-          if (err) return cb(err, null);
-          console.log('Just updated user');
-          console.log(util.inspect(user));
-          cb(null, user);
-        });
-      }
-      else {
-        cb(null, user);
-      }
+      // if(!user.hasOwnProperty('following')) {
+      //   user.following = [];
+      //   user.followers = [];
+      //   user.save(function(err) {
+      //     if (err) return cb(err, null);
+      //     console.log('Just updated user');
+      //     console.log(util.inspect(user));
+      //     cb(null, user);
+      //   });
+      // }
+      // else {
+      //   cb(null, user);
+      // }
+      return cb(null, user);
     });
 
 }
