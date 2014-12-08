@@ -8,8 +8,8 @@ var mongoose = require('mongoose'),
   //Comment = mongoose.model('Comment'),
   //User = mongoose.model('User'),
   //Photo = mongoose.model('Photo'),
-  util = require('util');//,
-  //Promise = require('promise'),
+  util = require('util'),
+  PromiseJS = require('promise');
   //Set = require('set');
 
 
@@ -41,7 +41,7 @@ function getEntries(req, res, userDicts) {
 
     //var journalEntriesTransforms = []
     var promises = journalEntries.map(function(journalEntry) {
-      return new Promise(function(resolve, reject) {
+      return new PromiseJS(function(resolve, reject) {
 
         journalEntryForPublicJSON(journalEntry, function(err, journalEntryJSON) {
           if (err) reject(err);
@@ -53,7 +53,7 @@ function getEntries(req, res, userDicts) {
       });
     });
 
-    Promise.all(promises).then(function(journalEntriesTransforms) {
+    PromiseJS.all(promises).then(function(journalEntriesTransforms) {
       // console.log('All Promise was successful!!');
       // console.log(util.inspect(journalEntriesTransforms));
       res.status(200).send(journalEntriesTransforms);

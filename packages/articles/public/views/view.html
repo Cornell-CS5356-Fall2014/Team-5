@@ -1,14 +1,30 @@
 <section data-ng-controller="ArticlesController" data-ng-init="findOne()">
-  <span>{{article.created | date:'medium'}}</span> /
-  <span>{{article.user.name}}</span>
-  <h2>{{article.title}}</h2>
-  <div data-ng-if="hasAuthorization(article)">
-    <a class="btn" href="/#!/articles/{{article._id}}/edit">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn" data-ng-click="remove(article);">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
+  <div class="blog-post">
+    <h2 class="blog-post-title">{{oneJournal.title}}</h2>
+    <p class="blog-post-meta">{{oneJournal.createdDate}} <a href="#">{{oneJournal.user.name}}</a></p>
+
+    <hr>
+
+    <div class="well well-sm">
+      <div class="thumbnail">
+        <div ng-if="oneJournal.recipe && oneJournal.recipe.displayImage" class="ng-scope">
+        <img src="{{oneJournal.recipe.displayImage}}" alt="Martha Stewart">
+        </div><!-- end ngIf: recipe.displayImage -->
+        <!-- ngIf: !recipe.displayImage -->
+        <div class="caption">
+          <h3 class="ng-binding">Fried Kale</h3>
+          <p>...</p>
+          <p>
+            <a href="/#!/recipes/Fried-Kale-Martha-Stewart-192970" class="btn btn-default" role="button">View</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <p>{{oneJournal.detailText}}</p>
+    <hr>
+
   </div>
-  <div>{{article.content}}</div>
+
 </section>

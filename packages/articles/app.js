@@ -19,14 +19,14 @@ Articles.register(function(app, auth, database) {
   //We are adding a link to the main menu for all authenticated users
   Articles.menus.add({
     'roles': ['authenticated'],
-    'title': 'Articles',
-    'link': 'all articles'
+    'title': 'Journal Entries',
+    'link': 'all journal entries'
   });
-  Articles.menus.add({
-    'roles': ['authenticated'],
-    'title': 'Create New Article',
-    'link': 'create article'
-  });
+  //Articles.menus.add({
+  //  'roles': ['authenticated'],
+  //  'title': 'Create New Article',
+  //  'link': 'create article'
+  //});
 
   //Articles.aggregateAsset('js','/packages/system/public/services/menus.js', {group:'footer', absolute:true, weight:-9999});
   //Articles.aggregateAsset('js', 'test.js', {group: 'footer', weight: -1});
@@ -49,6 +49,7 @@ Articles.register(function(app, auth, database) {
     });
     */
   Articles.aggregateAsset('css', 'articles.css');
+  Articles.aggregateAsset('css', 'blog.css');
 
   return Articles;
 });
