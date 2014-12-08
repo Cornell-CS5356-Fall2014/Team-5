@@ -2,7 +2,7 @@
 
   <span ng-if="journals">
     <div class="col-sm-8 blog-main">
-      <div class="blog-post" ng-repeat="journal in journals">
+      <div class="blog-post" ng-repeat="journal in journals | orderBy : createdDate : reverse">
         <h2 class="blog-post-title">{{journal.title}}</h2>
         <p class="blog-post-meta">{{journal.createdDate}} by <a href="#">{{journal.user.name}}</a></p>
         <!--<a class="btn btn-default" href="#" role="button" data-ng-href="#!/journal/{{journal._id}}">Read »</a>-->
