@@ -21,7 +21,7 @@
   <ul class="list-group">
     <li class="list-group-item" ng-repeat="user in users | filter:query as results">
       <span class="badge">
-        {{user.followers.length}} followers
+        {{user.followingCount}} followers
       </span>
       <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
       <a href="/#!/users/{{user._id}}">{{user.name}}</a>

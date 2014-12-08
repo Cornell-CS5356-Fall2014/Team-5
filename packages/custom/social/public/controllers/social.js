@@ -20,7 +20,14 @@ angular.module('mean.social').controller('SocialController', ['$scope', '$stateP
       $http.get('/users')
           .success(function(userData) {
             console.log('Got ' + userData.length + ' total users');
-            $scope.users = userData;
+            $scope.users = [];
+            userData.forEach(function(oneUser) {
+              oneUser.followingCount = oneUser.following.length;
+              oneUser.followerCount = oneUser.followers.length;
+              //console.log('User ' + oneUser.username + ' has ' + oneUser.followerCount + ' followers and follows ' + oneUser.followingCount);
+              $scope.users.push(oneUser);
+            });
+            //$scope.users = userData;
           });
     };
 
