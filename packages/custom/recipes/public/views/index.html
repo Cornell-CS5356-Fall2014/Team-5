@@ -19,17 +19,17 @@
       <div class="row">
         <div class="col-sm-6 col-md-4" ng-repeat="recipe in recipes">
           <div class="thumbnail">
-            <div ng-if="recipe.imageUrlsBySize && recipe.imageUrlsBySize[90]">
-              <img src="{{recipe.imageUrlsBySize[90]}}" alt="...">
+            <div ng-if="recipe.displayImage">
+              <img src="{{recipe.imageUrlsBySize[90]}}" alt="{{recipe.sourceDisplayName}}">
             </div>
-            <div ng-if="!recipe.imageUrlsBySize">
-              <img data-src="holder.js/300x300" alt="...">
+            <div ng-if="!recipe.displayImage">
+              <img data-src="holder.js/90x90" alt="No image available">
             </div>
             <div class="caption">
               <h3>{{recipe.recipeName}}</h3>
               <p>...</p>
               <p>
-                <a href="#" class="btn btn-primary" role="button">Save</a>
+                <a href="/#!/recipes/{{recipe.id}}" class="btn btn-default" role="button">View</a>
               </p>
             </div>
           </div>

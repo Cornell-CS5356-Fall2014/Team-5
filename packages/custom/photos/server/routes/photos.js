@@ -22,14 +22,14 @@ module.exports = function(Photos, app, auth, database) {
     .put(auth.requiresLogin, hasAuthorization, photos.update)
     .delete(auth.requiresLogin, hasAuthorization, photos.destroy);
 
-  app.get('/upload/photo', auth.requiresLogin, function(req, res, next) {
-    Photos.render('index', {
-      package: 'photos'
-    }, function(err, html) {
-      //Rendering a view from the Package server/views
-      res.send(html);
-    });
-  });
+  //app.get('/upload/photo', auth.requiresLogin, function(req, res, next) {
+  //  Photos.render('index', {
+  //    package: 'photos'
+  //  }, function(err, html) {
+  //    //Rendering a view from the Package server/views
+  //    res.send(html);
+  //  });
+  //});
 
   // Finish with setting up the photoId param
   app.param('photoId', photos.photo);

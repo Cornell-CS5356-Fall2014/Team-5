@@ -1,0 +1,20 @@
+<div class="" data-ng-controller="PhotosController" >
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form role="form" action="/photos" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="inputFile">Image file</label>
+                    <input type="file" id="inputFile" name="photo">
+                    <p class="help-block">...</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputCaption">Caption</label>
+                    <input type="text" class="form-control" id="inputCaption" placeholder="Enter caption (optional)">
+                </div>
+
+                <button type="submit" class="btn btn-default">Upload</button>
+            </form>
+        </div>
+    </div>
+</div>

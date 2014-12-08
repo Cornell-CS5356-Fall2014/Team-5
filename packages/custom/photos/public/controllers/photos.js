@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.photos').controller('PhotosController', ['$scope', '$http', 'Global', 'Photos',
-  function($scope, $http, Global, Photos) {
+angular.module('mean.photos').controller('PhotosController', ['$scope', '$http', '$location', 'Global', 'Photos',
+  function($scope, $http, $location, Global, Photos) {
     $scope.global = Global;
     $scope.package = {
       name: 'photos'
