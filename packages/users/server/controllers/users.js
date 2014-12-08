@@ -234,6 +234,9 @@ exports.removeUserFromFollowing = function(req, res) {
   var thisUser = req.user;
   var found = true;
 
+  console.log(util.inspect(typeof(userToFollowId)));
+  console.log(util.inspect(userToFollowId));
+
   getUser(userToFollowId, function(err, userToFollow) {
     if (err)
       return res.json(500, {
