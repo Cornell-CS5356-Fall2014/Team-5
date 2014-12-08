@@ -1,7 +1,5 @@
 {
   "name": "social",
   "version": "0.0.1",
-  "dependencies": {
-    "holderjs": "~2.4.1"
-  }
+  "dependencies": {}
 }
