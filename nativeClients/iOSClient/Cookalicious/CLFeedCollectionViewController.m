@@ -13,6 +13,9 @@
 #import "CLPhotoModel.h"
 #import "NSArray+HigherOrderFunctionExtensions.h"
 #import <UIImageView+AFNetworking.h>
+#import "CLJournalEntryModel.h"
+#import "CLJournalEntryView.h"
+#import "CLRecipeViewController.h"
 
 
 @interface CLFeedCollectionViewController () <CHTCollectionViewDelegateWaterfallLayout>
@@ -23,8 +26,12 @@
 @property (strong, nonatomic) NSArray *arrayOfPhotoObjects;
 @property (strong, nonatomic) NSMutableArray *arrayOfImages;
 
+@property (strong, nonatomic) NSArray *journalEntryArray;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
+
+@property (strong, nonatomic) CLRecipeModel *recipeToPass;
 
 
 @end
@@ -55,6 +62,8 @@ static NSString * const reuseIdentifier = @"Cell";
     
     self.waterfallLayout.columnCount = 1;
     
+    self.waterfallLayout.minimumInteritemSpacing = 150;
+    
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
@@ -66,7 +75,65 @@ static NSString * const reuseIdentifier = @"Cell";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self loadPhotos:nil];
+    //[self loadPhotos:nil];
+    [self loadJournalEntries:nil];
+}
+
+-(void)loadJournalEntries:(void (^)(void))completion
+{
+    [[CLNetworkingController sharedController] getJournalEntriesOnSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        if([responseObject isKindOfClass:[NSArray class]])
+        {
+            //            UIImage *placeHolderImage = [UIImage imageNamed:@"TestImage"];
+//            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+//            [(NSArray *)responseObject enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//                
+//                [self.arrayOfImages addObject:placeHolderImage];
+//                [self.imageViewArray addObject:[[UIImageView alloc] initWithImage:placeHolderImage]];
+//                
+//                [tempArray addObject:[[CLPhotoModel alloc] initWithDictionary:(NSDictionary *)obj]];
+//                
+//            }];
+//            self.arrayOfPhotoObjects = [NSArray arrayWithArray:tempArray];
+//            
+//            [self.arrayOfPhotoObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//                
+//                CLPhotoModel *photo = (CLPhotoModel *)obj;
+//                if(![photo.thumbnailImageID isKindOfClass:[NSNull class]] && ![photo.thumbnailImageID isEqualToString:@""])
+//                    [[CLNetworkingController sharedController] setImageOfImageView:[self.imageViewArray objectAtIndex:idx] withImageId:photo.thumbnailImageID];
+//                
+//            }];
+//
+//            [self.collectionView reloadData];
+            
+            NSArray* reversedArray = [[responseObject reverseObjectEnumerator] allObjects];
+            
+            __block NSMutableArray *journalEntryMutableArray = [[NSMutableArray alloc]init];
+            [(NSArray *)reversedArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                
+                CLJournalEntryModel *journalEntry = [[CLJournalEntryModel alloc]initWithDictionary:obj];
+                if(journalEntry.recipeId)
+                    [journalEntryMutableArray addObject:journalEntry];
+                
+            }];
+            
+            self.journalEntryArray = [NSArray arrayWithArray:journalEntryMutableArray];
+            [self.collectionView reloadData];
+
+            
+        }
+        
+        if (completion)
+            completion();
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if (completion)
+            completion();
+        
+    }];
 }
 
 -(void)loadPhotos:(void (^)(void))completion
@@ -152,7 +219,12 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.arrayOfPhotoObjects.count;
+    //return self.arrayOfPhotoObjects.count;
+    return [self.journalEntryArray count];
+//    if ([self.journalEntryArray count] > 0)
+//        return 1;
+//    else
+//        return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -160,19 +232,60 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
+    __block CLJournalEntryModel *journalEntry = [self.journalEntryArray objectAtIndex:indexPath.row];
+    
+    __block CLJournalEntryView *journalEntryView = [[CLJournalEntryView alloc]initWithJournalEntry:journalEntry andFrame:CGRectMake(0.f, 0.f, self.collectionView.bounds.size.width, 468)];
+    
+    journalEntryView.titleLabel.text = journalEntry.title;
+    journalEntryView.detailTextField.text = journalEntry.detailText;
+    //journalEntryView.dateLabel.text = [[CLJournalEntryModel longDateFormatter] stringFromDate:journalEntry.createdDate];
+    
+    journalEntryView.dateLabel.text = [NSDateFormatter localizedStringFromDate:journalEntry.createdDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+    
+    
+    [[CLNetworkingController sharedController] getUser:journalEntry.userId onSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if([responseObject isKindOfClass:[NSDictionary class]] && [responseObject objectForKey:@"username"])
+            journalEntryView.userLabel.text = [responseObject objectForKey:@"username"];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+    if(!journalEntry.recipe)
+        [[CLNetworkingController sharedController] getRecipe:journalEntry.recipeId onSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            journalEntry.recipe = [[CLRecipeModel alloc]initWithDictionary:(NSDictionary *)responseObject];
+            
+            [[CLNetworkingController sharedController] setImageOfImageView:journalEntryView.imageView withURL:journalEntry.recipe.mediumImageURL];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            
+            
+        }];
+    
+    else
+        [[CLNetworkingController sharedController] setImageOfImageView:journalEntryView.imageView withURL:journalEntry.recipe.mediumImageURL];
+    
+    
+    [cell.contentView addSubview:journalEntryView];
+    
+
     // Configure the cell
     //UIImageView *imageView = [[UIImageView alloc] initWithImage:[self.arrayOfImages objectAtIndex:indexPath.row]];
-    UIImageView *imageView = [self.imageViewArray objectAtIndex:indexPath.row];
-    [imageView removeFromSuperview];
-    // Scale with fill for contents when we resize.
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    
-    // Scale the imageview to fit inside the contentView with the image centered:
-    CGRect imageViewFrame = CGRectMake(0.f, 0.f, CGRectGetMaxX(cell.contentView.bounds), CGRectGetMaxY(cell.contentView.bounds));
-    imageView.frame = imageViewFrame;
-    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    imageView.clipsToBounds = YES;
-    [cell.contentView addSubview:imageView];
+//    UIImageView *imageView = [self.imageViewArray objectAtIndex:indexPath.row];
+//    [imageView removeFromSuperview];
+//    // Scale with fill for contents when we resize.
+//    imageView.contentMode = UIViewContentModeScaleAspectFit;
+//    
+//    // Scale the imageview to fit inside the contentView with the image centered:
+//    CGRect imageViewFrame = CGRectMake(0.f, 0.f, CGRectGetMaxX(cell.contentView.bounds), CGRectGetMaxY(cell.contentView.bounds));
+//    imageView.frame = imageViewFrame;
+//    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    imageView.clipsToBounds = YES;
+//    [cell.contentView addSubview:imageView];
     
     
     return cell;
@@ -181,6 +294,32 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
 #pragma mark <UICollectionViewDelegate>
+
+- (void)collectionView:(UICollectionView *)collectionView
+didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CLJournalEntryModel *journalEntry = [self.journalEntryArray objectAtIndex:indexPath.row];
+    if(journalEntry.recipe)
+    {
+        self.recipeToPass = journalEntry.recipe;
+        [self performSegueWithIdentifier:@"Show Recipe" sender:nil];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    //     Get the new view controller using [segue destinationViewController].
+    //     Pass the selected object to the new view controller.
+    
+    if ([[segue destinationViewController] isKindOfClass:[CLRecipeViewController class]])
+    {
+        CLRecipeViewController *recipeViewController = (CLRecipeViewController *)[segue destinationViewController];
+        
+        recipeViewController.recipe = self.recipeToPass;
+        recipeViewController.backOnly = YES;
+        //recipeViewController.delegate = self;
+    }
+}
+
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {

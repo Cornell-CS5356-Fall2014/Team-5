@@ -19,7 +19,7 @@
 	<key>FacebookDisplayName</key>
 	<string>Cookem Cookalicious</string>
 	<key>BaseURL</key>
-	<string>https://dry-beach-2224-dev-james.herokuapp.com</string>
+	<string>https://dry-beach-2224-staging.herokuapp.com</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

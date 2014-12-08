@@ -101,6 +101,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="waterfallLayout" destination="lgN-4d-q9O" id="Lst-WB-1wi"/>
+                        <segue destination="fRq-nx-Csc" kind="show" identifier="Show Recipe" id="Thb-g3-uQe"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EJR-21-Qvt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -395,7 +396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1yU-ZO-vk9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1715.5" y="904.5"/>
+            <point key="canvasLocation" x="1663.5" y="1912.5"/>
         </scene>
         <!--Following-->
         <scene sceneID="92g-sn-yQA">
@@ -507,10 +508,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="euW-CT-xjZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="646.5" y="1757.5"/>
+            <point key="canvasLocation" x="1118.5" y="1689.5"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="Thb-g3-uQe"/>
         <segue reference="L60-kZ-0C1"/>
     </inferredMetricsTieBreakers>
 </document>
