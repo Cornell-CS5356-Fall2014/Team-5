@@ -26,9 +26,7 @@ angular.module('mean.recipes').controller('RecipesController', ['$scope', 'Globa
               console.log(result);
               if (result.matches) {
                 result.matches.forEach(function(one) {
-                  if (one.imageUrlsBySize && one.imageUrlsBySize[90]) {
-                    console.log('Image ' + one.imageUrlsBySize[90]);
-                  }
+                  one.displayImage = getImage(one);
                   $scope.recipes.push(one);
                 });
               }
@@ -37,6 +35,15 @@ angular.module('mean.recipes').controller('RecipesController', ['$scope', 'Globa
               //
             });
       }
+    };
+
+    var getImage = function(recipe) {
+      if (recipe.imageUrlsBySize && recipe.imageUrlsBySize[90]) {
+        return recipe.imageUrlsBySize[90];
+      } else if (recipe.smallImageUrls) {
+        return recipe.smallImageUrls.pop();
+      }
+      return null;
     };
   }
 ]);
