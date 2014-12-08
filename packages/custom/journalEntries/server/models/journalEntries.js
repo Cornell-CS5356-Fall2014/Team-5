@@ -38,8 +38,7 @@ var mongoose = require('mongoose'),
     type: String,
     required: false,
     trim: true
-  },
-
+  }
 });
 
 /**

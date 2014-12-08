@@ -1,16 +1,16 @@
 <div class="" data-ng-controller="PhotosController">
   <h1>Photo Gallery</h1>
-  </br>
-
-  </br></br>
-
+  </br></br></br>
   <div class="row">
-    <div class="col-xs-6 col-md-3" ng-repeat="photo in photos">
-      <a href="/images/{{photo.original}}" class="thumbnail">
-        <img src="/images/{{photo.preview}}" width="100%" height="100">
-      </a>
+    <div class="col-md-4" ng-repeat="photo in photos" >
+      <span ng-if="photo.preview">
+        <a href="/images/{{photo.original}}" class="thumbnail">
+          <img src="/images/{{photo.preview}}" width="100" height="100%">
+        </a>
+      </span>
     </div>
   </div>
 
+  <a href="#!/upload/photo"><button class="btn btn-primary" type="button">Upload</button></a>
 </div>
 

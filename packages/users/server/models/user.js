@@ -68,10 +68,6 @@ var UserSchema = new Schema({
   resetPasswordToken: String,
   resetPasswordExpires: Date,
   facebook: {},
-  twitter: {},
-  github: {},
-  google: {},
-  linkedin: {},
   following: [Schema.Types.ObjectId],
   followers: [Schema.Types.ObjectId]
 });

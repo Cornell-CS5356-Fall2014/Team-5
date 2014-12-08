@@ -1,21 +1,55 @@
 <section data-ng-controller="ArticlesController" data-ng-init="find()">
-  <ul class="articles unstyled">
-    <li data-ng-repeat="article in articles">
-      <span>{{article.created | date:'medium'}}</span> /
-      <span>{{article.user.name}}</span>
-      <h2>
-        <a data-ng-href="#!/articles/{{article._id}}">{{article.title}}</a>
-        <span data-ng-if="hasAuthorization(article)">
-          <a class="btn" href="/#!/articles/{{article._id}}/edit">
-            <i class="glyphicon glyphicon-edit"></i>
-          </a>
-          <a class="btn" data-ng-click="remove(article);">
-            <i class="glyphicon glyphicon-trash"></i>
-          </a>
+
+  <span ng-if="journals">
+    <div class="col-sm-8 blog-main">
+      <div class="blog-post" ng-repeat="journal in journals | orderBy : createdDate : reverse">
+        <h2 class="blog-post-title">{{journal.title}}</h2>
+        <p class="blog-post-meta">{{journal.createdDate}} by <a href="#">{{journal.user.name}}</a></p>
+        <!--<a class="btn btn-default" href="#" role="button" data-ng-href="#!/journal/{{journal._id}}">Read »</a>-->
+        <!--<hr>-->
+        </br>
+
+        <div class="well well-sm">
+          <div class="thumbnail">
+            <!--<div ng-if="journal.recipe && journal.recipe.displayImage" class="ng-scope">-->
+              <!--<img src="{{journal.recipe.displayImage}}" alt="...">-->
+            <!--</div>&lt;!&ndash; end ngIf: recipe.displayImage &ndash;&gt;-->
+            <!-- ngIf: !recipe.displayImage -->
+            <div class="caption">
+              <h3 class="ng-binding">{{journal.recipe.name}}</h3>
+              <p>...</p>
+              <p>
+                <a href="/#!/recipes/{{journal.recipe.id}}" class="btn btn-default" role="button">View</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <span ng-if="journal.photoList">
+          <div class="row">
+            <div class="col-xs-6 col-md-3" ng-repeat="photo in journal.photos">
+              <a href="/images/{{photo.original}}" class="thumbnail">
+                <img src="/images/{{photo.thumbnail}}" alt="{{photo.caption}}">
+              </a>
+            </div>
+            {{photo.thumbnail}}
+          </div>
         </span>
-      </h2>
-      <div>{{article.content}}</div>
-    </li>
-  </ul>
-  <h1 data-ng-hide="!articles || articles.length">No articles yet. <br> Why don't you <a href="/#!/articles/create">Create One</a>?</h1>
+
+        <p>
+          {{journal.detailText}}
+        </p>
+
+      </div>
+    </div>
+  </span>
+
+  <hr>
+
+  <span ng-if="!journals">
+    <div class="alert alert-warning alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <strong>Hey!</strong> No journal entries yet.
+    </div>
+  </span>
 </section>

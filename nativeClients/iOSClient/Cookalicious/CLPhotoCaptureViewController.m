@@ -96,12 +96,24 @@
     
     [[CLNetworkingController sharedController] postUserPhoto:@"test photo" fName:@"testFileName" image:self.capturedImage OnSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        self.capturedPhoto = [[CLPhotoModel alloc]initWithDictionary:responseObject];
+        
+        if(self.delegate)
+            [self.delegate photoCaptureViewControllerDidAccept:self];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+        [self.navigationController popViewControllerAnimated:YES];
         
     }];
     
+}
+- (IBAction)cancel:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

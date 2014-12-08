@@ -1,0 +1,47 @@
+<div class="" data-ng-controller="RecipesController" data-ng-init="findOne()">
+    <span ng-if="selectedRecipe">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong><h1 class="panel-title">{{selectedRecipe.name}}</h1></strong>
+            </div>
+            <div class="panel-body">
+                <span ng-if="selectedRecipe.displayImage">
+                    <a href="#" class="thumbnail">
+                        <img src="{{selectedRecipe.displayImage}}" alt="...">
+                    </a>
+                </span>
+
+                <!-- Ingredients -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">Ingredients</div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="ingredient in selectedRecipe.ingredientLines">{{ingredient}}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p><strong>Yield:</strong> {{selectedRecipe.yield}}</p>
+                        <p><strong>Total Time:</strong> {{selectedRecipe.yield}}</p>
+                        <p><strong>Servings:</strong> {{selectedRecipe.numberOfServings}}</p>
+                    </div>
+                </div>
+
+                <span ng-if="selectedRecipe.source">
+                <p>Source:
+                    <a href="{{selectedRecipe.source.sourceRecipeUrl}}">{{selectedRecipe.source.sourceDisplayName}}</a>
+                </p>
+                </span>
+
+            </div>
+        </div>
+
+        <div ng-if="selectedHTML">
+            <div class="panel panel-default">
+                <div class="panel-body" ng-bind-html="selectedHTML"></div>
+            </div>
+        </div>
+    </span>
+</div>
