@@ -1,77 +1,78 @@
 'use strict';
 
 angular.module('mean.articles')
-    .controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Global', 'Articles', 'JournalEntries',
-    function($scope, $stateParams, $location, Global, Articles, JournalEntries) {
+    .controller('ArticlesController', ['$scope', '$stateParams', '$location', '$http', 'Global', 'Articles',
+    function($scope, $stateParams, $location, $http, Global, Articles) {
       $scope.global = Global;
+
+      $scope.journals = null;
+      $scope.oneJournal = null;
 
       $scope.hasAuthorization = function(article) {
         if (!article || !article.user) return false;
         return $scope.global.isAdmin || article.user._id === $scope.global.user._id;
       };
 
-      $scope.create = function(isValid) {
-        if (isValid) {
-          var article = new Articles({
-            title: this.title,
-            content: this.content
-          });
-          article.$save(function(response) {
-            $location.path('articles/' + response._id);
-          });
-
-          this.title = '';
-          this.content = '';
-        } else {
-          $scope.submitted = true;
-        }
-      };
-
-      $scope.remove = function(article) {
-        if (article) {
-          article.$remove();
-
-          for (var i in $scope.articles) {
-            if ($scope.articles[i] === article) {
-              $scope.articles.splice(i, 1);
-            }
-          }
-        } else {
-          $scope.article.$remove(function(response) {
-            $location.path('articles');
-          });
-        }
-      };
-
-      $scope.update = function(isValid) {
-        if (isValid) {
-          var article = $scope.article;
-          if (!article.updated) {
-            article.updated = [];
-          }
-          article.updated.push(new Date().getTime());
-
-          article.$update(function() {
-            $location.path('articles/' + article._id);
-          });
-        } else {
-          $scope.submitted = true;
-        }
-      };
-
       $scope.find = function() {
-        Articles.query(function(articles) {
-          $scope.articles = articles;
-        });
+        console.log('Getting all journal entries');
+        $http.get('/journalEntries')
+            .success(function(journals){
+              console.log('Got ' + journals.length + ' total journals');
+              journals.forEach(function(journal) {
+                $http.get('/users/' + journal.user)
+                    .success(function(user) {
+                      console.log('Finished fetching user ' + user.username);
+                      journal.user = user;
+                    });
+                if (journal.photoList) {
+                  journal.photos = [];
+                    console.log('Querying for ' + journal.photoList.length + ' total photos');
+                  journal.photoList.forEach(function(photoId) {
+                    $http.get('/photos/' + photoId)
+                        .success(function(photo) {
+                            console.log('Got photo ' + photo._id);
+                          journal.photos.push(photo);
+                        });
+                  });
+                }
+                if (journal.recipeId) {
+                  $http.get('/recipes/' + journal.recipeId)
+                      .success(function(recipe) {
+                          console.log('Got recipe' + recipe.id);
+                          console.log(JSON.stringify(recipe));
+                        journal.recipe = recipe;
+                      });
+                }
+              });
+              $scope.journals = journals;
+            });
       };
 
-      $scope.findOne = function() {
-        Articles.get({
-          articleId: $stateParams.articleId
-        }, function(article) {
-          $scope.article = article;
-        });
-      };
+      //$scope.findOne = function() {
+      //  console.log('Getting one journal entry ' + $stateParams.journalId);
+      //  $http.get('/journalEntries/' + $stateParams.journalId)
+      //      .success(function(journal){
+      //        console.log('Got one journal entry ' + journal.title);
+      //        if (journal.photoList) {
+      //          journal.photos = [];
+      //          journal.photoList.forEach(function(photoId) {
+      //            $http.get('/photos/' + photoId)
+      //                .success(function(photo) {
+      //                  console.log('Finished fetching ' + photo._id);
+      //                  journal.photos.push(photo);
+      //                });
+      //          });
+      //        }
+      //        if (journal.recipeId) {
+      //          $http.get('/recipes/' + journal.recipeId)
+      //              .success(function(recipe) {
+      //                console.log('Finished fetching ' + recipe.id);
+      //                journal.recipe = recipe;
+      //              });
+      //        }
+      //        $scope.oneJournal = journal;
+      //      });
+      //};
     }
   ])
 
