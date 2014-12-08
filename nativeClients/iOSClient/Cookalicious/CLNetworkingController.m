@@ -151,10 +151,16 @@ static NSString *cImagesPath = @"/images";
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
+        if(success)
+            success(operation, responseObject);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
+        if(failure)
+            failure(operation, error);
     }];
 }
+
 
 -(void)isloggedInOnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
 
@@ -265,6 +271,12 @@ static NSString *cImagesPath = @"/images";
     [imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%@", self.operationManager.baseURL, cImagesPath, imageId]]];
 }
 
+-(void)setImageOfImageView:(UIImageView *)imageView
+                   withURL:(NSString *)url
+{
+    [imageView setImageWithURL:[NSURL URLWithString:url]];
+}
+
 -(void)postNewJournalEntry:(NSDictionary *)journalEntryDictionary
                  onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
@@ -292,6 +304,66 @@ static NSString *cImagesPath = @"/images";
     
     [self.operationManager POST:@"/recipes/search" parameters:@{@"query" : searchString} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        NSError *jsonParsingError = nil;
+        id object = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&jsonParsingError];
+        
+        if (jsonParsingError) {
+            NSLog(@"JSON ERROR: %@", [jsonParsingError localizedDescription]);
+            if(failure)
+                failure(operation, jsonParsingError);
+        } else {
+            NSLog(@"OBJECT: %@", [object class]);
+            NSArray *resultsArray = [(NSDictionary *)object objectForKey:@"matches"];
+            if(success)
+                success(operation, resultsArray);
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if(failure)
+            failure(operation, error);
+        
+    }];
+    
+}
+
+-(void)getRecipe:(NSString *)recipeId
+       onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    [self.operationManager GET:[NSString stringWithFormat:@"/recipes/%@", recipeId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSError *jsonParsingError = nil;
+        id object = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&jsonParsingError];
+        
+        
+        
+        if (jsonParsingError) {
+            NSLog(@"JSON ERROR: %@", [jsonParsingError localizedDescription]);
+            if(failure)
+                failure(operation, jsonParsingError);
+        } else {
+            NSLog(@"OBJECT: %@", [object class]);
+            //NSDictionary *result = [(NSDictionary *)object objectForKey:@"matches"];
+            if(success)
+                success(operation, object);
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if(failure)
+            failure(operation, error);
+        
+    }];
+}
+
+-(void)getMeOnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    [self.operationManager GET:@"/users/me" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         if(success)
             success(operation, responseObject);
         
@@ -301,7 +373,56 @@ static NSString *cImagesPath = @"/images";
             failure(operation, error);
         
     }];
-    
+}
+
+-(void)getUsersOnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    [self.operationManager GET:@"/users" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if(success)
+            success(operation, responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if(failure)
+            failure(operation, error);
+        
+    }];
+}
+
+-(void)followUser:(NSString *)userId
+         onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    [self.operationManager POST:@"/following" parameters:@{@"userId" : userId} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if(success)
+            success(operation, responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if(failure)
+            failure(operation, error);
+        
+    }];
+}
+
+-(void)unfollowUser:(NSString *)userId
+            onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    [self.operationManager DELETE:@"/following" parameters:@{@"userId" : userId} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if(success)
+            success(operation, responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if(failure)
+            failure(operation, error);
+        
+    }];
 }
 
 @end

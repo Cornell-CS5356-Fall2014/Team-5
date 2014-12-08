@@ -9,8 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "CLJournalEntryModel.h"
 
+
+@class CLRecipeSearchViewController;
+
+@protocol CLRecipeSearchViewControllerDelegate<NSObject>
+
+@required
+-(void)recipeSearchViewControllerDidAccept:(CLRecipeSearchViewController *)recipeSearchViewController;
+@end
+
 @interface CLRecipeSearchViewController : UIViewController
 
-@property (weak, nonatomic) CLJournalEntryModel *journalEntry;
+//@property (weak, nonatomic) CLJournalEntryModel *journalEntry;
+//@property (nonatomic, strong) CLRecipeModel *recipeToReceive;
+@property (weak, nonatomic) id <CLRecipeSearchViewControllerDelegate>delegate;
+@property (nonatomic, strong) CLRecipeModel *selectedRecipe;
 
 @end

@@ -91,7 +91,11 @@
                                 <segue destination="Bvh-Su-MYC" kind="show" id="LKp-jT-kzf"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="cpx-S6-y40"/>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="cpx-S6-y40">
+                            <connections>
+                                <segue destination="gFJ-5N-KiE" kind="show" id="v8Z-fJ-5qh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -101,9 +105,9 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EJR-21-Qvt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="121.5" y="1341.5"/>
+            <point key="canvasLocation" x="-190.5" y="1337.5"/>
         </scene>
-        <!--Log In View Controller-->
+        <!--Log In With Facebook-->
         <scene sceneID="g1r-fl-dqf">
             <objects>
                 <viewController id="4xT-Dh-dHD" customClass="CLLogInViewController" sceneMemberID="viewController">
@@ -138,20 +142,14 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="quu-zd-6c3">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Log In With Facebook" id="Zqo-Gf-ZYw"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Log In With Facebook" id="2nK-vx-cGz"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="loginView" destination="ka8-Xp-Koz" id="1gm-xP-HeQ"/>
                         <outlet property="nameLabel" destination="sku-rv-SQn" id="awW-6e-NVS"/>
-                        <outlet property="navItem" destination="Zqo-Gf-ZYw" id="pvZ-Q7-Lnh"/>
                         <outlet property="profilePictureView" destination="CpY-zj-G8b" id="aVI-cW-gXG"/>
                         <outlet property="statusLabel" destination="rwA-Ak-87M" id="Zhd-12-gLa"/>
                     </connections>
@@ -175,12 +173,6 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kr4-bx-K3X">
                                 <rect key="frame" x="0.0" y="64" width="375" height="80"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recipe View" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQ2-Wc-lqu">
-                                        <rect key="frame" x="140" y="29" width="95" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9MZ-Mg-uGl">
                                         <rect key="frame" x="337" y="25" width="30" height="30"/>
                                         <state key="normal" title="Edit">
@@ -190,6 +182,12 @@
                                             <segue destination="ReB-ep-OlR" kind="show" id="C9M-gs-Oww"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Recipe Selected" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQ2-Wc-lqu">
+                                        <rect key="frame" x="8" y="29" width="290" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -233,8 +231,9 @@
                         <outlet property="journalEntryDetailsTextField" destination="ovD-S5-Tfv" id="rqB-bX-v88"/>
                         <outlet property="journalEntryPhotoCarousel" destination="AwK-Ep-ojR" id="UrR-SE-g9p"/>
                         <outlet property="postButton" destination="Ugj-gg-F7w" id="oPy-jf-lia"/>
+                        <outlet property="recipeNameLabel" destination="gQ2-Wc-lqu" id="2tu-8s-LyT"/>
                         <outlet property="titleTextField" destination="0hR-2v-drl" id="qP3-Pd-ZbC"/>
-                        <segue destination="gyE-Fk-SW7" kind="show" id="nTC-Ne-Hgx"/>
+                        <segue destination="gyE-Fk-SW7" kind="show" identifier="Photo Picker Segue" id="nTC-Ne-Hgx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pb5-8J-LGR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -271,9 +270,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="fRq-nx-Csc" kind="show" id="Yb0-6u-UU8"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -301,6 +297,7 @@
                         <outlet property="acceptButton" destination="3nN-1c-rKg" id="55O-Sn-Be5"/>
                         <outlet property="cancelButton" destination="0aP-nU-dPH" id="MMy-td-dow"/>
                         <outlet property="tableView" destination="dzd-w9-MJY" id="fmK-29-Ga6"/>
+                        <segue destination="fRq-nx-Csc" kind="show" identifier="Show Recipe" id="A5M-UP-iXy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jMk-wH-iqJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -310,7 +307,7 @@
         <!--View Recipe-->
         <scene sceneID="E47-k4-fCZ">
             <objects>
-                <viewController title="View Recipe" id="fRq-nx-Csc" sceneMemberID="viewController">
+                <viewController title="View Recipe" id="fRq-nx-Csc" customClass="CLRecipeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z0X-Wo-HcQ"/>
                         <viewControllerLayoutGuide type="bottom" id="miC-7d-hQ3"/>
@@ -326,24 +323,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time: X Minutes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vN-nR-RC3">
-                                <rect key="frame" x="16" y="127" width="124" height="21"/>
+                                <rect key="frame" x="16" y="127" width="180" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yields X Servings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIc-MT-NIm">
-                                <rect key="frame" x="16" y="156" width="133" height="21"/>
+                                <rect key="frame" x="16" y="156" width="171" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dC9-05-9Xc" userLabel="Ingredients Text View">
-                                <rect key="frame" x="16" y="214" width="343" height="199"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ingredients:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3e-C1-EL7">
                                 <rect key="frame" x="16" y="185" width="90" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -353,22 +343,101 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4IJ-Jp-cmu" userLabel="ImageView">
                                 <rect key="frame" x="16" y="421" width="343" height="188"/>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dC9-05-9Xc" userLabel="Ingredients Text View">
+                                <rect key="frame" x="16" y="214" width="343" height="199"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1U-1W-fSA">
+                                <rect key="frame" x="215" y="123" width="144" height="30"/>
+                                <state key="normal" title="View Recipe On Web">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="viewLink:" destination="fRq-nx-Csc" eventType="touchUpInside" id="5HY-kr-KBK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="TPD-sT-e8l"/>
-                        <barButtonItem systemItem="action" id="ang-vV-o4K"/>
+                        <barButtonItem systemItem="action" id="ang-vV-o4K">
+                            <connections>
+                                <action selector="viewLink:" destination="fRq-nx-Csc" id="UJI-c9-84G"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Recipe" id="NmH-1D-qZD">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="12q-RL-nqt"/>
-                        <barButtonItem key="rightBarButtonItem" title="Accept" id="FVO-tk-fqT"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="12q-RL-nqt">
+                            <connections>
+                                <action selector="back:" destination="fRq-nx-Csc" id="fOq-ba-P0K"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Accept" id="FVO-tk-fqT">
+                            <connections>
+                                <action selector="back:" destination="fRq-nx-Csc" id="7CF-QG-kuf"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="acceptButton" destination="FVO-tk-fqT" id="4Cr-TB-uhk"/>
+                        <outlet property="cancelButton" destination="12q-RL-nqt" id="r97-Lx-OiP"/>
+                        <outlet property="ingredientsTextView" destination="dC9-05-9Xc" id="ir8-FL-Wir"/>
+                        <outlet property="photoImageView" destination="4IJ-Jp-cmu" id="knu-Gs-CUr"/>
+                        <outlet property="time" destination="4vN-nR-RC3" id="1XR-Ux-80D"/>
+                        <outlet property="titleLabel" destination="ZlD-4h-8uP" id="c7D-Zj-gcx"/>
+                        <outlet property="yieldsLabel" destination="XIc-MT-NIm" id="fpq-Fh-8Ip"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1yU-ZO-vk9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1715.5" y="904.5"/>
+        </scene>
+        <!--Following-->
+        <scene sceneID="92g-sn-yQA">
+            <objects>
+                <tableViewController id="gFJ-5N-KiE" customClass="CLSettingsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zTC-Sh-8qV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="User Cell" textLabel="E2Q-Gz-fYz" style="IBUITableViewCellStyleDefault" id="5of-k9-RRa">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5of-k9-RRa" id="qXZ-wu-AN2">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E2Q-Gz-fYz">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gFJ-5N-KiE" id="pMe-VP-DQw"/>
+                            <outlet property="delegate" destination="gFJ-5N-KiE" id="Xlb-mb-jLI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Following" id="LAa-bV-gqQ">
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="GFq-Kp-gBh">
+                            <connections>
+                                <segue destination="4xT-Dh-dHD" kind="show" id="L60-kZ-0C1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="44H-HK-IZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="76.5" y="2134.5"/>
         </scene>
         <!--Photo Picker-->
         <scene sceneID="hFB-AW-0WV">
@@ -418,6 +487,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="GHq-4O-cyt"/>
                     <navigationItem key="navigationItem" title="Photo Picker" id="jGU-kB-5ME">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="F54-ul-qV7">
+                            <connections>
+                                <action selector="cancel:" destination="gyE-Fk-SW7" id="3AH-X4-LAM"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="Xif-6q-ALc">
                             <connections>
                                 <action selector="uploadPhoto:" destination="gyE-Fk-SW7" id="JMU-9Z-zf2"/>
@@ -437,6 +511,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="B07-ml-hbS"/>
+        <segue reference="L60-kZ-0C1"/>
     </inferredMetricsTieBreakers>
 </document>

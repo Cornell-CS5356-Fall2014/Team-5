@@ -22,12 +22,12 @@ NSString * const kOriginalPhotoURL=@"original";
     {
         
         _photoObjectID = [dictionary objectForKey:@"_id"];
-        _owningUserID = [dictionary valueForKeyPath:@"user._id"];
-        _caption = [dictionary objectForKey:@"caption"];
+        _owningUserID = [dictionary objectForKey:@"user"];
+        //_caption = [dictionary objectForKey:@"caption"];
         _createdDate = [[CLPhotoModel longDateFormatter] dateFromString:[dictionary objectForKey:@"created"]];
-        _filename = [dictionary objectForKey:@"filename"];
+        //_filename = [dictionary objectForKey:@"filename"];
         _originalImageID = [dictionary objectForKey:@"original"];
-        if([dictionary objectForKey:@"thumbnail"])
+        if([dictionary objectForKey:@"thumbnail"] && ![[dictionary objectForKey:@"thumbnail"] isKindOfClass:[NSNull class]])
             _thumbnailImageID = [dictionary objectForKey:@"thumbnail"];
         else
             _thumbnailImageID = @"";

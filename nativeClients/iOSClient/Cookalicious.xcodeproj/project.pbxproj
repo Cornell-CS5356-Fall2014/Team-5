@@ -12,6 +12,8 @@
 		4826E14D19F6B67D00E79107 /* CLNetworkingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826E14C19F6B67D00E79107 /* CLNetworkingController.m */; };
 		4826E15119F7383C00E79107 /* CLFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826E15019F7383C00E79107 /* CLFeedViewController.m */; };
 		4826E15419F73A1A00E79107 /* CLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826E15319F73A1A00E79107 /* CLNavigationController.m */; };
+		482FDD1A1A35862100512CE2 /* CLUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 482FDD191A35862100512CE2 /* CLUserModel.m */; };
+		482FDD1D1A35877400512CE2 /* CLSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 482FDD1C1A35877400512CE2 /* CLSettingsTableViewController.m */; };
 		4857D41C19F8748A0004C5A0 /* CLFeedCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4857D41B19F8748A0004C5A0 /* CLFeedCollectionViewController.m */; };
 		4857D42019F87F590004C5A0 /* CLPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4857D41F19F87F590004C5A0 /* CLPhotoModel.m */; };
 		4857D42619F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4857D42519F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m */; };
@@ -28,6 +30,7 @@
 		48B836581A3529BC0075DA3A /* CLRecipeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B836571A3529BC0075DA3A /* CLRecipeModel.m */; };
 		48B8365C1A353A710075DA3A /* CLRecipeSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B8365B1A353A710075DA3A /* CLRecipeSearchViewController.m */; };
 		48B8365F1A35468C0075DA3A /* CLSearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B8365E1A35468C0075DA3A /* CLSearchResultsTableViewController.m */; };
+		48B836621A3556BA0075DA3A /* CLRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B836611A3556BA0075DA3A /* CLRecipeViewController.m */; };
 		B04AA200C4C74FB5893190D3 /* libPods-CookaliciousTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33320F88E40640A683F529F8 /* libPods-CookaliciousTests.a */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +56,10 @@
 		4826E15019F7383C00E79107 /* CLFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLFeedViewController.m; sourceTree = "<group>"; };
 		4826E15219F73A1A00E79107 /* CLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNavigationController.h; sourceTree = "<group>"; };
 		4826E15319F73A1A00E79107 /* CLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNavigationController.m; sourceTree = "<group>"; };
+		482FDD181A35862100512CE2 /* CLUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUserModel.h; sourceTree = "<group>"; };
+		482FDD191A35862100512CE2 /* CLUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUserModel.m; sourceTree = "<group>"; };
+		482FDD1B1A35877400512CE2 /* CLSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSettingsTableViewController.h; sourceTree = "<group>"; };
+		482FDD1C1A35877400512CE2 /* CLSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSettingsTableViewController.m; sourceTree = "<group>"; };
 		4857D41A19F8748A0004C5A0 /* CLFeedCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLFeedCollectionViewController.h; sourceTree = "<group>"; };
 		4857D41B19F8748A0004C5A0 /* CLFeedCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLFeedCollectionViewController.m; sourceTree = "<group>"; };
 		4857D41E19F87F590004C5A0 /* CLPhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPhotoModel.h; sourceTree = "<group>"; };
@@ -84,6 +91,8 @@
 		48B8365B1A353A710075DA3A /* CLRecipeSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLRecipeSearchViewController.m; sourceTree = "<group>"; };
 		48B8365D1A35468C0075DA3A /* CLSearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSearchResultsTableViewController.h; sourceTree = "<group>"; };
 		48B8365E1A35468C0075DA3A /* CLSearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSearchResultsTableViewController.m; sourceTree = "<group>"; };
+		48B836601A3556BA0075DA3A /* CLRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLRecipeViewController.h; sourceTree = "<group>"; };
+		48B836611A3556BA0075DA3A /* CLRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLRecipeViewController.m; sourceTree = "<group>"; };
 		5B03D8EA2F8F3C618E2B030B /* Pods-Cookalicious.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cookalicious.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cookalicious/Pods-Cookalicious.debug.xcconfig"; sourceTree = "<group>"; };
 		D40F5467123A76E33A2D6B70 /* Pods-Cookalicious.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cookalicious.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cookalicious/Pods-Cookalicious.release.xcconfig"; sourceTree = "<group>"; };
 		E4FF9DE71B7C877587686AA2 /* Pods-CookaliciousTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookaliciousTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CookaliciousTests/Pods-CookaliciousTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +136,8 @@
 				48B836541A35145E0075DA3A /* CLJournalEntryModel.m */,
 				48B836561A3529BC0075DA3A /* CLRecipeModel.h */,
 				48B836571A3529BC0075DA3A /* CLRecipeModel.m */,
+				482FDD181A35862100512CE2 /* CLUserModel.h */,
+				482FDD191A35862100512CE2 /* CLUserModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -214,6 +225,8 @@
 			children = (
 				48B8365A1A353A710075DA3A /* CLRecipeSearchViewController.h */,
 				48B8365B1A353A710075DA3A /* CLRecipeSearchViewController.m */,
+				48B836601A3556BA0075DA3A /* CLRecipeViewController.h */,
+				48B836611A3556BA0075DA3A /* CLRecipeViewController.m */,
 				48B836501A3513E90075DA3A /* CLNewJournalEntryViewController.h */,
 				48B836511A3513E90075DA3A /* CLNewJournalEntryViewController.m */,
 				4857D41A19F8748A0004C5A0 /* CLFeedCollectionViewController.h */,
@@ -224,6 +237,8 @@
 				48092D7219F32005009EBC3F /* CLPhotoCaptureViewController.m */,
 				48B8365D1A35468C0075DA3A /* CLSearchResultsTableViewController.h */,
 				48B8365E1A35468C0075DA3A /* CLSearchResultsTableViewController.m */,
+				482FDD1B1A35877400512CE2 /* CLSettingsTableViewController.h */,
+				482FDD1C1A35877400512CE2 /* CLSettingsTableViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -417,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48B8365C1A353A710075DA3A /* CLRecipeSearchViewController.m in Sources */,
+				482FDD1A1A35862100512CE2 /* CLUserModel.m in Sources */,
 				48B836581A3529BC0075DA3A /* CLRecipeModel.m in Sources */,
 				48B836551A35145E0075DA3A /* CLJournalEntryModel.m in Sources */,
 				4826E15119F7383C00E79107 /* CLFeedViewController.m in Sources */,
@@ -429,8 +445,10 @@
 				48B836521A3513E90075DA3A /* CLNewJournalEntryViewController.m in Sources */,
 				4857D42619F8A12F0004C5A0 /* NSArray+HigherOrderFunctionExtensions.m in Sources */,
 				4826E15419F73A1A00E79107 /* CLNavigationController.m in Sources */,
+				482FDD1D1A35877400512CE2 /* CLSettingsTableViewController.m in Sources */,
 				48B8365F1A35468C0075DA3A /* CLSearchResultsTableViewController.m in Sources */,
 				4866475C19F6113F00DC63A1 /* CLLogInViewController.m in Sources */,
+				48B836621A3556BA0075DA3A /* CLRecipeViewController.m in Sources */,
 				4857D41C19F8748A0004C5A0 /* CLFeedCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

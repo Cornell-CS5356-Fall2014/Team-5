@@ -43,6 +43,9 @@
 -(void)setImageOfImageView:(UIImageView *)imageView
                withImageId:(NSString *)imageId;
 
+-(void)setImageOfImageView:(UIImageView *)imageView
+               withURL:(NSString *)url;
+
 -(void)getPhotos:(NSArray *)photoIds
        onSuccess:(void (^)(id responseObject))success
 
@@ -55,5 +58,23 @@
 -(void)searchForRecipe:(NSString *)searchString
              onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+-(void)getRecipe:(NSString *)recipeId
+             onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+-(void)getMeOnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+-(void)getUsersOnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+-(void)followUser:(NSString *)userId
+         onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+-(void)unfollowUser:(NSString *)userId
+         onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

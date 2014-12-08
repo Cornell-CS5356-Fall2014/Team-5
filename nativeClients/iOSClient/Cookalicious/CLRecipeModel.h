@@ -12,8 +12,10 @@
 
 @property (strong, nonatomic) NSString *recipeId;
 @property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) NSNumber *timeInSeconds;
-@property (strong, nonatomic) NSNumber *servings;
+//@property (strong, nonatomic) NSNumber *timeInSeconds;
+@property (strong, nonatomic) NSString *totalTime;
+//@property (strong, nonatomic) NSNumber *servings;
+@property (strong, nonatomic) NSString *yield;
 @property (strong, nonatomic) NSArray *ingredients; //of NSString
 @property (strong, nonatomic) NSString *smallImageURL;
 @property (strong, nonatomic) NSString *mediumImageURL;

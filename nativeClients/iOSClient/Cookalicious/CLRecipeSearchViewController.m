@@ -10,13 +10,15 @@
 #import "CLRecipeModel.h"
 #import "CLSearchResultsTableViewController.h"
 #import "CLNetworkingController.h"
+#import "CLRecipeViewController.h"
 
-@interface CLRecipeSearchViewController () <UITableViewDataSource, UITableViewDelegate,  UISearchBarDelegate>
+@interface CLRecipeSearchViewController () <UITableViewDataSource, UITableViewDelegate,  UISearchBarDelegate, CLRecipeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *searchResults; // Filtered search results
 @property (nonatomic, strong) NSArray *recipes;
-@property (nonatomic, strong) CLRecipeModel *selectedRecipe;
+
+@property (nonatomic, strong) CLRecipeModel *recipeToPass;
 @property (strong, nonatomic) IBOutlet UISearchController *searchController;
 //@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
@@ -48,6 +50,8 @@
     self.tableView.tableHeaderView = self.searchController.searchBar;
     
     self.acceptButton.enabled = NO;
+    
+    //self.recipeToReceive = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,7 +74,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.recipes count];
+    return [self.searchResults count];
     
 }
 
@@ -78,14 +82,30 @@
     static NSString *CellIdentifier = @"Search Results Cell";
     
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    CLRecipeModel *recipe = [self.recipes objectAtIndex:indexPath.row];
-    cell.textLabel.text = recipe.title;
+
+    cell.textLabel.text = [[self.searchResults objectAtIndex:indexPath.row] objectForKey:@"recipeName"];
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    NSDictionary *selectedRowDictionary = [self.searchResults objectAtIndex:indexPath.row];
+    NSString *recipeId = [selectedRowDictionary objectForKey:@"id"];
+    
+    [[CLNetworkingController sharedController] getRecipe:recipeId onSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        self.recipeToPass = [[CLRecipeModel alloc]initWithDictionary:(NSDictionary *)responseObject];
+        [self performSegueWithIdentifier:@"Show Recipe" sender:nil];
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+    
     
 }
 
@@ -130,13 +150,15 @@
     [[CLNetworkingController sharedController] searchForRecipe:searchString onSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         self.searchResults = (NSArray *)responseObject;
-        
         [self.searchController setActive:NO];
+        [self.tableView reloadData];
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+        self.searchResults = @[];
         [self.searchController setActive:NO];
+        [self.tableView reloadData];
         
     }];
     
@@ -186,21 +208,33 @@
 
 
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//     Get the new view controller using [segue destinationViewController].
+//     Pass the selected object to the new view controller.
+    
+    if ([[segue destinationViewController] isKindOfClass:[CLRecipeViewController class]])
+    {
+        CLRecipeViewController *recipeViewController = (CLRecipeViewController *)[segue destinationViewController];
+        
+        recipeViewController.recipe = self.recipeToPass;
+        recipeViewController.delegate = self;
+    }
 }
-*/
+
+-(void)recipeViewControllerDidAccept:(CLRecipeViewController *)recipeViewController
+{
+    self.selectedRecipe = recipeViewController.recipe;
+}
+
 - (IBAction)completeSearch:(id)sender {
     
-    if(sender == self.acceptButton && self.selectedRecipe)
-    {
-        self.journalEntry.recipe = self.selectedRecipe;
-    }
+    if(sender == self.acceptButton)
+        if(self.delegate)
+            [self.delegate recipeSearchViewControllerDidAccept:self];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
